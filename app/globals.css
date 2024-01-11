@@ -15,3 +15,11 @@
 .flexColumn{
   @apply flex flex-col justify-center items-center
 }
+
+/* Table */
+th, td {
+  @apply px-2 py-2
+}
+.td-custom {
+  @apply !py-[10px]
+}
