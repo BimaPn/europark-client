@@ -23,7 +23,8 @@ import {
 } from '@chakra-ui/react'
 import { FiChevronDown, FiMenu } from 'react-icons/fi'
 import { IconType } from 'react-icons'
-import { SidebarContent } from '@/components/dashboard/SidebarContent'
+import Sidebar from '@/components/dashboard/Sidebar'
+import ButtonLogout from '@/components/ui/ButtonLogout'
 
 interface MobileProps extends FlexProps {
   onOpen: () => void
@@ -87,7 +88,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <ButtonLogout>Logout</ButtonLogout>
             </MenuList>
           </Menu>
         </Flex>
@@ -101,7 +102,7 @@ const DashboardLayout = ({children}:{children:React.ReactNode}) => {
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-      <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
+      <Sidebar onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -110,7 +111,7 @@ const DashboardLayout = ({children}:{children:React.ReactNode}) => {
         onOverlayClick={onClose}
         size="full">
         <DrawerContent>
-          <SidebarContent onClose={onClose} />
+          <Sidebar onClose={onClose} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
