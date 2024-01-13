@@ -14,13 +14,13 @@ const ButtonNavigation = () => {
     }
   }
   return (
-    <>
+    <div className="w-[584px] bg-white mx-auto">
       {currentPage >= 3 ? (
         <ButtonCheckout />
       ) : (
         <ButtonNextPrev callback={(condition) => pageChange(condition)} />
       )}
-    </>
+    </div>
   )
 }
 
@@ -30,9 +30,17 @@ const ButtonNextPrev = ({callback}:{callback:(condition:boolean)=>void}) => {
     callback(condition)
   }
   return (
-    <div>
-      <button onClick={(e) => buttonClick(e, false)}>Prev</button>
-      <button onClick={(e) => buttonClick(e, true)}>Next</button>
+    <div className="flex justify-end items-center gap-3 text-end py-4 px-4">
+
+      <button
+      onClick={(e) => buttonClick(e, false)}
+      className="border-2 border-gray-300 px-4 py-[6.5px] rounded"
+      >Kembali</button>
+      <button 
+      onClick={(e) => buttonClick(e, true)}
+      className="px-4 py-2 bg-blue-500 text-white rounded font-medium"
+      >Lanjutkan</button>
+
     </div>
   )
 }
