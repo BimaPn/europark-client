@@ -21,7 +21,7 @@ const LoginForm = ({className}:{className?:string}) => {
       .then((callback) => {
       if(callback?.error) setError(callback.error);
       if(callback?.ok && !callback.error) {
-        router.push("/dashboard");
+        router.push("/admin/dashboard");
       }
     });
   }

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import RoundedImage from '../ui/RoundedImage'
 import Link from 'next/link'
+import { Table, Tbody, Td, Th, Thead, Tr } from '../ui/Table'
 
 const RecentVisitors = ({className}:{className?:string}) => {
   const visitors = [
@@ -49,27 +50,27 @@ const RecentVisitors = ({className}:{className?:string}) => {
         <span className='font-semibold '>Recent Visitors</span>
       </div>
 
-      <table className='w-full border-spacing-2'>
-        <thead>
-          <tr className='text-xs text-slate-600'>
-            <th className='w-1/2 text-start font-medium'>Nama</th>
-            <th className='font-medium'>Total</th>
-            <th className='font-medium'>Tanggal</th>
-          </tr>
-        </thead>
-        <tbody className='text-sm'>
-          {visitors.map((item, index) => (
-            <tr>
-              <td className='flex items-center gap-2 td-custom'>
+      <Table>
+        <Thead>
+          <Tr>
+            <Th className='w-1/2 text-start'>Nama</Th>
+            <Th>Total</Th>
+            <Th>Tanggal</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+            {visitors.map((item, index) => (
+            <Tr>
+              <Td className='flex items-center gap-2'>
                 <RoundedImage src={item.avatar} alt={item.name} className='!min-w-[38px] !w-[38px]' />
                 <span className='line-clamp-1'>{item.name}</span>
-              </td>
-              <td className='text-center td-custom'>{item.visitors}</td>
-              <td className='text-center td-custom'>{item.date}</td>
-            </tr>
+              </Td>
+              <Td className='text-center'>{item.visitors}</Td>
+              <Td className='text-center'>{item.date}</Td>
+            </Tr>
           ))}
-        </tbody>
-      </table>  
+        </Tbody>
+      </Table>
     </div>
   )
 }
