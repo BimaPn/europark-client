@@ -1,22 +1,34 @@
 import TicketPurchaseProvider from "@/components/provider/TicketPurchaseProvider"
 import ButtonNavigation from "@/components/ticket/ButtonNavigation"
 import StartPage from "@/components/ticket/StartPage"
+import Link from "next/link"
+import { HiMiniBuildingLibrary } from "react-icons/hi2"
 
 const page = () => {
   return (
     <TicketPurchaseProvider>
-      <section className="boxWidth relative">
-        <nav className='w-full px-8 py-[10px] sticky top-0 right-0 left-0 bg-white z-[1000]'>
-          <span className='text-2xl font-semibold'>Europark</span>
-        </nav>
-        <main className="w-[584px] px-4 mt-2 mx-auto h-full">
+      <section className="boxWidth h-screen min-h-screen relative">
+        <Navbar className="sticky top-0 right-0 left-0 z-[1000]" />
+        <main className="w-[584px] px-4 mx-auto min-h-[79.5%]">
           <StartPage />
         </main>
-        <footer className="sticky bottom-0 right-0 left-0">
+        <footer className="sticky bottom-0 right-0 left-0 z-[1000]">
           <ButtonNavigation />
         </footer>
       </section>
     </TicketPurchaseProvider>
+  )
+}
+
+const Navbar = ({className}:{className?:string}) => {
+  return (
+    <nav className={`w-full flexBetween px-8 py-[10px] bg-white ${className}`}>
+      <div className="font-semibold flexCenter gap-1 text-blue-700">
+        <HiMiniBuildingLibrary className="text-[26px] -mt-[3px]"/>
+        <span className="text-xl">EuroPark</span>
+      </div>
+      <Link href={`/`} className="text-blue-600">Beranda</Link>
+    </nav>
   )
 }
 

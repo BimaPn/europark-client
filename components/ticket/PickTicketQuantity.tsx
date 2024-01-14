@@ -26,7 +26,7 @@ const PickTicketQuantity = ({className}:{className?: string}) => {
   ]
   return (
     <div className={`flex flex-col gap-1 ${className}`}>
-      <span className='font-semibold'>3. Jumlah Ticket</span>
+      <span className='font-medium'>3. Jumlah Ticket</span>
       <div className="flex flex-col">
         {types.map((item) => (
           <PricingItem 
@@ -47,7 +47,7 @@ const PricingItem = ({type, description, price}:{type:string, description?:strin
   return (
     <div className="flexBetween h-[68px] border-b">
       <div className="w-1/3 flex flex-col">
-        <span className="font-medium">{type}</span> 
+        <span className="font-medium text-sm">{type}</span> 
         {description && (
           <span className="text-xs text-gray-600">{description}</span> 
         )}
@@ -79,7 +79,7 @@ const QuantityInput = ({value, onChange}:{value:number, onChange:(value:number)=
     <div className="w-fit flex">
       <button
       onClick={removeQuantity}
-      className="border-2 border-slate-400 p-2 aspect-square flexCenter rounded" 
+      className="bg-blue-100 p-2 aspect-square flexCenter rounded" 
       >-</button>
       <input
       type="number"
@@ -87,7 +87,7 @@ const QuantityInput = ({value, onChange}:{value:number, onChange:(value:number)=
       className="block w-8 text-center"
       />
       <button onClick={addQuantity}
-      className="border-2 border-slate-400 p-2 aspect-square flexCenter rounded" 
+      className="bg-blue-100 p-2 aspect-square flexCenter rounded" 
       >+</button>
     </div>
   )
