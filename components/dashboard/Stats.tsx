@@ -17,7 +17,7 @@ type Stat = {
   description: string,
   icon: React.ReactNode,
 }
-const StatItem = ({value, description, icon, className}:Stat & {className?:   }) => {
+const StatItem = ({className}:{className?:string}) => {
   return (
     <div className={`bg-white flex flex-col px-3 py-3 rounded-lg ${className} relative`}>
       <div className="flex flex-col gap-[2px]">

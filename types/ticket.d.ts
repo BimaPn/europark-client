@@ -1,20 +1,35 @@
 interface TicketPurchaseContext {
-  ticketInformationData: TicketInformationForm
   ticketCheckoutData: TicketCheckoutForm
+  ticketInformationData: TicketInformationForm
+  setTicketInformationData: Dispatch<SetStateAction<TicketInformationForm>>
+  setTicketCheckoutData: Dispatch<SetStateAction<TicketCheckoutForm>>
   currentPage: number
   setCurrentPage: Dispatch<SetStateAction<number>>
+  ticketQuantity: TicketQuantity[]
+  setTicketQuantity: Dispatch<SetStateAction<TicketQuantity[]>>
+  maxQuantity: number
+  setMaxQuantity: Dispatch<SetStateAction<number>>
+  disableSubmit: boolean
+  setDisableSubmit: Dispatch<SetStateAction<number>>
 }
 
 interface TicketInformationForm {
   visit_date?: Date
-  schedule_id?: number
-  ticket_quantity?: TicketQuantity[]
+  schedule?: Schedule
   price?: number
 }
 
 interface TicketQuantity {
   id: number
+  type: string
+  description?: string
   quantity: number
+  price: number
+}
+
+interface Schedule {
+  id: number,
+  schedule: string
 }
 
 interface TicketCheckoutForm {

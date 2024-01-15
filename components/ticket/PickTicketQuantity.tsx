@@ -1,95 +1,122 @@
 "use client"
 
-import { useState } from "react"
+import { useContext, useEffect } from "react"
+import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
 
-const PickTicketQuantity = ({className}:{className?: string}) => {
+const PickTicketQuantity = ({className}:{className?:string}) => {
   const types = [
   {
+    id: 1,
     type: "Anak-anak",
-    description: "Dibawah 12 tahun.",
-    price: 115000
+    price: 115000,
+    quantity: 0,
+    description: "kurang dari 12 tahun."
   },
   {
+    id: 2,
     type: "Pelajar",
-    description: "Memiliki kartu pelajar.",
-    price: 150000
+    price: 150000,
+    quantity: 0,
+    description: "Memiliki kartu pelajar."
   },
   {
+    id: 3,
     type: "Dewasa",
-    price: 250000
+    price: 200000,
+    quantity: 0,
   },
   {
+    id: 4,
     type: "Lansia",
-    description: "Diatas 65 tahun.",
-    price: 200000
+    price: 180000,
+    quantity: 0,
+    description: "60 tahun keatas."
   },
   ]
-  return (
-    <div className={`flex flex-col gap-1 ${className}`}>
-      <span className='font-medium'>3. Jumlah Ticket</span>
-      <div className="flex flex-col">
-        {types.map((item) => (
-          <PricingItem 
-          key={item.type}
-          type={item.type}
-          description={item.description} 
-          price={item.price} />
-        ))}
+  const { ticketQuantity, setTicketQuantity,
+  setMaxQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
 
+  useEffect(() => {
+    setTicketQuantity(types) 
+    setMaxQuantity(16)
+  },[])
+  
+  return ticketQuantity && (
+    <div className={`flex flex-col gap-[6px] ${className}`}>
+      <div className="flex flex-col gap-1">
+        <span className='font-medium'>3. Pilih categori dan jumlah tiket</span>
+        <span className="text-sm">Maksimal jumlah pembelian adalah 16 tiket.</span>
       </div>
+
+        <div className="flex flex-col gap-1">
+          {ticketQuantity.map((item) => (
+            <QuantityItem 
+            key={item.id}
+            id={item.id}
+            type={item.type}
+            price={item.price}
+            quantity={item.quantity}
+            description={item.description}
+            />
+          ))}
+        </div>
     </div>
   )
 }
-
-const PricingItem = ({type, description, price}:{type:string, description?:string, price:number}) => {
-  const [number, setNumber] = useState<number>(0)
-
+const QuantityItem = ({id, type, price, description, quantity}:TicketQuantity) => {
   return (
-    <div className="flexBetween h-[68px] border-b">
-      <div className="w-1/3 flex flex-col">
-        <span className="font-medium text-sm">{type}</span> 
+    <div className="flex border-b py-3">
+      <div className="basis-1/3 flex flex-col gap-[2px] text-[13px] text-slate-800">
+        <span className="font-medium text-base text-black">{type}</span>
         {description && (
-          <span className="text-xs text-gray-600">{description}</span> 
+          <span>{description}</span>
         )}
       </div>
-      <div className="w-1/3 text-center">
-        <span>{'Rp. ' + price}</span> 
+      <div className="basis-1/3 flexCenter">
+        <span className="text-sm">Rp. {price} </span>
       </div>
-      <div className="w-1/3 flex justify-end">
-        <QuantityInput
-        value={number}
-        onChange={(value) => setNumber((prev) => prev + value)} 
-        />
+      <div className="basis-1/3 flex justify-end">
+       
+        <QuantityInput id={id} value={quantity} /> 
       </div>
     </div>
   )
 }
 
-const QuantityInput = ({value, onChange}:{value:number, onChange:(value:number)=>void}) => {
-  const addQuantity = (e:React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    onChange(1)
+const QuantityInput = ({ id, value }:{id:number, value:number}) => {
+  const { ticketQuantity,setTicketQuantity,
+  maxQuantity, setMaxQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+
+  const changeQuantity = (value:number) => {
+    const updated = ticketQuantity.map((item) => {
+      if(item.id == id) {
+        item.quantity += value
+      }
+      return item
+    })
+    setTicketQuantity(updated)
+    setMaxQuantity((prev: number) => prev - value)
   }
-  const removeQuantity = (e:React.MouseEvent<HTMLButtonElement>) => {
+  const increase = (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if(maxQuantity <= 0) return
+    changeQuantity(1)
+  }
+  const decrease = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if(value <= 0) return
-    onChange(-1)
+    changeQuantity(-1)
   }
   return (
-    <div className="w-fit flex">
-      <button
-      onClick={removeQuantity}
-      className="bg-blue-100 p-2 aspect-square flexCenter rounded" 
-      >-</button>
-      <input
-      type="number"
-      value={value}
-      className="block w-8 text-center"
-      />
-      <button onClick={addQuantity}
-      className="bg-blue-100 p-2 aspect-square flexCenter rounded" 
-      >+</button>
-    </div>
+        <div className="w-fit flexCenter">
+          <button
+          onClick={decrease}
+          className="w-7 aspect-square flexCenter bg-blue-200 text-xl rounded">-</button>
+          <input type="number" className="w-9 text-center" value={value} readOnly />
+          <button
+          onClick={increase}
+          className="w-7 aspect-square flexCenter bg-blue-200 text-lg rounded">+</button>
+        </div>
   )
 }
 

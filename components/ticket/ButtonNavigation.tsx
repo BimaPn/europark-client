@@ -4,7 +4,7 @@ import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
 import ButtonCheckout from "./ButtonCheckout"
 
 const ButtonNavigation = () => {
-  const { currentPage, setCurrentPage } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+  const { currentPage, setCurrentPage, disableSubmit } = useContext(ticketPurchaseContext) as TicketPurchaseContext
   const pageChange = (condition: boolean) => {
     if(condition) {
       setCurrentPage((prev: number) => prev+1);
@@ -16,15 +16,20 @@ const ButtonNavigation = () => {
   return (
     <div className="w-[584px] bg-white mx-auto">
       {currentPage >= 3 ? (
-        <ButtonCheckout />
+        <ButtonCheckout disabled={disableSubmit} />
       ) : (
-        <ButtonNextPrev callback={(condition) => pageChange(condition)} />
+        <ButtonNextPrev
+        page={currentPage}
+        disabled={disableSubmit}
+        callback={(condition) => pageChange(condition)} 
+        />
       )}
     </div>
   )
 }
 
-const ButtonNextPrev = ({callback}:{callback:(condition:boolean)=>void}) => {
+const ButtonNextPrev = ({callback, page, disabled}:
+{callback:(condition:boolean)=>void, page: number, disabled:boolean}) => {
   const buttonClick = (e:React.MouseEvent<HTMLButtonElement>, condition:boolean) => {
     e.preventDefault()
     callback(condition)
@@ -34,11 +39,12 @@ const ButtonNextPrev = ({callback}:{callback:(condition:boolean)=>void}) => {
 
       <button
       onClick={(e) => buttonClick(e, false)}
-      className="border-2 border-gray-300 px-4 py-[6.5px] rounded"
+      className={`border-2 border-gray-300 px-4 py-[6.5px] rounded-full ${page <= 1 && "opacity-50 cursor-not-allowed"}`}
       >Kembali</button>
       <button 
+      disabled={disabled}
       onClick={(e) => buttonClick(e, true)}
-      className="px-4 py-2 bg-blue-500 text-white rounded font-medium"
+      className="px-4 py-2 bg-blue-500 text-white rounded-full font-medium disabled:opacity-50 disabled:cursor-not-allowed"
       >Lanjutkan</button>
 
     </div>

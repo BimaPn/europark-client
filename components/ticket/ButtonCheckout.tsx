@@ -1,6 +1,5 @@
-import React from 'react'
 
-const ButtonCheckout = () => {
+const ButtonCheckout = ({disabled}:{disabled:boolean}) => {
   return (
     <div className='flexBetween py-4 px-4'>
       <div className='flex gap-3'>
@@ -8,6 +7,7 @@ const ButtonCheckout = () => {
         <span className='font-medium'>Rp. 9000000</span>
       </div>
       <button
+      disabled={disabled}
       className='w-fit px-5 py-2 rounded text-white font-medium bg-blue-500'
       >
       Bayar Sekarang

@@ -19,6 +19,7 @@ export const authOptions : NextAuthOptions = {
               const error = await res.catch((error) => error.response.data.message);
               if(typeof error === "string"){
                 throw new Error(error);
+                console.log(error)
               }
               const user = await res.then(res => {
                 return res.data; 

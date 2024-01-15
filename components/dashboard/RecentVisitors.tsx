@@ -9,37 +9,37 @@ const RecentVisitors = ({className}:{className?:string}) => {
   const visitors = [
   {
     avatar: "/images/avatar.jpg",
-    name: "Dadang Sriwati",
+    name: "Tatang Sriwati",
     visitors: 10,
     date: "12 June, 2024"
   },
   {
     avatar: "/images/avatar.jpg",
-    name: "Dadang Sriwati",
+    name: "Tatang Sriwati",
     visitors: 10,
     date: "12 June, 2024"
   },
   {
     avatar: "/images/avatar.jpg",
-    name: "Dadang Sriwati",
+    name: "Tatang Sriwati",
     visitors: 10,
     date: "12 June, 2024"
   },
   {
     avatar: "/images/avatar.jpg",
-    name: "Dadang Sriwati",
+    name: "Tatang Sriwati",
     visitors: 10,
     date: "12 June, 2024"
   },
   {
     avatar: "/images/avatar.jpg",
-    name: "Dadang Sriwati",
+    name: "Tatang Sriwati",
     visitors: 10,
     date: "12 June, 2024"
   },
   {
     avatar: "/images/avatar.jpg",
-    name: "Dadang Sriwati",
+    name: "Tatang Sriwati",
     visitors: 10,
     date: "12 June, 2024"
   },
