@@ -1,5 +1,4 @@
 import { FormControl, FormLabel, Input, NumberInput, NumberInputField, Textarea } from '@chakra-ui/react'
-import React from 'react'
 import ImageInput from '../ui/ImageInput'
 
 const TicketCheckout = () => {

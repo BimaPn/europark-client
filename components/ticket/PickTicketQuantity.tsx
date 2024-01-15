@@ -2,6 +2,7 @@
 
 import { useContext, useEffect } from "react"
 import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
+import { numberToRupiah } from "@/helper/convert"
 
 const PickTicketQuantity = ({className}:{className?:string}) => {
   const types = [
@@ -74,7 +75,7 @@ const QuantityItem = ({id, type, price, description, quantity}:TicketQuantity) =
         )}
       </div>
       <div className="basis-1/3 flexCenter">
-        <span className="text-sm">Rp. {price} </span>
+        <span className="text-sm">{numberToRupiah(price)}</span>
       </div>
       <div className="basis-1/3 flex justify-end">
        
