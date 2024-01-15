@@ -8,7 +8,7 @@ const ButtonCheckout = ({disabled}:{disabled:boolean}) => {
       </div>
       <button
       disabled={disabled}
-      className='w-fit px-5 py-2 rounded text-white font-medium bg-blue-500'
+      className='w-fit px-5 py-2 rounded-full text-white font-medium bg-blue-500'
       >
       Bayar Sekarang
       </button>

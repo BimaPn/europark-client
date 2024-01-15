@@ -9,7 +9,7 @@ const page = () => {
     <TicketPurchaseProvider>
       <section className="boxWidth h-screen min-h-screen relative">
         <Navbar className="sticky top-0 right-0 left-0 z-[1000]" />
-        <main className="w-[584px] px-4 mx-auto min-h-[79.5%]">
+        <main className="w-[584px] px-4 mx-auto min-h-[80.2%]">
           <StartPage />
         </main>
         <footer className="sticky bottom-0 right-0 left-0 z-[1000]">

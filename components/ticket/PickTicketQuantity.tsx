@@ -37,6 +37,7 @@ const PickTicketQuantity = ({className}:{className?:string}) => {
   setMaxQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
 
   useEffect(() => {
+    if(ticketQuantity.length > 0) return
     setTicketQuantity(types) 
     setMaxQuantity(16)
   },[])
