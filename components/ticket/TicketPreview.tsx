@@ -2,19 +2,10 @@
 import { useContext, useState } from "react"
 import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
 import { dateToString, numberToRupiah } from "@/helper/convert"
+import { totalPrice } from "@/helper"
 
 const TicketPreview = () => {
   const { ticketInformationData, ticketQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
-
-  const totalPrice: ()=> number = () => {
-    return ticketQuantity.reduce((accumulator, currentValue) => {
-      let total = 0
-      if(currentValue.quantity > 0) {
-        total = (currentValue.price * currentValue.quantity)
-      }
-      return accumulator + total 
-    }, 0);
-  }
   return (
     <section>
       <div className='flex flex-col gap-2'>
@@ -47,11 +38,12 @@ const TicketPreview = () => {
             })}
           </PreviewItem>
           <PreviewItem title='Total'>
-            <span className='font-medium text-black -mt-1 text-lg'>{numberToRupiah(totalPrice())}</span>
+            <span className='font-medium text-black -mt-1 text-lg'>
+            {numberToRupiah(totalPrice(ticketQuantity))}
+            </span>
           </PreviewItem>
         </div>
       </div>
-
     </section>
   )
 }

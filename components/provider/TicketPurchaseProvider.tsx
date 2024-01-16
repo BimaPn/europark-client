@@ -5,7 +5,14 @@ export const ticketPurchaseContext = createContext<TicketPurchaseContext | null>
 
 const TicketPurchaseProvider = ({children}:{children:React.ReactNode}) => {
   const [ticketInformationData, setTicketInformationData] = useState<TicketInformationForm>({})
-  const [ticketCheckoutData, setTicketCheckoutData] = useState<TicketCheckoutForm>({})
+  const [ticketCheckoutData, setTicketCheckoutData] = useState<TicketCheckoutForm>({
+    email: "",
+    name: "",
+    whatsapp_number: "",
+    indentity_card_picture: null,
+    institute_name: "",
+    institute_address: ""
+  })
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [maxQuantity, setMaxQuantity] = useState<number>(0)
   const [ticketQuantity, setTicketQuantity] = useState<TicketQuantity[]>([])

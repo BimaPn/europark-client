@@ -33,9 +33,10 @@ interface Schedule {
 }
 
 interface TicketCheckoutForm {
-  name?: string
-  indentity_card_picture?: File
-  whatsapp_number?: number | string
-  institute_name?: string
-  institute_address?: string
+  name: string
+  email: string
+  indentity_card_picture: File | null
+  whatsapp_number: string
+  institute_name: string
+  institute_address: string
 }

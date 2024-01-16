@@ -1,52 +1,135 @@
+"use client"
 import { FormControl, FormLabel, Input, NumberInput, NumberInputField, Textarea } from '@chakra-ui/react'
 import ImageInput from '../ui/ImageInput'
+import { useContext, useEffect } from 'react'
+import { ticketPurchaseContext } from '../provider/TicketPurchaseProvider'
 
 const TicketCheckout = () => {
+  const { ticketCheckoutData,
+  disableSubmit, setDisableSubmit } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+
+  const checkFieldsExist = () => {
+    return ticketCheckoutData.name && ticketCheckoutData.email && ticketCheckoutData.whatsapp_number
+    && ticketCheckoutData.indentity_card_picture
+  }
+  const checkInstituteFields = () => {
+    if(ticketCheckoutData.institute_name) {
+      if(ticketCheckoutData.institute_address) {
+        setDisableSubmit(false)
+      }else {
+        setDisableSubmit(true)
+      }
+    }else {
+      setDisableSubmit(false)
+    }
+  }
+  const setSubmitButton = () => {
+    if(checkFieldsExist()) {
+      checkInstituteFields()
+    }else {
+      setDisableSubmit(true)
+    }
+  }
+
+  useEffect(() => {
+    setSubmitButton()
+  },[ticketCheckoutData])
+
   return (
     <section className='flex flex-col gap-8 mb-8'>
-      <div className='flex flex-col gap-3'>
+      <CheckoutForm />
+    </section>
+  )
+}
+
+const CheckoutForm = () => {
+  const {ticketCheckoutData,setTicketCheckoutData}=useContext(ticketPurchaseContext) as TicketPurchaseContext
+
+  const onChange = (field: keyof TicketCheckoutForm, value: string|number|File) => {
+    setTicketCheckoutData((prev:TicketCheckoutForm) => {
+      return {...prev,[field]:value}
+    })
+  }
+  return (
+    <form>
+      <div className='flex flex-col gap-3 mb-6'>
         <span className='font-medium text-lg'>Kemana tiket akan dikirim ?</span>
         <FormControl>
           <FormLabel
           fontWeight={400} fontSize={15} className='font-normal text-xs'>Alamat Email</FormLabel>
-          <Input type='email' className="xs:!w-[70%]" placeholder='Email Address' />
+          <Input
+          type='email'
+          value={ticketCheckoutData.email}
+          onChange={(e) => onChange("email",e.target.value)}
+          className="xs:!w-[70%]"
+          isRequired
+          placeholder='Email Address'
+          />
         </FormControl>        
-      </div>
+      </div>    
       <div className='flex flex-col gap-4'>
         <span className='font-medium text-lg'>Masukan Data Diri Anda</span>       
-        <FormControl>
+        <FormControl className='!-mt-1'>
           <FormLabel
           fontWeight={400} fontSize={15} className='font-normal text-xs'>Nama Lengkap</FormLabel>
-          <Input type='text' className="xs:!w-[70%]" placeholder='Full Name' />
+          <Input 
+          type='text'
+          value={ticketCheckoutData.name}
+          onChange={(e) => onChange("name",e.target.value)}
+          className="xs:!w-[70%]"
+          isRequired
+          placeholder='Full Name'
+          />
         </FormControl>        
         <FormControl>
           <FormLabel
           fontWeight={400} fontSize={15} className='font-normal text-xs'>Nomor Whatsapp</FormLabel>
-          <NumberInput className="xs:!w-[70%]">
+          <NumberInput
+          value={ticketCheckoutData.whatsapp_number}
+          onChange={(value) => onChange("whatsapp_number",value)}
+          className="xs:!w-[70%]"
+          isRequired
+          >
           <NumberInputField placeholder="Whatsapp Number" />
           </NumberInput>
         </FormControl> 
         <FormControl>
           <FormLabel
           fontWeight={400} fontSize={15} className='font-normal text-xs'>Foto Kartu Identitas</FormLabel>
-          <ImageInput onChange={(image) => console.log(image)} />
+          <ImageInput
+          onChange={(image) => onChange("indentity_card_picture",image)}
+          />
         </FormControl> 
 
-        <FormControl>
+        <FormControl >
           <FormLabel
-          fontWeight={400} fontSize={15} className='font-normal text-xs'>Nama Institusi (optional)</FormLabel>
-          <Input type='number' className="xs:!w-[70%]" placeholder="Institute's Name" />
+          fontWeight={400} fontSize={15} className='font-normal text-xs'>
+          Nama Institusi (optional)
+          </FormLabel>
+          <Input 
+          type='text'
+          value={ticketCheckoutData.institute_name}
+          onChange={(e) => onChange("institute_name",e.target.value)}
+          className="xs:!w-[70%]" 
+          placeholder="Institute's Name"
+          />
         </FormControl> 
-        <FormControl>
+        <FormControl
+         className={`${ticketCheckoutData.institute_name.length > 0 ? "opacity-100":"opacity-50"}`}
+         isReadOnly={ticketCheckoutData.institute_name.length <= 0}
+        >
           <FormLabel
           fontWeight={400}
           fontSize={15}
           className='font-normal text-xs'>Alamat Institusi (optional)</FormLabel>
-          <Textarea placeholder="Institute's Address" />
+          <Textarea
+          value={ticketCheckoutData.institute_address}
+          onChange={(e) => onChange("institute_address", e.target.value)}
+          placeholder="Institute's Address" 
+          />
         </FormControl> 
       </div>
-
-    </section>
+    </form>
   )
 }
 
