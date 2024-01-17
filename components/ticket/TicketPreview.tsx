@@ -1,13 +1,18 @@
 "use client"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
 import { dateToString, numberToRupiah } from "@/helper/convert"
 import { totalPrice } from "@/helper"
 
 const TicketPreview = () => {
-  const { ticketInformationData, ticketQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+  const { ticketInformationData, 
+  ticketQuantity, setDisableSubmit } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+
+  useEffect(() => {
+    setDisableSubmit(false)
+  },[])
   return (
-    <section>
+    <section className="h-full">
       <div className='flex flex-col gap-2'>
         <h1 className='font-semibold text-xl'>Ringkasan Pembelian</h1>
         <span className='text-sm'>Mohon periksa kembali pesanan sebelum menyelesaikan tahap pembelian.</span>

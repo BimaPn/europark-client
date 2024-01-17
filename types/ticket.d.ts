@@ -16,7 +16,6 @@ interface TicketPurchaseContext {
 interface TicketInformationForm {
   visit_date?: Date
   schedule?: Schedule
-  price?: number
 }
 
 interface TicketQuantity {
@@ -37,6 +36,6 @@ interface TicketCheckoutForm {
   email: string
   indentity_card_picture: File | null
   whatsapp_number: string
-  institute_name: string
-  institute_address: string
+  institute_name?: string
+  institute_address?: string
 }

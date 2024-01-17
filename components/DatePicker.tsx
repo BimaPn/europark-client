@@ -7,7 +7,6 @@ import '../app/css/custom-daypicker.css'
 import { ticketPurchaseContext } from './provider/TicketPurchaseProvider';
 
 const DatePicker = ({className}:{className?:string}) => {
-  const [selected, setSelected] = useState<Date>();
   const { ticketInformationData,
   setTicketInformationData } = useContext(ticketPurchaseContext) as TicketPurchaseContext
   const disabledDates = [
@@ -19,17 +18,11 @@ const DatePicker = ({className}:{className?:string}) => {
     }
   ]
 
-  useEffect(() => {
-    if(ticketInformationData.visit_date) {
-      setSelected(ticketInformationData.visit_date)
-    }
-  },[])
-  useEffect(()=>{
-      setTicketInformationData((prev: TicketInformationForm) => {
-        return {...prev, visit_date: selected}
-      })
-  },[selected])
-
+  const onChange = (day:Date|undefined) => {
+    setTicketInformationData((prev: TicketInformationForm) => {
+      return {...prev, visit_date: day}
+    })
+  }
   const classNames: ClassNames = {
     ...styles,
        head_cell  : "w-[100px]",
@@ -43,8 +36,8 @@ const DatePicker = ({className}:{className?:string}) => {
         mode='single'
         classNames={classNames}
         disabled={disabledDates}
-        selected={selected}
-        onSelect={setSelected}
+        selected={ticketInformationData.visit_date}
+        onSelect={onChange}
         />
       </div>
 

@@ -3,6 +3,7 @@ import { FormControl, FormLabel, Input, NumberInput, NumberInputField, Textarea 
 import ImageInput from '../ui/ImageInput'
 import { useContext, useEffect } from 'react'
 import { ticketPurchaseContext } from '../provider/TicketPurchaseProvider'
+import ButtonCheckout from './ButtonCheckout'
 
 const TicketCheckout = () => {
   const { ticketCheckoutData,
@@ -37,21 +38,26 @@ const TicketCheckout = () => {
 
   return (
     <section className='flex flex-col gap-8 mb-8'>
-      <CheckoutForm />
+      <CheckoutForm disableSubmit={disableSubmit} />
     </section>
   )
 }
 
-const CheckoutForm = () => {
-  const {ticketCheckoutData,setTicketCheckoutData}=useContext(ticketPurchaseContext) as TicketPurchaseContext
-
+const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
+  const {ticketCheckoutData, ticketQuantity,
+  setTicketCheckoutData}=useContext(ticketPurchaseContext) as TicketPurchaseContext
+  
+  const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    alert("submitted buddy")
+  }
   const onChange = (field: keyof TicketCheckoutForm, value: string|number|File) => {
     setTicketCheckoutData((prev:TicketCheckoutForm) => {
       return {...prev,[field]:value}
     })
   }
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div className='flex flex-col gap-3 mb-6'>
         <span className='font-medium text-lg'>Kemana tiket akan dikirim ?</span>
         <FormControl>
@@ -108,26 +114,32 @@ const CheckoutForm = () => {
           </FormLabel>
           <Input 
           type='text'
-          value={ticketCheckoutData.institute_name}
+          value={ticketCheckoutData.institute_name ? ticketCheckoutData.institute_name : ""}
           onChange={(e) => onChange("institute_name",e.target.value)}
           className="xs:!w-[70%]" 
           placeholder="Institute's Name"
           />
         </FormControl> 
         <FormControl
-         className={`${ticketCheckoutData.institute_name.length > 0 ? "opacity-100":"opacity-50"}`}
-         isReadOnly={ticketCheckoutData.institute_name.length <= 0}
+         className={`${ticketCheckoutData.institute_name ? "opacity-100":"opacity-50"}`}
+         isReadOnly={ticketCheckoutData.institute_name == undefined}
         >
           <FormLabel
           fontWeight={400}
           fontSize={15}
           className='font-normal text-xs'>Alamat Institusi (optional)</FormLabel>
           <Textarea
-          value={ticketCheckoutData.institute_address}
+          value={ticketCheckoutData.institute_address ? ticketCheckoutData.institute_address : ""}
           onChange={(e) => onChange("institute_address", e.target.value)}
           placeholder="Institute's Address" 
           />
         </FormControl> 
+      </div>
+      <div className="w-[584px] bg-white mx-auto sticky bottom-0 right-0 left-0 z-[1000]">
+        <ButtonCheckout 
+        disabled={disableSubmit}
+        ticketQuantity={ticketQuantity}
+        />
       </div>
     </form>
   )

@@ -7,9 +7,10 @@ export const numberToRupiah = (number:number) => {
   });
 }
 
-export const dateToString = (date: Date) => {
+export const dateToString = (date: Date|string) => {
+  const time = typeof date === "string" ? new Date(date) : date
   const options: Intl.DateTimeFormatOptions = {
     weekday: 'long', day: 'numeric', month: 'short', year: 'numeric'
   };
-  return new Intl.DateTimeFormat('en-US',options).format(date)
+  return new Intl.DateTimeFormat('en-US',options).format(time)
 }

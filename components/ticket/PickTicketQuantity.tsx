@@ -16,22 +16,22 @@ const PickTicketQuantity = ({className}:{className?:string}) => {
   {
     id: 2,
     type: "Pelajar",
-    price: 150000,
+    price: 170000,
     quantity: 0,
     description: "Memiliki kartu pelajar."
   },
   {
     id: 3,
     type: "Dewasa",
-    price: 200000,
+    price: 250000,
     quantity: 0,
   },
   {
     id: 4,
     type: "Lansia",
-    price: 180000,
+    price: 200000,
     quantity: 0,
-    description: "60 tahun keatas."
+    description: "65 tahun keatas."
   },
   ]
   const { ticketQuantity, setTicketQuantity,
@@ -57,7 +57,7 @@ const PickTicketQuantity = ({className}:{className?:string}) => {
             id={item.id}
             type={item.type}
             price={item.price}
-            quantity={item.quantity}
+            quantity={item.quantity ? item.quantity : 0}
             description={item.description}
             />
           ))}

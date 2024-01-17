@@ -2,9 +2,11 @@
 import { useContext } from "react"
 import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
 import ButtonCheckout from "./ButtonCheckout"
+import { SessionTicket, createTicketSession } from "@/app/api/ticket/session"
+import axios from "axios"
 
 const ButtonNavigation = () => {
-  const { currentPage, setCurrentPage, disableSubmit } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+  const { currentPage, setCurrentPage} = useContext(ticketPurchaseContext) as TicketPurchaseContext
   const pageChange = (condition: boolean) => {
     if(condition) {
       setCurrentPage((prev: number) => prev+1);
@@ -13,26 +15,55 @@ const ButtonNavigation = () => {
       setCurrentPage((prev: number) => prev-1);
     }
   }
-  return (
+  return (currentPage < 3) && (
     <div className="w-[584px] bg-white mx-auto">
-      {currentPage >= 3 ? (
-        <ButtonCheckout disabled={disableSubmit} />
-      ) : (
-        <ButtonNextPrev
-        page={currentPage}
-        disabled={disableSubmit}
-        callback={(condition) => pageChange(condition)} 
-        />
-      )}
+      <ButtonNextPrev
+      page={currentPage}
+      callback={(condition) => pageChange(condition)} 
+      />
     </div>
   )
 }
 
-const ButtonNextPrev = ({callback, page, disabled}:
-{callback:(condition:boolean)=>void, page: number, disabled:boolean}) => {
+const ButtonNextPrev = ({callback, page}: {callback:(condition:boolean)=>void, page: number}) => {
+
+  const { ticketInformationData, ticketQuantity, setTicketInformationData, setTicketQuantity,
+  setDisableSubmit, disableSubmit } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+
   const buttonClick = (e:React.MouseEvent<HTMLButtonElement>, condition:boolean) => {
     e.preventDefault()
-    callback(condition)
+    if(page === 1 && condition) {
+      sessionRequest()
+    }else {
+      callback(condition)
+    }
+
+  }
+  const sessionRequest = async () => {
+    const requestData: SessionTicket = {
+      visit_date: ticketInformationData.visit_date as Date,
+      schedule_id: ticketInformationData.schedule?.id as number,
+      quantities: ticketQuantity
+    }
+    setDisableSubmit(true)
+    axios.post(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/session/create`,
+    requestData,
+    {withCredentials:true})
+    .then((res) => {
+      const result = res.data.result
+      if(result) {
+        res.data.result 
+        setTicketInformationData({
+          visit_date: new Date(result["visit_date"]) as Date,
+          schedule: result["schedule"],
+        })
+        setTicketQuantity(result["quantities"])
+        callback(true)
+      }
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+    })
   }
   return (
     <div className="flex justify-end items-center gap-3 text-end py-4 px-4">
@@ -42,7 +73,7 @@ const ButtonNextPrev = ({callback, page, disabled}:
       className={`border-2 border-gray-300 px-4 py-[6.5px] rounded-full ${page <= 1 && "opacity-50 cursor-not-allowed"}`}
       >Kembali</button>
       <button 
-      disabled={disabled}
+      disabled={disableSubmit}
       onClick={(e) => buttonClick(e, true)}
       className="px-4 py-2 bg-blue-500 text-white rounded-full font-medium disabled:opacity-50 disabled:cursor-not-allowed"
       >Lanjutkan</button>
