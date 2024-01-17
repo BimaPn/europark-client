@@ -6,14 +6,15 @@ import { numberToRupiah } from "@/helper/convert"
 import axios from "axios"
 
 const PickTicketQuantity = ({className}:{className?:string}) => {
-  const { ticketQuantity, setTicketQuantity,
+  const { ticketQuantity, setTicketQuantity, maxQuantity,
   setMaxQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
 
   useEffect(() => {
-    if(ticketQuantity.length > 0) return
     axios.get(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/categories/get`)
     .then((res) => {
+    if(ticketQuantity.length <= 0) {
       setTicketQuantity(res.data.result)
+    }
       setMaxQuantity(res.data.maxQuantity)
     })
     .catch((err) => {
@@ -25,7 +26,7 @@ const PickTicketQuantity = ({className}:{className?:string}) => {
     <div className={`flex flex-col gap-[6px] ${className}`}>
       <div className="flex flex-col gap-1">
         <span className='font-medium'>3. Pilih categori dan jumlah tiket</span>
-        <span className="text-sm">Maksimal jumlah pembelian adalah 16 tiket.</span>
+        <span className="text-sm">Maksimal jumlah pembelian adalah {maxQuantity} tiket.</span>
       </div>
 
         <div className="flex flex-col gap-1">

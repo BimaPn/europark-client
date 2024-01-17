@@ -13,7 +13,7 @@ const page = () => {
   }
   useEffect(() => {
     // axios.post(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/session/create`,data,{withCredentials:true})
-    axios.get(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/schedules/get`)
+    axios.get(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/categories/get`,{withCredentials:true})
     .then((res) => {
       console.log(res.data)
       })

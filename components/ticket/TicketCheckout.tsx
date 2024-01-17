@@ -1,9 +1,18 @@
 "use client"
-import { FormControl, FormLabel, Input, NumberInput, NumberInputField, Textarea } from '@chakra-ui/react'
+import { 
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input, 
+  NumberInput,
+  NumberInputField,
+  Textarea
+} from '@chakra-ui/react'
 import ImageInput from '../ui/ImageInput'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ticketPurchaseContext } from '../provider/TicketPurchaseProvider'
 import ButtonCheckout from './ButtonCheckout'
+import axios from 'axios'
 
 const TicketCheckout = () => {
   const { ticketCheckoutData,
@@ -11,7 +20,7 @@ const TicketCheckout = () => {
 
   const checkFieldsExist = () => {
     return ticketCheckoutData.name && ticketCheckoutData.email && ticketCheckoutData.whatsapp_number
-    && ticketCheckoutData.indentity_card_picture
+    && ticketCheckoutData.identity_card_picture
   }
   const checkInstituteFields = () => {
     if(ticketCheckoutData.institute_name) {
@@ -45,11 +54,22 @@ const TicketCheckout = () => {
 
 const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
   const {ticketCheckoutData, ticketQuantity,
-  setTicketCheckoutData}=useContext(ticketPurchaseContext) as TicketPurchaseContext
-  
+  setTicketCheckoutData, setDisableSubmit}= useContext(ticketPurchaseContext) as TicketPurchaseContext
+  const [errors, setErrors] = useState<TicketCheckoutFormErrors| null>() 
   const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    alert("submitted buddy")
+    // setDisableSubmit(true)
+    axios.post(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/create`,
+    ticketCheckoutData,
+    {withCredentials:true, headers: {"Content-Type":"multipart/form-data"}})
+    .then((res) => {
+      console.log(res.data)
+      setErrors(null)
+    })
+    .catch((err) => {
+      setDisableSubmit(false)
+      setErrors(err.response.data.errors)
+    })
   }
   const onChange = (field: keyof TicketCheckoutForm, value: string|number|File) => {
     setTicketCheckoutData((prev:TicketCheckoutForm) => {
@@ -60,7 +80,7 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
     <form onSubmit={onSubmit}>
       <div className='flex flex-col gap-3 mb-6'>
         <span className='font-medium text-lg'>Kemana tiket akan dikirim ?</span>
-        <FormControl>
+        <FormControl isInvalid={errors?.email}>
           <FormLabel
           fontWeight={400} fontSize={15} className='font-normal text-xs'>Alamat Email</FormLabel>
           <Input
@@ -71,11 +91,14 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
           isRequired
           placeholder='Email Address'
           />
+          {errors?.email && (
+            <FormErrorMessage>{errors?.email[0]}</FormErrorMessage>
+          )}
         </FormControl>        
       </div>    
       <div className='flex flex-col gap-4'>
         <span className='font-medium text-lg'>Masukan Data Diri Anda</span>       
-        <FormControl className='!-mt-1'>
+        <FormControl className='!-mt-1' isInvalid={errors?.name}>
           <FormLabel
           fontWeight={400} fontSize={15} className='font-normal text-xs'>Nama Lengkap</FormLabel>
           <Input 
@@ -86,8 +109,11 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
           isRequired
           placeholder='Full Name'
           />
+          {errors?.name && (
+            <FormErrorMessage>{errors?.name[0]}</FormErrorMessage>
+          )}
         </FormControl>        
-        <FormControl>
+        <FormControl isInvalid={errors?.whatsapp_number}>
           <FormLabel
           fontWeight={400} fontSize={15} className='font-normal text-xs'>Nomor Whatsapp</FormLabel>
           <NumberInput
@@ -98,16 +124,22 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
           >
           <NumberInputField placeholder="Whatsapp Number" />
           </NumberInput>
+          {errors?.whatsapp_number && (
+            <FormErrorMessage>{errors?.whatsapp_number[0]}</FormErrorMessage>
+          )}
         </FormControl> 
-        <FormControl>
+        <FormControl isInvalid={errors?.identity_card_picture}>
           <FormLabel
           fontWeight={400} fontSize={15} className='font-normal text-xs'>Foto Kartu Identitas</FormLabel>
           <ImageInput
-          onChange={(image) => onChange("indentity_card_picture",image)}
+          onChange={(image) => onChange("identity_card_picture",image)}
           />
+          {errors?.identity_card_picture && (
+            <FormErrorMessage>{errors?.identity_card_picture[0]}</FormErrorMessage>
+          )}
         </FormControl> 
 
-        <FormControl >
+        <FormControl isInvalid={errors?.institute_name}>
           <FormLabel
           fontWeight={400} fontSize={15} className='font-normal text-xs'>
           Nama Institusi (optional)
@@ -119,10 +151,14 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
           className="xs:!w-[70%]" 
           placeholder="Institute's Name"
           />
+          {errors?.institute_name && (
+            <FormErrorMessage>{errors?.institute_name[0]}</FormErrorMessage>
+          )}
         </FormControl> 
         <FormControl
          className={`${ticketCheckoutData.institute_name ? "opacity-100":"opacity-50"}`}
          isReadOnly={ticketCheckoutData.institute_name == undefined}
+         isInvalid={errors?.institute_address}
         >
           <FormLabel
           fontWeight={400}
@@ -133,6 +169,9 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
           onChange={(e) => onChange("institute_address", e.target.value)}
           placeholder="Institute's Address" 
           />
+          {errors?.institute_address && (
+            <FormErrorMessage>{errors?.institute_address[0]}</FormErrorMessage>
+          )}
         </FormControl> 
       </div>
       <div className="w-[584px] bg-white mx-auto sticky bottom-0 right-0 left-0 z-[1000]">

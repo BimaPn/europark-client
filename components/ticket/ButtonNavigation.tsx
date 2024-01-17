@@ -2,7 +2,6 @@
 import { useContext } from "react"
 import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
 import ButtonCheckout from "./ButtonCheckout"
-import { SessionTicket, createTicketSession } from "@/app/api/ticket/session"
 import axios from "axios"
 
 const ButtonNavigation = () => {
@@ -40,7 +39,7 @@ const ButtonNextPrev = ({callback, page}: {callback:(condition:boolean)=>void, p
 
   }
   const sessionRequest = async () => {
-    const requestData: SessionTicket = {
+    const requestData= {
       visit_date: ticketInformationData.visit_date as Date,
       schedule_id: ticketInformationData.schedule?.id as number,
       quantities: ticketQuantity

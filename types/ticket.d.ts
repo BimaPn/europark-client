@@ -34,8 +34,16 @@ interface Schedule {
 interface TicketCheckoutForm {
   name: string
   email: string
-  indentity_card_picture: File | null
+  identity_card_picture: File | null
   whatsapp_number: string
   institute_name?: string
   institute_address?: string
+}
+interface TicketCheckoutFormErrors {
+  name?: Array,
+  email?: Array,
+  identity_card_picture?: Array
+  whatsapp_number?: Array
+  institute_name?: Array
+  institute_address?: Array
 }
