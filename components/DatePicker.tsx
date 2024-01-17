@@ -1,6 +1,6 @@
 "use client"
 import { addMonths } from 'date-fns';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { ClassNames, DayPicker } from 'react-day-picker';
 import styles from 'react-day-picker/dist/style.module.css'
 import '../app/css/custom-daypicker.css'

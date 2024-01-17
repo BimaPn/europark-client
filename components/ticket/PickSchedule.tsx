@@ -1,24 +1,23 @@
 "use client"
-
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
+import axios from "axios"
 
 const PickSchedule = ({className}:{className?: string}) => {
-  const { ticketInformationData, setTicketInformationData } = useContext(ticketPurchaseContext) as TicketPurchaseContext
-  const schedules = [
-  {
-    id: 1,
-    schedule: "09.00 AM - 12.00 PM"
-  },
-  {
-    id: 2,
-    schedule: "12.00 PM - 15.00 PM"
-  },
-  {
-    id: 3,
-    schedule: "18.00 PM - 21.00 PM"
-  },
-  ]
+  const { ticketInformationData,
+  setTicketInformationData } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+  const [schedules, setSchedules] = useState<Schedule[]>([])
+
+  useEffect(() => {
+    axios.get(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/schedules/get`)
+    .then((res) => {
+      setSchedules(res.data.result)
+      })
+    .catch((err) => {
+      console.log(err.response.data)
+      })
+  },[])
+
   const onChange = (e:React.MouseEvent<HTMLButtonElement>, schedule: Schedule) => {
     e.preventDefault()
     setTicketInformationData((prev:TicketInformationForm) => {

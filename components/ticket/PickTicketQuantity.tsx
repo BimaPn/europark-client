@@ -3,44 +3,22 @@
 import { useContext, useEffect } from "react"
 import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
 import { numberToRupiah } from "@/helper/convert"
+import axios from "axios"
 
 const PickTicketQuantity = ({className}:{className?:string}) => {
-  const types = [
-  {
-    id: 1,
-    type: "Anak-anak",
-    price: 115000,
-    quantity: 0,
-    description: "kurang dari 12 tahun."
-  },
-  {
-    id: 2,
-    type: "Pelajar",
-    price: 170000,
-    quantity: 0,
-    description: "Memiliki kartu pelajar."
-  },
-  {
-    id: 3,
-    type: "Dewasa",
-    price: 250000,
-    quantity: 0,
-  },
-  {
-    id: 4,
-    type: "Lansia",
-    price: 200000,
-    quantity: 0,
-    description: "65 tahun keatas."
-  },
-  ]
   const { ticketQuantity, setTicketQuantity,
   setMaxQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
 
   useEffect(() => {
     if(ticketQuantity.length > 0) return
-    setTicketQuantity(types) 
-    setMaxQuantity(16)
+    axios.get(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/categories/get`)
+    .then((res) => {
+      setTicketQuantity(res.data.result)
+      setMaxQuantity(res.data.maxQuantity)
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+    })
   },[])
   
   return ticketQuantity && (
