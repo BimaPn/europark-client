@@ -66,7 +66,6 @@ const ButtonNextPrev = ({callback, page}: {callback:(condition:boolean)=>void, p
   }
   return (
     <div className="flex justify-end items-center gap-3 text-end py-4 px-4">
-
       <button
       onClick={(e) => buttonClick(e, false)}
       className={`border-2 border-gray-300 px-4 py-[6.5px] rounded-full ${page <= 1 && "opacity-50 cursor-not-allowed"}`}

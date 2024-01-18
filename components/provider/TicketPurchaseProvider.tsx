@@ -9,7 +9,7 @@ const TicketPurchaseProvider = ({children}:{children:React.ReactNode}) => {
     email: "",
     name: "",
     whatsapp_number: "",
-    indentity_card_picture: null,
+    identity_card_picture: null,
   })
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [maxQuantity, setMaxQuantity] = useState<number>(0)

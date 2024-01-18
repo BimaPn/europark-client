@@ -21,12 +21,12 @@ const PickTicketQuantity = ({className}:{className?:string}) => {
       console.log(err.response.data)
     })
   },[])
-  
+
   return ticketQuantity && (
     <div className={`flex flex-col gap-[6px] ${className}`}>
       <div className="flex flex-col gap-1">
         <span className='font-medium'>3. Pilih categori dan jumlah tiket</span>
-        <span className="text-sm">Maksimal jumlah pembelian adalah {maxQuantity} tiket.</span>
+        <span className="text-sm">Jumlah pembelian tersisa adalah {maxQuantity} tiket.</span>
       </div>
 
         <div className="flex flex-col gap-1">
