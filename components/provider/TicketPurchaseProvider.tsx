@@ -26,6 +26,7 @@ const TicketPurchaseProvider = ({children}:{children:React.ReactNode}) => {
       whatsapp_number: "",
       identity_card_picture: null,
     })
+    setCurrentPage(1)
   }
   return (
     <ticketPurchaseContext.Provider
