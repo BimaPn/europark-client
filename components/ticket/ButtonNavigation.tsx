@@ -3,6 +3,7 @@ import { useContext } from "react"
 import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
 import ButtonCheckout from "./ButtonCheckout"
 import axios from "axios"
+import { useRouter } from "next/navigation"
 
 const ButtonNavigation = () => {
   const { currentPage, setCurrentPage} = useContext(ticketPurchaseContext) as TicketPurchaseContext
@@ -27,7 +28,8 @@ const ButtonNavigation = () => {
 const ButtonNextPrev = ({callback, page}: {callback:(condition:boolean)=>void, page: number}) => {
 
   const { ticketInformationData, ticketQuantity, setTicketInformationData, setTicketQuantity,
-  setDisableSubmit, disableSubmit } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+  setDisableSubmit, disableSubmit, setIsDone } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+  const router = useRouter()
 
   const buttonClick = (e:React.MouseEvent<HTMLButtonElement>, condition:boolean) => {
     e.preventDefault()
@@ -61,7 +63,8 @@ const ButtonNextPrev = ({callback, page}: {callback:(condition:boolean)=>void, p
       }
     })
     .catch((err) => {
-      console.log(err.response.data)
+      setIsDone(true)
+      router.push(`/tickets/buy/error`)
     })
   }
   return (

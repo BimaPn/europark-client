@@ -8,9 +8,10 @@ import TicketCheckout from "./TicketCheckout"
 import axios from "axios"
 
 const StartPage = () => {
-  const { currentPage, setCurrentPage,
+  const { currentPage, setCurrentPage, setIsDone,
   setTicketInformationData, setTicketQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
   useEffect(() => {
+    setIsDone(false)
     axios.get(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/session/check`,{withCredentials:true})
     .then((res) => {
       const result = res.data.result

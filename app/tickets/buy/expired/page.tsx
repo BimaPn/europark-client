@@ -1,8 +1,18 @@
+"use client"
 import ErrorIcon from "@/components/icons/ErrorIcon"
+import { ticketPurchaseContext } from "@/components/provider/TicketPurchaseProvider"
 import Link from "next/link"
+import { useContext, useEffect } from "react"
 
 const page = () => {
-  return (
+  const { isDone, resetFormData } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+  
+  useEffect(() => {
+    if(isDone) {
+      resetFormData() 
+    }
+  },[])
+  return isDone && (
     <section className="flexBetween flex-col items-center h-full">
       <div className="flex flex-col items-center">
         <ErrorIcon width={230}/>

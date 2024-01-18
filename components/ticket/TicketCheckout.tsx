@@ -13,6 +13,7 @@ import { useContext, useEffect, useState } from 'react'
 import { ticketPurchaseContext } from '../provider/TicketPurchaseProvider'
 import ButtonCheckout from './ButtonCheckout'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 const TicketCheckout = () => {
   const { ticketCheckoutData,
@@ -54,19 +55,26 @@ const TicketCheckout = () => {
 
 const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
   const {ticketCheckoutData, ticketQuantity,
-  setTicketCheckoutData, setDisableSubmit}= useContext(ticketPurchaseContext) as TicketPurchaseContext
+  setTicketCheckoutData, setDisableSubmit, setIsDone}= useContext(ticketPurchaseContext) as TicketPurchaseContext
   const [errors, setErrors] = useState<TicketCheckoutFormErrors| null>() 
+  const router = useRouter()
+
   const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // setDisableSubmit(true)
+    setDisableSubmit(true)
     axios.post(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/create`,
     ticketCheckoutData,
     {withCredentials:true, headers: {"Content-Type":"multipart/form-data"}})
     .then((res) => {
-      console.log(res.data)
+      setIsDone(true)
+      router.push("/tickets/buy/success")
       setErrors(null)
     })
     .catch((err) => {
+      if(err.response.status === 419) {
+        setIsDone(true)
+        router.push("/tickets/buy/expired")
+      }
       setDisableSubmit(false)
       setErrors(err.response.data.errors)
     })

@@ -1,8 +1,22 @@
+"use client"
 import SuccessIcon from "@/components/icons/SuccessIcon"
+import { ticketPurchaseContext } from "@/components/provider/TicketPurchaseProvider"
 import Link from "next/link"
+import { useContext, useEffect, useState } from "react"
 
 const page = () => {
-  return (
+  const { isDone, resetFormData,
+  ticketCheckoutData } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+  const [email, setEmail] = useState<string>("")
+
+  useEffect(() => {
+    setEmail(ticketCheckoutData.email)
+    if(isDone) {
+      resetFormData() 
+    }
+  },[])
+
+  return isDone && (
     <section className="flexBetween flex-col items-center h-full">
       <div className="flex flex-col items-center">
         <SuccessIcon width={230}/>
@@ -10,7 +24,7 @@ const page = () => {
         <div className="mt-6">
           <span className="w-[80%] block text-center mx-auto leading-[28px]">
           Ticket telah berhasil dibuat dan ticket telah dikirim ke email
-           <span className="font-semibold ml-[6px]">bimaptr12@gmail.com</span></span>
+           <span className="font-semibold ml-[6px]">{email}</span></span>
         </div>
       </div>
       <div className="w-full py-4 px-4 flex gap-6 text-center">

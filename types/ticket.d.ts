@@ -11,6 +11,9 @@ interface TicketPurchaseContext {
   setMaxQuantity: Dispatch<SetStateAction<number>>
   disableSubmit: boolean
   setDisableSubmit: Dispatch<SetStateAction<number>>
+  isDone: boolean,
+  setIsDone: Dispatch<SetStateAction<boolean>>
+  resetFormData: () => void
 }
 
 interface TicketInformationForm {
