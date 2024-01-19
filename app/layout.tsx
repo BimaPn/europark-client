@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
 import { ChakraProvider } from '@/components/provider/ChakraProvider'
+import AuthProvider from '@/components/provider/AuthProvider'
 
 const poppins = Poppins({ subsets:["latin-ext"],weight:["400","500", "600", "700"] })
 
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <ChakraProvider>
-          {children}
-        </ChakraProvider>
+        <AuthProvider>
+          <ChakraProvider>
+            {children}
+          </ChakraProvider>
+        </AuthProvider>
       </body>
     </html>
   )

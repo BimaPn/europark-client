@@ -1,5 +1,4 @@
 import TicketPurchaseProvider from '@/components/provider/TicketPurchaseProvider'
-import axios from 'axios'
 import type { Metadata } from 'next'
 import TicketNavbar from '../TicketNavbar'
 

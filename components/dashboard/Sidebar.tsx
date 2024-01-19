@@ -1,14 +1,23 @@
-import { Box, BoxProps, CloseButton, Flex, FlexProps, Icon, Text, useColorModeValue } from "@chakra-ui/react"
-import { FiCompass, FiHome, FiSettings, FiStar, FiTrendingUp } from "react-icons/fi"
+"use client"
+import { Box, BoxProps, CloseButton, Flex, FlexProps } from "@chakra-ui/react"
 import { HiMiniBuildingLibrary } from "react-icons/hi2"
+import { usePathname } from 'next/navigation'
+import { LuUsers } from "react-icons/lu"
+import { IoTicketOutline } from "react-icons/io5"
+import { MdOutlineCollectionsBookmark } from "react-icons/md"
+import { AiOutlineDollar } from "react-icons/ai"
+import Link from "next/link"
+import { FiHome } from "react-icons/fi"
 
 interface LinkItemProps {
   name: string
   icon: React.ReactNode 
+  path: string
 }
 
 interface NavItemProps extends FlexProps {
   icon: React.ReactNode
+  path: string
   children: React.ReactNode
 }
 
@@ -19,73 +28,74 @@ interface MobileProps extends FlexProps {
 interface SidebarProps extends BoxProps {
   onClose: () => void
 }
-
-const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Tiket', icon: FiTrendingUp },
-  { name: 'Koleksi', icon: FiCompass },
-  { name: 'Administator', icon: FiStar },
+const dashboardNavigations = [
+  { 
+    name: 'Dashboard',
+    icon: <FiHome className="text-lg" />,
+    path: 'home'
+  },
+  {
+    name: 'Tiket',
+    icon: <IoTicketOutline className="text-[20px]" />,
+    path: 'tickets'
+  },
+  { 
+    name: 'Pengunjung',
+    icon: <LuUsers className="text-[19px]" />,
+    path: 'visitors'
+  },
+  { 
+    name: 'Koleksi',
+    icon: <MdOutlineCollectionsBookmark className="text-[21px]" />,
+    path: 'collections'
+  },
 ]
 
 const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
+  const pathname = usePathname()
   return (
     <Box
       transition="3s ease"
-      bg={useColorModeValue('white', 'gray.900')}
-      borderRight="1px"
-      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+      className={`bg-white`}
       w={{ base: 'full', md: 60 }}
       pos="fixed"
       h="full"
       {...rest}>
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" className='flexCenter gap-2'>
-            <Icon as={HiMiniBuildingLibrary} className="text-3xl" />
-            <span className="text-xl">EuroPark</span>
-        </Text>
+      <Flex  mx="4" justifyContent="space-between" className="my-6 !items-center">
+        <div className="flex items-center gap-2">
+            <HiMiniBuildingLibrary className="text-3xl" />
+            <span className="text-xl font-semibold">EuroPark</span>
+        </div>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
-      ))}
+      <div className="flex flex-col gap-1">
+        {dashboardNavigations.map((link) => (
+          <NavItem 
+          key={link.name}
+          icon={link.icon}
+          path={link.path}
+          className={`${pathname.includes(link.path) && "bg-blue-400 text-white"}`} 
+          >
+            {link.name}
+          </NavItem>
+        ))}
+      </div>
     </Box>
   )
 }
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, path, className, }: {className?:string} & NavItemProps) => {
   return (
-    <Box
-      as="a"
-      href="#"
-      style={{ textDecoration: 'none' }}
-      _focus={{ boxShadow: 'none' }}>
-      <Flex
-        align="center"
-        p="4"
-        mx="4"
-        borderRadius="lg"
-        role="group"
-        cursor="pointer"
-        _hover={{
-          bg: 'cyan.400',
-          color: 'white',
-        }}
-        {...rest}>
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="16"
-            _groupHover={{
-              color: 'white',
-            }}
-            as={icon as any}
-          />
-        )}
+    <Link href={`/admin/dashboard/${path}`}>
+      <div
+      className={`flex items-center gap-1 rounded-lg px-2 py-2 mx-2 cursor-pointer hover:bg-blue-400 hover:text-white ${className}`}
+        >
+        <div className="w-8 aspect-square flexCenter">
+          {icon}
+        </div>
         {children}
-      </Flex>
-    </Box>
+      </div>
+    </Link>
   )
 }
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getSession } from 'next-auth/react';
 
-const baseURL = process.env.NEXT_PUBLIC_DATABASE_URL || "http://localhost:3500";
+const baseURL = process.env.NEXT_PUBLIC_DATABASE_URL || "http://localhost:8000";
 
 const ApiClient = () => {
   const defaultOptions = {
