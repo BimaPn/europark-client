@@ -3,9 +3,10 @@ import { getSession } from 'next-auth/react';
 
 const baseURL = process.env.NEXT_PUBLIC_DATABASE_URL || "http://localhost:8000";
 
-const ApiClient = () => {
+const ApiClient = (withCredentials=false) => {
   const defaultOptions = {
     baseURL,
+    withCredentials
   };
   const instance = axios.create(defaultOptions);
 
@@ -26,4 +27,4 @@ const ApiClient = () => {
   return instance;
 };
 
-export default ApiClient();
+export default ApiClient;

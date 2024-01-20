@@ -2,6 +2,7 @@
 import ApiClient from "@/app/api/axios/ApiClient"
 import TicketIcon from "@/components/icons/TicketIcon"
 import ButtonVerify from "@/components/ticket/ButtonVerify"
+import ResponseMessageAdmin from "@/components/ticket/ResponseMessageAdmin"
 import TicketNotFound from "@/components/ticket/TicketNotFound"
 import Image from "next/image"
 import Link from "next/link"
@@ -21,22 +22,32 @@ type TicketData = {
 
 const page = ({params}:{params : {id:string}}) => {
   const [data, setData] = useState<TicketData|null>(null)
+  const [errorCode, setErrorCode] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    ApiClient.get(`/api/tickets/${params.id}/get`)
+    ApiClient().get(`/api/tickets/${params.id}/get`)
     .then((res) => {
       setData(res.data.result)
       setIsLoading(false)
     })
     .catch((err) => {
+      setErrorCode(err.response.status)
       setIsLoading(false)
     })
   },[])
   return (
     <>
       {isLoading && <p>loading</p>}
-      {(!isLoading && data === null) ? <TicketNotFound /> : 
+      {(!isLoading && errorCode === 404) && <TicketNotFound />}
+      {(!isLoading && errorCode === 409) && (
+        <ResponseMessageAdmin
+        type="error"
+        message="Verifikasi Gagal"
+        subMessage="Tiket sudah di verifikasi sebelumnya." 
+        />
+      )}
+      {(!isLoading && data) && 
       (
         <section className="flexBetween flex-col items-center h-full">
           <div className="flex flex-col items-center mb-4">

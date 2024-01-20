@@ -9,12 +9,12 @@ const ButtonVerify = ({ticketId, className}:{ticketId:string, className?:string}
   const onClick = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setDisabled(true)
-    ApiClient.post(`/api/tickets/${ticketId}/verify`)
+    ApiClient(true).post(`/api/tickets/${ticketId}/verify`)
     .then((res) => {
-      console.log("berhasil")
+      router.push("verify/success")
     })
     .catch((err) => {
-      console.log(err.response.data)
+      router.push("verify/error")
     })
   }
   return (
