@@ -102,7 +102,6 @@ const TicketData = () => {
       />
     </div>
   </>
-
   )
 }
 

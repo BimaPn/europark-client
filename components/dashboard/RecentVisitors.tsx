@@ -60,7 +60,7 @@ const RecentVisitors = ({className}:{className?:string}) => {
         </Thead>
         <Tbody>
             {visitors.map((item, index) => (
-            <Tr>
+            <Tr key={index}>
               <Td className='flex items-center gap-2'>
                 <RoundedImage src={item.avatar} alt={item.name} className='!min-w-[38px] !w-[38px]' />
                 <span className='line-clamp-1'>{item.name}</span>

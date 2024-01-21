@@ -49,7 +49,7 @@ export const Td = ({children, className}:{children: React.ReactNode, className?:
 export const TdActions = ({children, className}:{children: React.ReactNode, className?: string}) => {
   return (
     <td className={`text-sm td-custom t-default ${className}`} >
-      <div className="flexCenter gap-[6px] mx-auto">
+      <div className="flexCenter gap-[10px] mx-auto">
         {children}
       </div>
     </td>

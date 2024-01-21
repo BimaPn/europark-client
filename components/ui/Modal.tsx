@@ -1,5 +1,6 @@
 'use client'
 import { createContext, useContext, useState } from "react";
+import { MdClose } from "react-icons/md";
 
 export type ModalProvider = {
  showModal:boolean,
@@ -66,11 +67,20 @@ export const Content = ({children, width, onClose, className}:ModalContent) => {
   )
 }
 
-export const Header = ({children, className}:{children:React.ReactNode, className?:string}) => {
+export const Header = ({children, title, onClose, className}:{children?:React.ReactNode, title:string, onClose?:()=>void, className?:string}) => {
+  const buttonClose = () => {
+    onClose && onClose()
+  }
   return (
-    <div className={className}>
-      {children}
-    </div>
+      <div className={`grid grid-cols-3 py-3 px-2 ${className}`}>
+          <CloseButton className="!w-8 aspect-square flexCenter" onClose={buttonClose}>
+            <MdClose className="text-[22px]" />
+          </CloseButton>
+        <div className="flexCenter">
+          <span>{title}</span>
+        </div>
+        <span>{children ?? ""}</span>
+      </div>
   )
 }
 export const Body = ({children,className}:{children:React.ReactNode,className ?: string}) => {
@@ -89,10 +99,15 @@ export const Footer = ({children,className}:{children:React.ReactNode,className 
     )
 }
 
-export const CloseButton = ({children, className}:{children:React.ReactNode, className?:string}) => {
+export const CloseButton = ({children, onClose, className}:{children:React.ReactNode, onClose?:()=>void, className?:string}) => {
   const { toggleModal } = useContext(modalContext) as ModalProvider;
+  const buttonClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    onClose && onClose() 
+    toggleModal()
+  }
   return (
-    <button onClick={() => toggleModal()} className={`w-fit ${className}`}>
+    <button onClick={buttonClick} className={`w-fit ${className}`}>
       {children}
     </button>
   )
