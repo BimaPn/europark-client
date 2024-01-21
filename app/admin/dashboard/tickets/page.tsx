@@ -5,7 +5,7 @@ const page = () => {
   return (
   <>
     <PageTitle title="Tiket" />
-    <section className="bg-white rounded-lg px-4 py-4">
+    <section className="bg-white min-h-[80vh] rounded-lg px-4 py-4 overflow-y-scroll relative">
       <TicketData />  
     </section>
   </>
