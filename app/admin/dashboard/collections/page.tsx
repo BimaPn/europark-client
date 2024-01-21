@@ -1,16 +1,15 @@
-import TicketData from "@/components/dashboard/TicketData"
+import CollectionsData from "@/components/dashboard/CollectionsData"
 import { PageTitle } from "@/layouts/DashboardLayout"
 
 const page = () => {
   return (
   <>
-    <PageTitle title="Tiket" />
+    <PageTitle title="Koleksi" />
     <section className="bg-white min-h-[89.5vh] rounded-lg px-4 py-4 overflow-y-scroll relative">
-      <TicketData />  
+      <CollectionsData />  
     </section>
   </>
   )
 }
-
 
 export default page

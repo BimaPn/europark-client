@@ -40,11 +40,6 @@ const dashboardNavigations = [
     path: 'tickets'
   },
   { 
-    name: 'Pengunjung',
-    icon: <LuUsers className="text-[19px]" />,
-    path: 'visitors'
-  },
-  { 
     name: 'Koleksi',
     icon: <MdOutlineCollectionsBookmark className="text-[21px]" />,
     path: 'collections'

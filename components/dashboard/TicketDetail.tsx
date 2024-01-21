@@ -65,13 +65,12 @@ const TicketDetail = ({data}:{data:Ticket}) => {
         </div>
         <div className="w-full sticky bottom-0 bg-white py-4 px-4 flexCenter">
           <Link
-          href={`/admin/dashboard/home`}
+          href={`/admin/dashboard/tickets`}
           className="w-full xs:basis-[75%] px-4 py-2 bg-blue-500 text-white font-medium rounded-full text-center">
-          Dashboard
+          Kembali 
           </Link>
         </div>
       </section>
-
   )
 }
 
