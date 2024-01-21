@@ -50,3 +50,8 @@ interface TicketCheckoutFormErrors {
   institute_name?: Array
   institute_address?: Array
 }
+
+interface TicketDetail {
+  id:string | number | null
+  setId: Dispatch<SetStateAction<string | number>>
+}
