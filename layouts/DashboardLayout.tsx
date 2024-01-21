@@ -3,7 +3,7 @@ import { Box, useColorModeValue } from '@chakra-ui/react'
 
 const DashboardLayout = ({children}:{children:React.ReactNode}) => {
   return (
-    <div className='min-h-screen bg-blue-100'>
+    <div className='min-h-screen bg-sky-100'>
       <TopSideBar />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}

@@ -55,3 +55,23 @@ interface TicketDetail {
   id:string | number | null
   setId: Dispatch<SetStateAction<string | number>>
 }
+
+type ticketQuantity = {
+  type: string
+  quantity: number
+  total_price: number
+}
+
+interface Ticket {
+  id: string
+  identity_card: string
+  name: string
+  email: string
+  visit_date: string
+  schedule: string
+  expired: boolean
+  whatsapp_number: string
+  institute_name: string | null
+  institute_address : string | null
+  quantity: ticketQuantity[]
+}

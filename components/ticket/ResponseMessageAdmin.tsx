@@ -26,11 +26,11 @@ const ResponseMessageAdmin = ({type, message, subMessage}:ResponseMessage) => {
         )}
       </div>
       <div className="w-full py-4 px-4 flexCenter">
-      <Link
-      href={`/admin/dashboard/home`}
-      className="w-full xs:basis-[75%] px-4 py-2 bg-blue-500 text-white font-medium rounded-full text-center">
-      Dashboard
-      </Link>
+        <Link
+        href={`/admin/dashboard/home`}
+        className="w-full xs:basis-[75%] px-4 py-2 bg-blue-500 text-white font-medium rounded-full text-center">
+        Dashboard
+        </Link>
       </div>
     </section>
   )
