@@ -15,3 +15,11 @@ interface CollectionCreate {
   images: File[] 
   description: string
 }
+
+interface CollectionCreateErrors {
+  name?: Array,
+  createdBy?: Array,
+  discovery_year?: Array
+  origin ?: Array
+  description?: Array
+}
