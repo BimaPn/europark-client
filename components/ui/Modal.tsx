@@ -3,20 +3,21 @@ import { createContext, useContext, useState } from "react";
 import { MdClose } from "react-icons/md";
 
 export type ModalProvider = {
- showModal:boolean,
+ showModal:boolean
  toggleModal:()=>void
+ disabledToggle: boolean
 }
 
 export const modalContext = createContext<ModalProvider | null>(null); 
 
 const Modal = ({children, defaultValue=false}:{children:React.ReactNode, defaultValue?:boolean}) => {
   const [showModal,setShowModal] = useState<boolean>(defaultValue);
-
+  const disabledToggle = defaultValue
   const toggleModal = () => {
     setShowModal((prev) => !prev);
   }
   return (
-    <modalContext.Provider value={{ showModal, toggleModal }}>
+    <modalContext.Provider value={{ showModal, toggleModal, disabledToggle }}>
       <div className="z-[6000]">
         {children}
       </div>
@@ -43,15 +44,18 @@ type ModalContent = {
   className?:string
 }
 
-export const Content = ({children, width, onClose, className}:ModalContent) => {
-  const { showModal, toggleModal } = useContext(modalContext) as ModalProvider;
+export const Content = ({children,width, ...rest}:ModalContent) => {
+  const { showModal, toggleModal, disabledToggle } = useContext(modalContext) as ModalProvider;
   const modalClose = (e:React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    if(onClose) {
-      onClose();
+    if(rest.onClose) {
+      rest.onClose();
       return;
     };
-    toggleModal(); 
+    if(!disabledToggle) {
+      toggleModal(); 
+    }
+
   }
   return showModal && (
     <div onClick={modalClose} className="fixed inset-0 bg-black/30 flexCenter backdrop-blur">
@@ -60,7 +64,7 @@ export const Content = ({children, width, onClose, className}:ModalContent) => {
       style={{
         width
       }}
-      className={`h-full sm:h-[95%] md:h-[90%] bg-white dark:bg-dark-semiDark rounded-none sm:rounded-xl flex flex-col ${className}`}>
+      className={`h-full sm:h-[95%] md:h-[90%] bg-white dark:bg-dark-semiDark rounded-none sm:rounded-xl flex flex-col ${rest.className}`}>
         {children}
       </div>   
     </div>
@@ -100,11 +104,13 @@ export const Footer = ({children,className}:{children:React.ReactNode,className 
 }
 
 export const CloseButton = ({children, onClose, className}:{children:React.ReactNode, onClose?:()=>void, className?:string}) => {
-  const { toggleModal } = useContext(modalContext) as ModalProvider;
+  const { toggleModal, disabledToggle } = useContext(modalContext) as ModalProvider;
   const buttonClick = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     onClose && onClose() 
-    toggleModal()
+    if(!disabledToggle) {
+      toggleModal()
+    }
   }
   return (
     <button onClick={buttonClick} className={`w-fit ${className}`}>

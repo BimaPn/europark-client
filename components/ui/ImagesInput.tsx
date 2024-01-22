@@ -57,12 +57,13 @@ export const Trigger = ({children, className}:{children : React.ReactNode, class
   )
 }   
 
-export const Preview = ({className}:{className?:string}) => {
+export const Preview = ({children, className}:{children?:React.ReactNode, className?:string}) => {
   const { imagePreviews,removeImage } = useContext(imagesInputContext) as ImagesInputContext
-  return imagePreviews && (
-    <div className={`min-w-full overflow-x-auto ${imagePreviews.length > 0 && 'mb-3'}`}>
+  return (
+    <div className={`min-w-full overflow-x-auto mb-3`}>
       <div className={`flex items-center gap-3 ${className}`}>
-        {imagePreviews.map((content, index) => (
+        {children}
+        {imagePreviews && imagePreviews.map((content, index) => (
           <ImagePreview
             src={content}
             key={index} 
@@ -75,27 +76,28 @@ export const Preview = ({className}:{className?:string}) => {
     </div>
   )
 }
-// const EditOldImages = ({images,onRemove}:{images:PostMediaProps[],onRemove:(id:string | number)=> void}) => {
-//   const [oldImages,setOldImages] = useState<PostMediaProps[]>(images)
-//   const deleteOldImage = (id:string | number) => {
-//     setOldImages((prev)=>{
-//       return prev.filter(item => item.id != id)
-//     })
-//     onRemove(id)
-//   } 
-//   return (
-//     <>
-//     {oldImages.map((image) => (
-//       < ImagePreview
-//       key={image.id}
-//       src={image.file_path}
-//       onRemove={() => deleteOldImage(image.id)}
-//       alt='image' 
-//       className='aspect-square rounded-xl'/>
-//     ))}
-//     </>
-//   )
-// }
+export const EditOldImages = ({images,onRemove}:{images:DeletedImages[],onRemove:(id:string)=> void}) => {
+  const [oldImages,setOldImages] = useState<DeletedImages[]>(images)
+
+  const deleteOldImage = (id:string) => {
+    setOldImages((prev)=>{
+      return prev.filter(item => item.id != id)
+    })
+    onRemove(id)
+  } 
+  return (
+    <>
+    {oldImages.map((image) => (
+      <ImagePreview
+      key={image.id}
+      src={image.image}
+      onRemove={() => deleteOldImage(image.id)}
+      alt='image' 
+      className='aspect-square rounded-lg w-[60px] sm:min-w-24'/>
+    ))}
+    </>
+  )
+}
 const ImagePreview = ({src,alt,className,onRemove}:{src:string,alt:string,className?:string,onRemove?:()=> void}) => {
     const imageRemove = (e:React.MouseEvent) => {
         e.preventDefault()

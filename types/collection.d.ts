@@ -1,3 +1,4 @@
+
 interface CollectionProvider {
   collections: Collection[] | null
   setCollections: Dispatch<SetStateAction<Collection[] | null>>
@@ -24,10 +25,26 @@ interface CollectionCreate {
   description: string
 }
 
-interface CollectionCreateErrors {
+interface CollectionErrors {
   name?: Array,
   createdBy?: Array,
   discovery_year?: Array
   origin ?: Array
   description?: Array
 }
+
+interface CollectionUpdateProvider {
+  id: string | null
+  setId: Dispatch<SetStateAction<string | null>>
+}
+
+interface DeletedImages {
+  id: string
+  image: string
+}
+
+interface CollectionUpdate extends CollectionCreate {
+  deletedImages : string[]
+  _method: string
+}
+

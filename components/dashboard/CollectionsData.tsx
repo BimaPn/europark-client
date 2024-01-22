@@ -1,5 +1,4 @@
 "use client"
-
 import { IoSearch } from "react-icons/io5"
 import { Table, Tbody, Td, TdActions, Th, Thead, Tr } from "@/components/ui/Table"
 import ReactPaginate from "react-paginate"
@@ -11,9 +10,12 @@ import ButtonDelete from "../ui/ButtonDelete"
 import ButtonEdit from "../ui/ButtonEdit"
 import CollectionCreate from "../CollectionCreate"
 import { collectionContext } from "../provider/CollectionProvider"
+import { collectionUpdateContext } from "../CollectionUpdate"
 
 const CollectionsData = () => {
   const { collections, setCollections } = useContext(collectionContext) as CollectionProvider
+  const { setId } = useContext(collectionUpdateContext) as CollectionUpdateProvider
+
   useEffect(() => {
     ApiClient().get(`/api/collections/get`)
     .then((res) => {
@@ -26,19 +28,19 @@ const CollectionsData = () => {
 
   const renderCollections = () => {
     return collections!.map((item,index) => (
-      <Tr key={index} className="border-b">
+      <Tr key={index} className="border-b relative z-0">
         <Td className='flex items-center gap-2'>
           <RoundedImage 
           src={item.thumbnail}
           alt={item.name}
-          className='!min-w-[38px] !w-[38px] !rounded-md z-0' />
+          className='!min-w-[38px] !w-[38px] !rounded-md' />
           <span className='line-clamp-1'>{item.name}</span>
         </Td>
         <Td>{item.createdBy}</Td>
         <Td className="text-center">{item.discovery_year}</Td>
         <Td className="text-center">{item.origin}</Td>
         <TdActions>
-          <ButtonEdit callback={() => alert("edit data")} />
+          <ButtonEdit callback={() => setId(item.id)} />
           <ButtonDelete callback={() => alert("delete data")} />
         </TdActions>
       </Tr>
@@ -47,7 +49,7 @@ const CollectionsData = () => {
   return (
   <>
     <div className="px-1 flexBetween mb-[10px]">
-      <div className="relative z-[8000]">
+      <div className="z-[800]">
         <CollectionCreate />
       </div>
       <div className="w-52 flex px-1 py-1 bg-blue-100/90 text-slate-500 rounded-lg">

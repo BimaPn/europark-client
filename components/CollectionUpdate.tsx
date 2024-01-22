@@ -1,72 +1,113 @@
-import { useContext, useEffect, useState } from "react"
-import Modal, { Body, Content, Header, Trigger, Footer, modalContext, ModalProvider } from "./ui/Modal"
-import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
-import ImagesInput, {Trigger as ImagesTrigger, Preview} from "./ui/ImagesInput"
-import TextAreaExpand from "./ui/TextAreaExpand"
-import ButtonPrimary from "./ui/ButtonPrimary"
+"use client"
+import { createContext, useContext, useEffect, useState } from "react"
+import Modal, { Body, Content, Footer, Header } from "./ui/Modal"
+import { defaultData } from "./CollectionCreate"
 import ApiClient from "@/app/api/axios/ApiClient"
+import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react"
+import ButtonPrimary from "./ui/ButtonPrimary"
+import TextAreaExpand from "./ui/TextAreaExpand"
+import ImagesInput, { EditOldImages, Preview, Trigger as ImagesTrigger } from "./ui/ImagesInput"
 import { collectionContext } from "./provider/CollectionProvider"
 
-const CollectionCreate = () => {
+export const collectionUpdateContext = createContext<CollectionUpdateProvider | null>(null)
+
+const CollectionUpdate = ({children}:{children:React.ReactNode}) => {
+  const [id, setId] = useState<string|null>(null)
   return (
-    <Modal> 
-      <Trigger>
-      Buat koleksi
-      </Trigger>
-      <FormContent />
+<collectionUpdateContext.Provider value={{ id, setId }}>
+    {children}
+    <Modal defaultValue>
+      {id && <ModalContent id={id} onClose={() => setId(null)} />}
     </Modal>
+    </collectionUpdateContext.Provider>
   )
 }
-export const defaultData = {
-    name: "",
-    createdBy: "",
-    discovery_year: "",
-    origin: "",
-    images: [],
-    description: ""
-  }
 
-const FormContent = () => {  
-  const [formData, setFormData] = useState<CollectionCreate>(defaultData)
-  const [disabledButton, setDisabledButton] = useState<boolean>(true)
-  const { toggleModal } = useContext(modalContext) as ModalProvider
-  const [errors, setErrors] = useState<CollectionErrors | null>() 
-  const { addCollection } = useContext(collectionContext) as CollectionProvider
+type Data = {
+  data: CollectionUpdate,
+  oldImages: OldImage[]
+}
 
-  const isFormDataNotEmpty = () => {
-    return formData.name && formData.createdBy && formData.origin && formData.discovery_year && formData.description 
-    && formData.images.length > 0
-  }
+const ModalContent = ({id, onClose}:{id:string, onClose:() => void}) => {
+  const [data, setData] = useState<Data|null>(null)
+
   useEffect(() => {
-    setDisabledButton(isFormDataNotEmpty() ? false : true)
+   ApiClient().get(`/api/collections/${id}/update/get`)
+   .then((res) => {
+      setData({
+        data: {...res.data.collection,images:[],deletedImages:[],_method: "put"},
+        oldImages: res.data.oldImages
+      })
+    })
+   .catch((err) => {
+      console.log(err.response.data)
+    })
+  },[])
+  return (
+  <Content width={512} onClose={() => onClose()} className="flex flex-col relative pb-20 z-[10000]">
+      <div>
+        <Header title="Buat Koleksi" onClose={() => onClose()}/>
+      </div>
+      {!data && <p>loading</p>}
+      {data && <FormUpdate defaultValue={data} id={id} />}
+  </Content>
+  )
+}
+
+type OldImage = {
+  id: string,
+  image: string
+}
+
+const FormUpdate = ({id, defaultValue}:{id:string, defaultValue: Data}) => {
+  const [formData, setFormData] = useState<CollectionUpdate>(defaultValue.data)
+  const [oldImages, setOldImages] = useState<OldImage[]>(defaultValue.oldImages)
+  const [disabledButton, setDisabledButton] = useState<boolean>(true)
+  const [errors, setErrors] = useState<CollectionErrors | null>() 
+  const { updateCollection } = useContext(collectionContext) as CollectionProvider
+  const { setId } = useContext(collectionUpdateContext) as CollectionUpdateProvider
+
+  const isFormDataValid = () => {
+    return formData.name === defaultValue.data.name &&
+    formData.createdBy === defaultValue.data.createdBy &&
+    formData.discovery_year === defaultValue.data.discovery_year &&
+    formData.origin === defaultValue.data.origin &&
+    formData.description === defaultValue.data.description &&
+    (oldImages.length > 0 || formData.deletedImages.length > 0)
+  }
+
+  useEffect(() => {
+    setDisabledButton(isFormDataValid())
   },[formData])
 
   const submitForm = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setDisabledButton(true)
-    ApiClient().post(`/api/collections/create`,formData,
-    {headers: {"Content-Type":"multipart/form-data"}})
+    ApiClient().post(`/api/collections/${id}/update`,formData,{
+      headers: {"Content-Type":"multipart/form-data"}
+    })
     .then((res) => {
-      addCollection(res.data.collection)
-      setFormData(defaultData)
-      toggleModal()
+      setId(null)
+      updateCollection(res.data.collection)
     })
     .catch((err) => {
-      setErrors(err.response.data.errors)
-      setDisabledButton(false)
+      setDisabledButton(false) 
+      setErrors(err.data.errors)
     })
   }
+
   const onChange = (field: keyof CollectionCreate, value: string|number|File[]) => {
     setFormData((prev) => {
       return {...prev,[field]:value}
     })
   }
+  const removeOldImage = (id:string) => {
+    setFormData((prev) => {
+      return {...prev, deletedImages: [id,...prev.deletedImages]} 
+    })
+  }
   return (
-    <Content width={512} onClose={() => setFormData(defaultData)} className="flex flex-col relative pb-20">
-      <div>
-        <Header title="Buat Koleksi" onClose={() => setFormData(defaultData)}/>
-      </div>
-      <form onSubmit={submitForm} className="mt-2 overflow-y-auto px-6 rounded-xl">
+     <form onSubmit={submitForm} className="mt-2 overflow-y-auto px-6 rounded-xl">
         <Body className="flex flex-col gap-4">
           <FormControl isInvalid={errors?.name}>
             <FormLabel
@@ -128,7 +169,9 @@ const FormContent = () => {
             <FormLabel
             fontWeight={400} fontSize={15} className='font-normal text-xs'>Foto Koleksi</FormLabel>
             <ImagesInput value={formData.images} onChange={(images) => onChange('images',images)}>
-              <Preview />
+              <Preview>
+                <EditOldImages images={oldImages} onRemove={(id) => removeOldImage(id)} /> 
+              </Preview>
               <ImagesTrigger className="px-3 py-[6px] rounded-lg bg-blue-500 text-white">
                 Tambah Foto
               </ImagesTrigger>
@@ -153,11 +196,10 @@ const FormContent = () => {
           type="submit"
           disabled={disabledButton}
           className="!rounded-lg bg-blue-500 text-white"
-          >Submit</ButtonPrimary> 
+          >Update</ButtonPrimary> 
         </Footer> 
       </form>
-    </Content>
   )
 }
 
-export default CollectionCreate
+export default CollectionUpdate
