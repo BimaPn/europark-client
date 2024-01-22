@@ -13,7 +13,7 @@ import { collectionContext } from "../provider/CollectionProvider"
 import { collectionUpdateContext } from "../CollectionUpdate"
 
 const CollectionsData = () => {
-  const { collections, setCollections } = useContext(collectionContext) as CollectionProvider
+  const { collections, setCollections, deleteCollection } = useContext(collectionContext) as CollectionProvider
   const { setId } = useContext(collectionUpdateContext) as CollectionUpdateProvider
 
   useEffect(() => {
@@ -25,7 +25,17 @@ const CollectionsData = () => {
       console.log(err.response.data)
     })
   },[])
-
+  
+  const deleteData = (id:string) => {
+    ApiClient().delete(`/api/collections/${id}/delete`)
+    .then((res) => {
+      alert("berhasil")
+      deleteCollection(id)
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+    })
+  }
   const renderCollections = () => {
     return collections!.map((item,index) => (
       <Tr key={index} className="border-b relative z-0">
@@ -41,7 +51,7 @@ const CollectionsData = () => {
         <Td className="text-center">{item.origin}</Td>
         <TdActions>
           <ButtonEdit callback={() => setId(item.id)} />
-          <ButtonDelete callback={() => alert("delete data")} />
+          <ButtonDelete callback={() => deleteData(item.id)} />
         </TdActions>
       </Tr>
     ))
