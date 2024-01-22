@@ -1,3 +1,11 @@
+interface CollectionProvider {
+  collections: Collection[] | null
+  setCollections: Dispatch<SetStateAction<Collection[] | null>>
+  addCollection: (collection:Collection) => void
+  updateCollection: (collection:Collection) => void
+  deleteCollection: (id:string) => void
+}
+
 interface Collection {
   id: string
   name: string

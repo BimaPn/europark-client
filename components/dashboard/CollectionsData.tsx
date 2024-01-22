@@ -4,16 +4,16 @@ import { IoSearch } from "react-icons/io5"
 import { Table, Tbody, Td, TdActions, Th, Thead, Tr } from "@/components/ui/Table"
 import ReactPaginate from "react-paginate"
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import ApiClient from "@/app/api/axios/ApiClient"
 import RoundedImage from "../ui/RoundedImage"
 import ButtonDelete from "../ui/ButtonDelete"
 import ButtonEdit from "../ui/ButtonEdit"
 import CollectionCreate from "../CollectionCreate"
+import { collectionContext } from "../provider/CollectionProvider"
 
 const CollectionsData = () => {
-  const [collections,setCollections] = useState<Collection[] | null>(null)
-
+  const { collections, setCollections } = useContext(collectionContext) as CollectionProvider
   useEffect(() => {
     ApiClient().get(`/api/collections/get`)
     .then((res) => {
