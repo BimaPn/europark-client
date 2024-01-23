@@ -1,10 +1,13 @@
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import TopSideBar from '@/components/dashboard/TopSideBar'
 import { Box, useColorModeValue } from '@chakra-ui/react'
+import { getServerSession } from 'next-auth'
 
-const DashboardLayout = ({children}:{children:React.ReactNode}) => {
+const DashboardLayout = async ({children}:{children:React.ReactNode}) => {
+  const session = await getServerSession(authOptions)
   return (
     <div className='min-h-screen bg-sky-100'>
-      <TopSideBar />
+      <TopSideBar name={session?.user.name as string} avatar={session?.user.avatar as string} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>

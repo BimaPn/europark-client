@@ -1,3 +1,4 @@
+import AlertMessage from '@/components/AlertMessage'
 import DashboardLayout from '@/layouts/DashboardLayout'
 import type { Metadata } from 'next'
 
@@ -12,7 +13,9 @@ export default function RootLayout({
   return (
     <>
       <DashboardLayout>
-        {children}
+        <AlertMessage>
+          {children}
+        </AlertMessage>
       </DashboardLayout>
     </>
   )

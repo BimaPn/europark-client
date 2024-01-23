@@ -14,3 +14,14 @@ export const dateToString = (date: Date|string) => {
   };
   return new Intl.DateTimeFormat('en-US',options).format(time)
 }
+
+export const integerToRupiah = (number:number) => {
+    if (number < 1000) {
+        return number
+    }
+    if (number >= 1000) {
+        let formattedNumber = (number / 1000).toFixed(1);
+        formattedNumber = formattedNumber.replace(/\.0$/, '');
+        return formattedNumber + ' K';
+    }
+}

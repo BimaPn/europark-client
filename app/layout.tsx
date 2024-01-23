@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
+import './css/skeleton.css'
 import { ChakraProvider } from '@/components/provider/ChakraProvider'
 import AuthProvider from '@/components/provider/AuthProvider'
 

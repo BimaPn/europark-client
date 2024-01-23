@@ -8,17 +8,18 @@ import ButtonPrimary from "./ui/ButtonPrimary"
 import TextAreaExpand from "./ui/TextAreaExpand"
 import ImagesInput, { EditOldImages, Preview, Trigger as ImagesTrigger } from "./ui/ImagesInput"
 import { collectionContext } from "./provider/CollectionProvider"
+import CollectionUpdateSkeleton from "@/components/skeleton/CollectionUpdateSkeleton"
 
 export const collectionUpdateContext = createContext<CollectionUpdateProvider | null>(null)
 
 const CollectionUpdate = ({children}:{children:React.ReactNode}) => {
   const [id, setId] = useState<string|null>(null)
   return (
-<collectionUpdateContext.Provider value={{ id, setId }}>
-    {children}
-    <Modal defaultValue>
-      {id && <ModalContent id={id} onClose={() => setId(null)} />}
-    </Modal>
+    <collectionUpdateContext.Provider value={{ id, setId }}>
+      {children}
+      <Modal defaultValue>
+        {id && <ModalContent id={id} onClose={() => setId(null)} />}
+      </Modal>
     </collectionUpdateContext.Provider>
   )
 }
@@ -48,7 +49,7 @@ const ModalContent = ({id, onClose}:{id:string, onClose:() => void}) => {
       <div>
         <Header title="Buat Koleksi" onClose={() => onClose()}/>
       </div>
-      {!data && <p>loading</p>}
+      {!data && <CollectionUpdateSkeleton />}
       {data && <FormUpdate defaultValue={data} id={id} />}
   </Content>
   )

@@ -27,8 +27,8 @@ const LoginForm = ({className}:{className?:string}) => {
   }
   return (
     <form onSubmit={formSubmit} className={`w-[384px] rounded-lg bg-white  pt-4 pb-5 px-5 ${className}`}>
-      <h1 className="mb-[12px] font-medium">Login</h1>
-      <div className="flex flex-col gap-3">
+      <h1 className="mb-3 font-medium">Login</h1>
+      <div className="flex flex-col gap-4">
         
         <div className="relative">  
           <TextInput 
@@ -53,7 +53,7 @@ const LoginForm = ({className}:{className?:string}) => {
         </div> 
 
       </div>  
-      <ButtonPrimary type="submit" className="mt-6 text-[15px]">
+      <ButtonPrimary type="submit" className="mt-6 text-[15px] bg-primary w-full">
         Login
       </ButtonPrimary>
     </form>

@@ -6,12 +6,14 @@ import TextAreaExpand from "./ui/TextAreaExpand"
 import ButtonPrimary from "./ui/ButtonPrimary"
 import ApiClient from "@/app/api/axios/ApiClient"
 import { collectionContext } from "./provider/CollectionProvider"
+import { IoMdAdd } from "react-icons/io"
 
 const CollectionCreate = () => {
   return (
     <Modal> 
-      <Trigger>
-      Buat koleksi
+      <Trigger className="flexCenter gap-1 bg-blue-500 text-white pl-2 pr-3 py-2 rounded-lg text-[15px]">
+        <IoMdAdd className="text-lg" />
+        <span className="text-center -mt-[2px]">Buat koleksi</span>
       </Trigger>
       <FormContent />
     </Modal>
@@ -129,7 +131,7 @@ const FormContent = () => {
             fontWeight={400} fontSize={15} className='font-normal text-xs'>Foto Koleksi</FormLabel>
             <ImagesInput value={formData.images} onChange={(images) => onChange('images',images)}>
               <Preview />
-              <ImagesTrigger className="px-3 py-[6px] rounded-lg bg-blue-500 text-white">
+              <ImagesTrigger className="px-3 py-[6px] rounded-lg bg-blue-500 text-white text-sm">
                 Tambah Foto
               </ImagesTrigger>
             </ImagesInput>

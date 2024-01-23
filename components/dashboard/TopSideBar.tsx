@@ -28,6 +28,8 @@ import ButtonLogout from '../ui/ButtonLogout'
 
 interface MobileProps extends FlexProps {
   onOpen: () => void
+  avatar: string
+  name: string
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
@@ -63,16 +65,16 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <HStack>
                 <Avatar
                   size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
+                  src={rest.avatar}
                 />
                 <VStack
                   display={{ base: 'none', md: 'flex' }}
                   alignItems="flex-start"
                   spacing="1px"
-                  ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  ml="2"
+                  width={24}
+                  >
+                  <Text fontSize="sm">{rest.name}</Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
@@ -95,7 +97,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   )
 }
 
-const TopSideBar = () => {
+const TopSideBar = ({avatar, name}:{avatar:string, name:string}) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
@@ -112,7 +114,7 @@ const TopSideBar = () => {
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
+      <MobileNav onOpen={onOpen} avatar={avatar} name={name} />
     </>
   )
 }

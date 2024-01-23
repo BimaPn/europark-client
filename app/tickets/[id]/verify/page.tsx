@@ -28,7 +28,8 @@ const page = ({params}:{params : {id:string}}) => {
   useEffect(() => {
     ApiClient().get(`/api/tickets/${params.id}/get`)
     .then((res) => {
-      setData(res.data.result)
+      console.log(res.data)
+      setData(res.data.ticket)
       setIsLoading(false)
     })
     .catch((err) => {
