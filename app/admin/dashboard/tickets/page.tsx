@@ -1,7 +1,7 @@
 import TicketData from "@/components/dashboard/TicketData"
 import { PageTitle } from "@/layouts/DashboardLayout"
 
-const page = () => {
+const Page = () => {
   return (
   <>
     <PageTitle title="Tiket" />
@@ -13,4 +13,4 @@ const page = () => {
 }
 
 
-export default page
+export default Page

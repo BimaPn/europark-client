@@ -6,7 +6,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 .boxWidth {
-  @apply max-w-[1440px] mx-auto
+  @apply max-w-[1440px] mx-auto px-8
 }
 .flexCenter{
   @apply flex justify-center items-center
@@ -17,7 +17,12 @@ body {
 .flexColumn{
   @apply flex flex-col justify-center items-center
 }
-
+.text-leading {
+  @apply text-justify block leading-[28px]
+}
+.background-cover {
+  @apply bg-center bg-no-repeat bg-cover
+}
 /* Table */
 th, td {
   @apply px-2 py-2

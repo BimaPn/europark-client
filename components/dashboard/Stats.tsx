@@ -17,10 +17,10 @@ type Stat = {
 
 const Stats = () => {
   const icons = [
-  <HiUsers className="text-[19px]" />,
-  <IoTicket className="text-[18px]" />,
-  <PiCurrencyDollarBold className="text-[19px]" />,
-  <MdCollectionsBookmark className="text-[18px]" />
+  <HiUsers key={1} className="text-[19px]" />,
+  <IoTicket key={2} className="text-[18px]" />,
+  <PiCurrencyDollarBold key={3} className="text-[19px]" />,
+  <MdCollectionsBookmark key={4} className="text-[18px]" />
   ]
   const [data, setData] = useState<Stat[] | null>(null)
   const { setAlert } = useContext(alertMessageContext) as AlertMessageProvider
@@ -28,7 +28,6 @@ const Stats = () => {
     ApiClient().get(`/api/statistics/main-data/get`)
     .then((res) => {
       const result = res.data
-      console.log(res.data)
       const yearIncome = {
         label: result.yearIncome.label,
         total: `Rp. ${integerToRupiah(result.yearIncome.total)}`

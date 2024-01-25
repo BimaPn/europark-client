@@ -9,6 +9,7 @@ import TextAreaExpand from "./ui/TextAreaExpand"
 import ImagesInput, { EditOldImages, Preview, Trigger as ImagesTrigger } from "./ui/ImagesInput"
 import { collectionContext } from "./provider/CollectionProvider"
 import CollectionUpdateSkeleton from "@/components/skeleton/CollectionUpdateSkeleton"
+import { AlertMessageProvider, alertMessageContext } from "./AlertMessage"
 
 export const collectionUpdateContext = createContext<CollectionUpdateProvider | null>(null)
 
@@ -67,6 +68,7 @@ const FormUpdate = ({id, defaultValue}:{id:string, defaultValue: Data}) => {
   const [errors, setErrors] = useState<CollectionErrors | null>() 
   const { updateCollection } = useContext(collectionContext) as CollectionProvider
   const { setId } = useContext(collectionUpdateContext) as CollectionUpdateProvider
+  const { setAlert } = useContext(alertMessageContext) as AlertMessageProvider
 
   const isFormDataValid = () => {
     return formData.name === defaultValue.data.name &&
@@ -89,6 +91,10 @@ const FormUpdate = ({id, defaultValue}:{id:string, defaultValue: Data}) => {
     })
     .then((res) => {
       setId(null)
+      setAlert({
+        success: true,
+        message: "Koleksi berhasil di ubah."
+      })
       updateCollection(res.data.collection)
     })
     .catch((err) => {

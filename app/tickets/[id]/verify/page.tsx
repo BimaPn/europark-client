@@ -20,7 +20,7 @@ type TicketData = {
   quantity : Quantity[]
 }
 
-const page = ({params}:{params : {id:string}}) => {
+const Page = ({params}:{params : {id:string}}) => {
   const [data, setData] = useState<TicketData|null>(null)
   const [errorCode, setErrorCode] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -115,4 +115,4 @@ const Actions = ({ticketId}:{ticketId:string}) => {
   )
 }
 
-export default page
+export default Page

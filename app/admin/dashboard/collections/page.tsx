@@ -3,7 +3,7 @@ import CollectionsData from "@/components/dashboard/CollectionsData"
 import CollectionProvider from "@/components/provider/CollectionProvider"
 import { PageTitle } from "@/layouts/DashboardLayout"
 
-const page = () => {
+const Page = () => {
   return (
   <CollectionProvider>
     <PageTitle title="Koleksi" />
@@ -16,4 +16,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

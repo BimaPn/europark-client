@@ -13,11 +13,14 @@ import CollectionCreate from "../CollectionCreate"
 import { collectionContext } from "../provider/CollectionProvider"
 import { collectionUpdateContext } from "../CollectionUpdate"
 import { FiSearch } from "react-icons/fi"
+import DeleteCollectionButton from "../DeleteCollectionButton"
+import { AlertMessageProvider, alertMessageContext } from "../AlertMessage"
 
 const CollectionsData = () => {
   const { collections,
   setCollections, deleteCollection } = useContext(collectionContext) as CollectionProvider
   const { setId } = useContext(collectionUpdateContext) as CollectionUpdateProvider
+  const { setAlert } = useContext(alertMessageContext) as AlertMessageProvider
 
   useEffect(() => {
     ApiClient().get(`/api/collections/get`)
@@ -32,7 +35,10 @@ const CollectionsData = () => {
   const deleteData = (id:string) => {
     ApiClient().delete(`/api/collections/${id}/delete`)
     .then((res) => {
-      alert("berhasil")
+      setAlert({
+        success: true,
+        message: "Koleksi berhasil di hapus"
+      })
       deleteCollection(id)
     })
     .catch((err) => {
@@ -46,15 +52,15 @@ const CollectionsData = () => {
           <RoundedImage 
           src={item.thumbnail}
           alt={item.name}
-          className='!min-w-[38px] !w-[38px] !rounded-md' />
+          className='!min-w-[38px] !w-[38px] !rounded-md !z-[0]' />
           <span className='line-clamp-1'>{item.name}</span>
         </Td>
         <Td>{item.createdBy}</Td>
         <Td>{item.discovery_year}</Td>
         <Td>{item.origin}</Td>
         <TdActions>
-          <ButtonEdit callback={() => setId(item.id)} />
-          <ButtonDelete callback={() => deleteData(item.id)} />
+          <ButtonEdit callback={() => setId(item.id)} className="relative z-[1000]" />
+          <DeleteCollectionButton onDelete={() => deleteData(item.id)} />
         </TdActions>
       </Tr>
     ))
@@ -73,7 +79,7 @@ const CollectionsData = () => {
           <input type="text" className="w-full bg-transparent placeholder:text-slate-500 text-[15px]" placeholder="Cari tiket" />
         </div>
       </div>
-      <div className=" py-1 px-1">
+      <div className="px-1">
       <CollectionCreate />
       </div>
     </div>

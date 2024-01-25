@@ -2,7 +2,7 @@ import ApiServer from "@/app/api/axios/ApiServer"
 import TicketDetail from "@/components/dashboard/TicketDetail"
 import ResponseMessageAdmin from "@/components/ticket/ResponseMessageAdmin"
 
-const page = async ({params}:{params : {id:string}}) => {
+const Page = async ({params}:{params : {id:string}}) => {
   let error
   const data = await ApiServer.get(`/api/tickets/${params.id}/get`)
   .then((res) => {
@@ -28,4 +28,4 @@ const page = async ({params}:{params : {id:string}}) => {
   )
 }
 
-export default page
+export default Page

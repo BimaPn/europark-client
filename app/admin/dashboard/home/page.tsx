@@ -3,7 +3,7 @@ import TicketAnalytic from '@/components/dashboard/TicketAnalytic'
 import TicketCategoryStatistic from '@/components/dashboard/TicketCategoryStatistic'
 import { PageTitle } from '@/layouts/DashboardLayout'
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <PageTitle title="Dashboard" />
@@ -19,4 +19,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

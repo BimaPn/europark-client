@@ -4,7 +4,7 @@ import StartPage from "@/components/ticket/StartPage"
 import Link from "next/link"
 import { HiMiniBuildingLibrary } from "react-icons/hi2"
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <StartPage />
@@ -17,4 +17,4 @@ const page = () => {
 
 
 
-export default page
+export default Page

@@ -4,7 +4,7 @@ import { ticketPurchaseContext } from "@/components/provider/TicketPurchaseProvi
 import Link from "next/link"
 import { useContext, useEffect } from "react"
 
-const page = () => {
+const Page = () => {
   const { isDone, resetFormData } = useContext(ticketPurchaseContext) as TicketPurchaseContext
   
   useEffect(() => {
@@ -33,4 +33,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -7,6 +7,7 @@ import ButtonPrimary from "./ui/ButtonPrimary"
 import ApiClient from "@/app/api/axios/ApiClient"
 import { collectionContext } from "./provider/CollectionProvider"
 import { IoMdAdd } from "react-icons/io"
+import { AlertMessageProvider, alertMessageContext } from "./AlertMessage"
 
 const CollectionCreate = () => {
   return (
@@ -34,6 +35,7 @@ const FormContent = () => {
   const { toggleModal } = useContext(modalContext) as ModalProvider
   const [errors, setErrors] = useState<CollectionErrors | null>() 
   const { addCollection } = useContext(collectionContext) as CollectionProvider
+  const { setAlert } = useContext(alertMessageContext) as AlertMessageProvider
 
   const isFormDataNotEmpty = () => {
     return formData.name && formData.createdBy && formData.origin && formData.discovery_year && formData.description 
@@ -52,8 +54,13 @@ const FormContent = () => {
       addCollection(res.data.collection)
       setFormData(defaultData)
       toggleModal()
+      setAlert({
+        success: true,
+        message: "Koleksi berhasil ditambahkan."
+      })
     })
     .catch((err) => {
+      console.log(err.response.data)
       setErrors(err.response.data.errors)
       setDisabledButton(false)
     })
@@ -131,7 +138,7 @@ const FormContent = () => {
             fontWeight={400} fontSize={15} className='font-normal text-xs'>Foto Koleksi</FormLabel>
             <ImagesInput value={formData.images} onChange={(images) => onChange('images',images)}>
               <Preview />
-              <ImagesTrigger className="px-3 py-[6px] rounded-lg bg-blue-500 text-white text-sm">
+              <ImagesTrigger className="px-3 py-[6px] rounded-lg bg-blue-500 text-white text-sm -mt-1">
                 Tambah Foto
               </ImagesTrigger>
             </ImagesInput>

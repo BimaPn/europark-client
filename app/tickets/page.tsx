@@ -2,7 +2,7 @@
 import axios from "axios"
 import { useEffect } from "react"
 
-const page = () => {
+const Page = () => {
   const data = {
     visit_date : new Date(),
     schedule_id:1,
@@ -12,7 +12,6 @@ const page = () => {
     }]
   }
   useEffect(() => {
-    // axios.post(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/session/create`,data,{withCredentials:true})
     axios.get(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/categories/get`,{withCredentials:true})
     .then((res) => {
       console.log(res.data)
@@ -26,4 +25,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

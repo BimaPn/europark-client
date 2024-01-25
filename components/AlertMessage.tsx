@@ -23,7 +23,11 @@ const AlertMessage = ({children}:{children:React.ReactNode}) => {
     setMessage(message)
     const timeout = setTimeout(() => {
       setMessage(null)
-    }, 4000)
+    }, 3200)
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }
   return (
     <alertMessageContext.Provider value={{ message, setAlert }}>
@@ -42,7 +46,7 @@ const Overlay = ({message}:{message:AlertMessageProps}) => {
     initial={{ x: 1000 }} 
     animate={{ x: 0 }}
     exit={{ x: 1000 }}
-    transition={{ duration: 1 }}
+    transition={{ duration: .5 }}
     className={`fixed top-6 right-6 flex items-center gap-2 px-3 py-3 text-white rounded-lg ${message.success ? 'bg-green-400' : 'bg-red-400'}`}>
       {message.success ? (
         <IoIosCheckmarkCircle className="text-[32px]" />

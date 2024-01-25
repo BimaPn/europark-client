@@ -60,7 +60,7 @@ export const Trigger = ({children, className}:{children : React.ReactNode, class
 export const Preview = ({children, className}:{children?:React.ReactNode, className?:string}) => {
   const { imagePreviews,removeImage } = useContext(imagesInputContext) as ImagesInputContext
   return (
-    <div className={`min-w-full overflow-x-auto mb-3`}>
+    <div className={`min-w-full overflow-x-auto mb-3 ${(children || imagePreviews) && 'mb-3'}`}>
       <div className={`flex items-center gap-3 ${className}`}>
         {children}
         {imagePreviews && imagePreviews.map((content, index) => (
