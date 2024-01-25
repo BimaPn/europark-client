@@ -48,7 +48,7 @@ const ModalContent = ({id, onClose}:{id:string, onClose:() => void}) => {
   return (
   <Content width={512} onClose={() => onClose()} className="flex flex-col relative pb-20 z-[10000]">
       <div>
-        <Header title="Buat Koleksi" onClose={() => onClose()}/>
+        <Header title="Ubah Koleksi" onClose={() => onClose()}/>
       </div>
       {!data && <CollectionUpdateSkeleton />}
       {data && <FormUpdate defaultValue={data} id={id} />}
