@@ -13,6 +13,8 @@ import LinkTickeDetail from "../ui/LinkTicketDetail"
 import { FiSearch } from "react-icons/fi"
 import ChangeTicketPrice from "../ticket/ChangeTicketPrice"
 import TicketScan from "../TicketScan"
+import Search from "../ui/Search"
+import NotFound from "../NotFound"
 
 type Ticket = {
   id: string,
@@ -35,6 +37,17 @@ const TicketData = () => {
       console.log(err.response.data)
     })
   },[])
+  
+  const searchTicket = (query:string) => {
+    setTickets(null)
+    ApiClient().get(`/api/tickets/search?name=${query}`)
+    .then((res) => {
+      setTickets(res.data.tickets)
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+    })
+  }
 
   const renderTickets = () => {
     return tickets!.map((item,index) => (
@@ -63,12 +76,7 @@ const TicketData = () => {
     <div className="flexBetween !items-start">
       <div className="w-fit px-1 flex flex-col mb-[10px] gap-3">
         <span className="font-medium text-xl">Daftar Tiket</span>
-        <div className="w-[256px] flex px-1 gap-1 py-[6px] bg-blue-100/90 text-slate-500 rounded-lg">
-          <div className="w-8 aspect-square flexCenter">
-            <FiSearch className="text-xl" />
-          </div>
-          <input type="text" className="w-full bg-transparent placeholder:text-slate-500 text-[15px]" placeholder="Cari tiket" />
-        </div>
+        <Search onSearch={searchTicket} placeholder="Cari tiket"/>
       </div>
 
       <div className="flexCenter gap-3">
@@ -93,6 +101,11 @@ const TicketData = () => {
       {tickets && renderTickets()}
       </Tbody>
     </Table>
+    {(tickets && tickets.length <= 0) && (
+      <div className="py-12">
+        <NotFound />
+      </div>
+    )}
     <div className="absolute bottom-0 right-0 px-4 py-4">
       <ReactPaginate
       pageCount={20}
