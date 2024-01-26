@@ -5,6 +5,7 @@ import Hero from "@/components/landing/Hero"
 import Welcome from "@/components/landing/Welcome"
 import Collections from "@/components/landing/Collections"
 import Artists from "@/components/landing/Artists"
+import Footer from "@/components/Footer"
 const Home = () => {
   return (
     <>
@@ -27,7 +28,7 @@ const Home = () => {
       <Collections />
       <Artists />
       </main>
-
+      <Footer />
     </>
   )
 }

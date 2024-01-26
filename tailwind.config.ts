@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
         colors : {
           primary : '#F3B664',
-          dark : '#3B3B3B',
+          dark : '#000000',
           semiDark : '#787878',
           netral : '#8C8C8C',
           semiLight : '#EFF2F5',

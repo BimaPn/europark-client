@@ -23,7 +23,7 @@ const ChangeTicketPrice = () => {
 
 interface Pricing {
   id: number | string
-  price: number
+  price: number|string
 }
 
 interface DefaultPricing extends Pricing {
@@ -39,7 +39,6 @@ const FormContent = ({onClose}:{onClose:() => void}) => {
     ApiClient().get(`/api/tickets/ticket-pricings/get`)
     .then((res) => {
       const result = res.data.pricings
-      console.log(result)
       setPricings(result.map((item:Pricing) => {
         return {id: item.id, price: item.price}
       }))
@@ -49,10 +48,32 @@ const FormContent = ({onClose}:{onClose:() => void}) => {
       console.log(err.response.data)
     })
   },[]) 
+
+  useEffect(() => {
+    if(!pricings || !defaultPricings) return
+    setDisabledButton(isDataValid(pricings) ? false : true)
+  },[pricings])
   
+  const isDataValid = (_pricings:Pricing[]) => {
+    let isNotValid = false
+    for(let i = 0;i < _pricings.length;i++) {
+      if(_pricings[i].price != defaultPricings![i].price) {
+        console.log(_pricings[i].price + " " + defaultPricings![i].price)
+        isNotValid = true
+      }
+    }
+    return !isNotValid 
+  }
+
   const formSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(pricings)
+    ApiClient().put(`/api/tickets/ticket-pricings/update`,{pricings})
+    .then((res) => {
+      console.log("berhasil")
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+    })
   }
   const changePrice = (pricing:Pricing) => {
     if(!pricings) return
@@ -68,8 +89,13 @@ const FormContent = ({onClose}:{onClose:() => void}) => {
   return (
     <Content width={480} className="relative overflow-hidden" onClose={() => onClose()}>
     <Header title="Ubah Harga" onClose={() => onClose()}/>
-      <form onSubmit={formSubmit} className="px-5 my-1">
+      <form onSubmit={formSubmit} className="px-5">
         <Body className="flex flex-col gap-5">
+          <div className="flex flex-col gap-1 mb-1">
+            <span className="font-medium">Harga Tiket</span>
+            <span className="text-sm text-slate-800">
+            Ubah harga tiket menggunakan mata uang rupiah (Rp).</span>
+          </div>
             {(defaultPricings && pricings) && defaultPricings.map((item, i) => (
               <div key={item.id} className="flexBetween">
                 <span>{item.type}</span>
@@ -77,7 +103,7 @@ const FormContent = ({onClose}:{onClose:() => void}) => {
                   <NumberInput
                   defaultValue={item.price}
                   value={pricings[i].price} 
-                  onChange={(value) => changePrice({id:item.id, price: parseInt(value)})}
+                  onChange={(value) => changePrice({id:item.id, price: value})}
                   min={1000}
                   isRequired
                   >
