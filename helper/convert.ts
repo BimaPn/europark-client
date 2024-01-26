@@ -26,3 +26,32 @@ export const integerToRupiah = (number:number) => {
     return number
   }
 }
+
+export const dateToTanggal = (date:Date,showDayName=false) => {
+  const monthNames = [
+    "Januari", "Februari", "Maret",
+    "April", "Mei", "Juni", "Juli",
+    "Agustus", "September", "Oktober",
+    "November", "Desember"
+  ];
+
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  let formattedDate = day + ' ' + monthNames[monthIndex] + ' ' + year;
+
+  if(showDayName) {
+    formattedDate = `${dayName(date)}, ` + formattedDate
+  }
+  return formattedDate;
+}
+
+const dayName = (date:Date) => {
+    const dayNames = [
+    "Minggu", "Senin", "Selasa", "Rabu",
+    "Kamis", "Jumat", "Sabtu"
+  ];
+
+  return dayNames[date.getDay()];
+}

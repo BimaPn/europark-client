@@ -16,6 +16,7 @@ import TicketScan from "../TicketScan"
 import Search from "../ui/Search"
 import NotFound from "../NotFound"
 import Skeleton from "../skeleton/Skeleton"
+import { dateToTanggal } from "@/helper/convert"
 
 type Ticket = {
   id: string,
@@ -79,7 +80,7 @@ const TicketData = () => {
         <ActiveBadge />
         )}
         </Td>
-        <Td>{item.visit_date}</Td>
+        <Td>{dateToTanggal(new Date(item.visit_date))}</Td>
         <TdActions>
           <LinkTickeDetail ticketId={item.id} />
         </TdActions>
