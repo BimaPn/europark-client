@@ -5,6 +5,8 @@ interface CollectionProvider {
   addCollection: (collection:Collection) => void
   updateCollection: (collection:Collection) => void
   deleteCollection: (id:string) => void
+  paginate: Paginate | null
+  setPaginate: Dispatch<SetStateAction<Paginate | null>>
 }
 
 interface Collection {

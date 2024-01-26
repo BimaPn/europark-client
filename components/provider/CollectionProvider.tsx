@@ -5,6 +5,7 @@ export const collectionContext = createContext<CollectionProvider | null>(null)
 
 const CollectionProvider = ({children}:{children:React.ReactNode}) => {
   const [collections,setCollections] = useState<Collection[] | null>(null)
+  const [paginate, setPaginate] = useState<Paginate | null>(null)
 
   const addCollection = (collection: Collection) => {
     setCollections((prev) => [collection, ...prev as Collection[]])
@@ -27,7 +28,8 @@ const CollectionProvider = ({children}:{children:React.ReactNode}) => {
     })
   }
   return (
-    <collectionContext.Provider value={{ collections, setCollections, addCollection, updateCollection, deleteCollection }}>
+    <collectionContext.Provider value={{ collections, setCollections, addCollection,
+    updateCollection, deleteCollection, paginate, setPaginate }}>
       {children}
     </collectionContext.Provider>
   )

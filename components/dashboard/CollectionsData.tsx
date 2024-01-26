@@ -14,22 +14,36 @@ import { collectionUpdateContext } from "../CollectionUpdate"
 import { FiSearch } from "react-icons/fi"
 import DeleteCollectionButton from "../DeleteCollectionButton"
 import { AlertMessageProvider, alertMessageContext } from "../AlertMessage"
+import CollectionSearch from "../CollectionSearch"
+import Skeleton from "../skeleton/Skeleton"
 
 const CollectionsData = () => {
   const { collections,
-  setCollections, deleteCollection } = useContext(collectionContext) as CollectionProvider
+  setCollections, deleteCollection, paginate, setPaginate } = useContext(collectionContext) as CollectionProvider
   const { setId } = useContext(collectionUpdateContext) as CollectionUpdateProvider
   const { setAlert } = useContext(alertMessageContext) as AlertMessageProvider
 
   useEffect(() => {
     ApiClient().get(`/api/collections/get`)
     .then((res) => {
-      setCollections(res.data.result.data)
+      setCollections(res.data.result)
+      setPaginate(res.data.paginate)
     })
     .catch((err) => {
       console.log(err.response.data)
     })
   },[])
+
+  const fetchPaginateData = (page:number) => {
+    ApiClient().get(`/api/collections/get?page=${page}`)
+    .then((res) => {
+      setCollections(res.data.result)
+      setPaginate(res.data.paginate)
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+    })
+  }
   
   const deleteData = (id:string) => {
     ApiClient().delete(`/api/collections/${id}/delete`)
@@ -71,12 +85,7 @@ const CollectionsData = () => {
         <div>
           <span className="font-medium text-xl">Daftar Tiket</span>
         </div>
-        <div className="w-[256px] flex px-1 gap-1 py-[6px] bg-blue-100/90 text-slate-500 rounded-lg">
-          <div className="w-8 aspect-square flexCenter">
-            <FiSearch className="text-xl" />
-          </div>
-          <input type="text" className="w-full bg-transparent placeholder:text-slate-500 text-[15px]" placeholder="Cari tiket" />
-        </div>
+        <CollectionSearch /> 
       </div>
       <div className="px-1">
       <CollectionCreate />
@@ -98,24 +107,30 @@ const CollectionsData = () => {
       </Tbody>
     </Table>
     <div className="absolute bottom-0 right-0 px-4 py-4">
-      <ReactPaginate
-      pageCount={20}
-      pageRangeDisplayed={1}
-      marginPagesDisplayed={2}
-      previousLabel={
-        <div className="w-8 aspect-square flexCenter">
-          <IoIosArrowBack />
-        </div>
-      }
-      nextLabel={
-        <div className="w-8 aspect-square flexCenter">
-          <IoIosArrowForward />
-        </div>
-      }
-      className="flex items-center gap-1" 
-      pageClassName="w-8 aspect-square h-fit flexCenter"
-      activeClassName="bg-blue-500 text-white rounded-lg"
-      />
+      {(collections && paginate) && (
+        <ReactPaginate
+        pageCount={paginate.lastPage}
+        pageRangeDisplayed={1}
+        marginPagesDisplayed={2}
+        onPageChange={(val) => fetchPaginateData(val.selected+1)}
+        previousLabel={
+          <div className="w-8 aspect-square flexCenter">
+            <IoIosArrowBack />
+          </div>
+        }
+        nextLabel={
+          <div className="w-8 aspect-square flexCenter">
+            <IoIosArrowForward />
+          </div>
+        }
+        className="flex items-center gap-1" 
+        pageClassName="w-8 aspect-square h-fit flexCenter"
+        activeClassName="bg-blue-500 text-white rounded-lg"
+        />
+      )}
+      {(!collections && !paginate) && (
+        <Skeleton className="w-[124px] size-lg " />
+      )}
     </div>
   </>
   )
