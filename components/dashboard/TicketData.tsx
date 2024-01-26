@@ -12,6 +12,7 @@ import ApiClient from "@/app/api/axios/ApiClient"
 import LinkTickeDetail from "../ui/LinkTicketDetail"
 import { FiSearch } from "react-icons/fi"
 import ChangeTicketPrice from "../ticket/ChangeTicketPrice"
+import TicketScan from "../TicketScan"
 
 type Ticket = {
   id: string,
@@ -70,7 +71,8 @@ const TicketData = () => {
         </div>
       </div>
 
-      <div>
+      <div className="flexCenter gap-3">
+        <TicketScan />
         <ChangeTicketPrice />
       </div>
     </div>

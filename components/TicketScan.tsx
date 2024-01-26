@@ -53,7 +53,7 @@ const ModalContent = ({onClose}:{onClose:()=>void}) => {
   scanner.render(success, error)
   },[])
   return (
-    <Content width={380} onClose={() => onClose()}>
+    <Content width={400} className="!h-1/2" onClose={() => onClose()}>
       <Header title="Scan Tiket" onClose={() => onClose()}/>
       <Body className="px-4">
         <div className="flex flex-col items-center mb-4">

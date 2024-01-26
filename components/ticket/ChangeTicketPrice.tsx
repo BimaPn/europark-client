@@ -1,10 +1,12 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Modal, { Body, Footer, Header, Content } from "../ui/Modal"
 import { TbEdit } from "react-icons/tb"
 import ButtonPrimary from "../ui/ButtonPrimary"
 import { FormControl, NumberInput, NumberInputField } from "@chakra-ui/react"
 import ApiClient from "@/app/api/axios/ApiClient"
+import Skeleton from "../skeleton/Skeleton"
+import { AlertMessageProvider, alertMessageContext } from "../AlertMessage"
 
 const ChangeTicketPrice = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -34,6 +36,7 @@ const FormContent = ({onClose}:{onClose:() => void}) => {
   const [disabledButton, setDisabledButton] = useState(true)
   const [defaultPricings, setDefaultPricings] = useState<DefaultPricing[] | null>(null)
   const [pricings, setPricings] = useState<Pricing[] | null>(null)
+  const { setAlert } = useContext(alertMessageContext) as AlertMessageProvider
 
   useEffect(() => {
     ApiClient().get(`/api/tickets/ticket-pricings/get`)
@@ -58,21 +61,30 @@ const FormContent = ({onClose}:{onClose:() => void}) => {
     let isNotValid = false
     for(let i = 0;i < _pricings.length;i++) {
       if(_pricings[i].price != defaultPricings![i].price) {
-        console.log(_pricings[i].price + " " + defaultPricings![i].price)
         isNotValid = true
       }
     }
-    return !isNotValid 
+    return isNotValid 
   }
 
   const formSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setDisabledButton(true)
     ApiClient().put(`/api/tickets/ticket-pricings/update`,{pricings})
     .then((res) => {
-      console.log("berhasil")
+      onClose()
+      setAlert({
+        success: true,
+        message: "Harga berhasil diubah."
+      })
     })
     .catch((err) => {
       console.log(err.response.data)
+      onClose()
+      setAlert({
+        success: false,
+        message: "Harga gagal diubah."
+      })
     })
   }
   const changePrice = (pricing:Pricing) => {
@@ -96,6 +108,12 @@ const FormContent = ({onClose}:{onClose:() => void}) => {
             <span className="text-sm text-slate-800">
             Ubah harga tiket menggunakan mata uang rupiah (Rp).</span>
           </div>
+            {!defaultPricings && (
+              <div className="flex flex-col gap-10">
+                <LoadingSkeleton/>
+              </div>
+
+            )}
             {(defaultPricings && pricings) && defaultPricings.map((item, i) => (
               <div key={item.id} className="flexBetween">
                 <span>{item.type}</span>
@@ -126,4 +144,13 @@ const FormContent = ({onClose}:{onClose:() => void}) => {
   )
 }
 
+const LoadingSkeleton = () => {
+  return Array(4).fill(0).map((_,index) => (
+    <div key={index} className="flexBetween">
+      <Skeleton className="w-1/3 size-md" />
+      <Skeleton className="w-1/3 size-md" />
+    </div>  
+    )
+  )
+}
 export default ChangeTicketPrice
