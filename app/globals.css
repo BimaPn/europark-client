@@ -6,7 +6,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 .boxWidth {
-  @apply max-w-[1440px] mx-auto px-8
+  @apply max-w-[1440px] mx-auto px-9
 }
 .flexCenter{
   @apply flex justify-center items-center
