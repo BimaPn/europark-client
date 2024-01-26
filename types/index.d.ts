@@ -11,3 +11,6 @@ interface ImagesInputContext {
     imagePreviews ?: string[]
     setImagePreviews:Dispatch<SetStateAction<string []>>
 }
+interface Paginate {
+  lastPage: number
+}

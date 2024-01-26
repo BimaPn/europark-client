@@ -15,6 +15,7 @@ import ChangeTicketPrice from "../ticket/ChangeTicketPrice"
 import TicketScan from "../TicketScan"
 import Search from "../ui/Search"
 import NotFound from "../NotFound"
+import Skeleton from "../skeleton/Skeleton"
 
 type Ticket = {
   id: string,
@@ -27,22 +28,36 @@ type Ticket = {
 }
 const TicketData = () => {
   const [tickets, setTickets] = useState<Ticket[] | null>(null)
+  const [paginate, setPaginate] = useState<Paginate | null>(null)
 
   useEffect(() => {
     ApiClient().get(`/api/tickets/get`)
     .then((res) => {
       setTickets(res.data.result)
+      setPaginate(res.data.paginate)
     })
     .catch((err) => {
       console.log(err.response.data)
     })
   },[])
-  
+
+  const fetchPaginateData = (page:number) => {
+    ApiClient().get(`/api/tickets/get?page=${page}`)
+    .then((res) => {
+      setTickets(res.data.result)
+      setPaginate(res.data.paginate)
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+    })
+  }
   const searchTicket = (query:string) => {
     setTickets(null)
+    setPaginate(null)
     ApiClient().get(`/api/tickets/search?name=${query}`)
     .then((res) => {
       setTickets(res.data.tickets)
+      setPaginate(res.data.paginate)
     })
     .catch((err) => {
       console.log(err.response.data)
@@ -107,24 +122,30 @@ const TicketData = () => {
       </div>
     )}
     <div className="absolute bottom-0 right-0 px-4 py-4">
-      <ReactPaginate
-      pageCount={20}
-      pageRangeDisplayed={1}
-      marginPagesDisplayed={2}
-      previousLabel={
-        <div className="w-8 aspect-square flexCenter">
-          <IoIosArrowBack />
-        </div>
-      }
-      nextLabel={
-        <div className="w-8 aspect-square flexCenter">
-          <IoIosArrowForward />
-        </div>
-      }
-      className="flex items-center gap-1" 
-      pageClassName="w-8 aspect-square h-fit flexCenter"
-      activeClassName="bg-blue-500 text-white rounded-lg"
-      />
+      {(tickets && paginate) && (
+        <ReactPaginate
+        pageCount={paginate.lastPage}
+        pageRangeDisplayed={1}
+        marginPagesDisplayed={2}
+        onPageChange={(val) => fetchPaginateData(val.selected+1)}
+        previousLabel={
+          <div className="w-8 aspect-square flexCenter">
+            <IoIosArrowBack />
+          </div>
+        }
+        nextLabel={
+          <div className="w-8 aspect-square flexCenter">
+            <IoIosArrowForward />
+          </div>
+        }
+        className="flex items-center gap-1" 
+        pageClassName="w-8 aspect-square h-fit flexCenter"
+        activeClassName="bg-blue-500 text-white rounded-lg"
+        />
+      )}
+      {(!tickets && !paginate) && (
+        <Skeleton className="w-[124px] size-lg " />
+      )}
     </div>
   </>
   )
