@@ -6,11 +6,11 @@ import Welcome from "@/components/landing/Welcome"
 import Collections from "@/components/landing/Collections"
 import Artists from "@/components/landing/Artists"
 import Footer from "@/components/Footer"
-import LandingNavbar from "@/components/landing/LandingNavbar"
+import Navbar from "@/components/Navbar"
 const Home = () => {
   return (
     <>
-      <LandingNavbar />
+      <Navbar />
       <main className="overflow-hidden">
         <Hero />  
         <Welcome />
