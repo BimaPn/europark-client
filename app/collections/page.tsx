@@ -1,3 +1,4 @@
+import CollectionSkeleton from "@/components/skeleton/CollectionSkeleton"
 import Image from "next/image"
 import { FiSearch } from "react-icons/fi"
 
@@ -28,10 +29,10 @@ const page = () => {
             <span className="font-medium">Leonardo da Vinci</span>
             <span className="text-xs text-gray-700">1342 M</span>
           </div>
-
         </div>
-
       ))}
+
+      <CollectionSkeleton count={3}/>
     </div>
     </section>  
   )
