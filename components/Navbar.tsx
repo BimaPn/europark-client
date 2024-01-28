@@ -30,7 +30,7 @@ const LandingNavbar = () => {
       <header 
       className={`boxWidth fixed ${isNavbarVisible ? "top-0" : "-top-20 delay-150"} left-0 right-0 transition-top z-[20000] text-white !px-6 py-2`}>
         <nav 
-        className={`${isFillBackground ? "bg-dark": "bg-transparent"} transition-background flexBetween rounded-xl  p-[8px]`}>
+        className={`${isFillBackground ? "bg-dark/45": "bg-transparent"} transition-background flexBetween rounded-xl  p-[8px]`}>
           <span className="text-2xl font-bold ml-2">
           EuroPark
           </span>
