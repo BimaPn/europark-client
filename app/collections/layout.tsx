@@ -1,10 +1,11 @@
+import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Koleksi Museum',
-  description: 'Museum Collection',
+  description: 'Museum Collections',
 }
 
 export default async function RootLayout({
@@ -14,7 +15,7 @@ export default async function RootLayout({
 }) {
   return (
     <section className='min-h-screen'>
-      <nav className='boxWidth flexBetween p-[14px]'>
+      <nav className='boxWidth flexBetween p-4'>
         <span className="text-2xl font-bold">
           EuroPark
         </span>
@@ -38,9 +39,10 @@ export default async function RootLayout({
             </Link>
           </div>
       </nav>
-      <main>
+      <main className='mt-3 mb-12'>
         {children}
       </main>
+      <Footer />
     </section>
   )
 }

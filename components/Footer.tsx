@@ -1,3 +1,4 @@
+"use client"
 import { collections, navigations, socialMedia } from "@/constants/list"
 import { Box, Center, Icon } from "@chakra-ui/react"
 import Link from "next/link"

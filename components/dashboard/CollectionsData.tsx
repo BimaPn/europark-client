@@ -14,8 +14,9 @@ import { collectionUpdateContext } from "../CollectionUpdate"
 import { FiSearch } from "react-icons/fi"
 import DeleteCollectionButton from "../DeleteCollectionButton"
 import { AlertMessageProvider, alertMessageContext } from "../AlertMessage"
-import CollectionSearch from "../CollectionSearch"
+import CollectionsAdminSearch from "../CollectionsAdminSearch"
 import Skeleton from "../skeleton/Skeleton"
+import NotFound from "../NotFound"
 
 const CollectionsData = () => {
   const { collections,
@@ -24,7 +25,7 @@ const CollectionsData = () => {
   const { setAlert } = useContext(alertMessageContext) as AlertMessageProvider
 
   useEffect(() => {
-    ApiClient().get(`/api/collections/get`)
+    ApiClient().get(`/api/admin/collections/get`)
     .then((res) => {
       setCollections(res.data.result)
       setPaginate(res.data.paginate)
@@ -35,7 +36,7 @@ const CollectionsData = () => {
   },[])
 
   const fetchPaginateData = (page:number) => {
-    ApiClient().get(`/api/collections/get?page=${page}`)
+    ApiClient().get(`/api/admin/collections/get?page=${page}`)
     .then((res) => {
       setCollections(res.data.result)
       setPaginate(res.data.paginate)
@@ -85,7 +86,7 @@ const CollectionsData = () => {
         <div>
           <span className="font-medium text-xl">Daftar Tiket</span>
         </div>
-        <CollectionSearch /> 
+        <CollectionsAdminSearch /> 
       </div>
       <div className="px-1">
       <CollectionCreate />
@@ -106,6 +107,11 @@ const CollectionsData = () => {
       {collections && renderCollections()}
       </Tbody>
     </Table>
+    {(collections && collections.length <= 0) && (
+      <div className="py-12">
+        <NotFound />
+      </div>
+    )}
     <div className="absolute bottom-0 right-0 px-4 py-4">
       {(collections && paginate) && (
         <ReactPaginate
