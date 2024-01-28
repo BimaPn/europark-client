@@ -6,7 +6,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 .boxWidth {
-  @apply max-w-[1440px] mx-auto px-9
+  @apply max-w-[1920px] mx-auto px-9
 }
 .flexCenter{
   @apply flex justify-center items-center
@@ -33,5 +33,17 @@ th, td {
 
 .shadow-footer {
   box-shadow: 0px 16px 48px 0px rgba(0, 0, 0, 0.176);
+}
+
+.transition-background {
+  transition-property: background;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.transition-top {
+  transition-property: top;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
