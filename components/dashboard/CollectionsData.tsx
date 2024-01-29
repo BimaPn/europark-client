@@ -25,7 +25,7 @@ const CollectionsData = () => {
   const { setAlert } = useContext(alertMessageContext) as AlertMessageProvider
 
   useEffect(() => {
-    ApiClient().get(`/api/admin/collections/get`)
+    ApiClient().get(`/api/admin/get`)
     .then((res) => {
       setCollections(res.data.result)
       setPaginate(res.data.paginate)

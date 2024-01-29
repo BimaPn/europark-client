@@ -6,12 +6,14 @@ import { parentVariant, slideLeftVariant, slideRightVariant, slideUpVariant, vie
 const Welcome = () => {
 
   return (
-    <motion.section className="boxWidth min-h-screen flexCenter gap-16 my-32 flex-col">
+    <motion.section
+    variants={parentVariant} 
+    initial="hidden"
+    whileInView={`visible`}
+    viewport={viewport} 
+    className="boxWidth min-h-screen flexCenter gap-16 section flex-col">
       <motion.div
       variants={parentVariant} 
-      initial="hidden"
-      whileInView={`visible`}
-      viewport={viewport} 
       className="flex justify-between gap-10">
         <motion.div variants={slideRightVariant} className="basis-[60%] h-fit">
           <span className="font-bold text-[42px] leading-[52px]">Selamat Datang Di Museum Seni Terbaik di Indonesia</span>
@@ -20,7 +22,6 @@ const Welcome = () => {
           <span className="text-justify text-lg block leading-9">Europark adalah museum pertama di Indonesia yang memiliki seni lukisan legendaris dan terbaik di dunia. Kami juga dsad sadasdbh dsadsahdbshjd dsadsadbs</span>
         </motion.div>
       </motion.div>
-
       <motion.div 
       variants={parentVariant}
       initial="hidden"

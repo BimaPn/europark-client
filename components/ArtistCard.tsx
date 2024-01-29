@@ -1,36 +1,7 @@
 "use client"
-import { useEffect, useState } from 'react'
+import Image from "next/image"
 import { motion,AnimatePresence } from "framer-motion"
-import Image from 'next/image'
-
-const Page = () => {
-  const [kanjut, setKanjut] = useState(false)
-  return (
-    <section className='h-[2000px] flex items-center py-12 flex-col'>
-    <div className='w-full flexCenter gap-5 border'>
-    <div className='basis-1/4'>
-      <ArtistCard  />
-    </div>
-
-    <div className='basis-1/4'>
-      <ArtistCard  />
-    </div>
-
-    <div className='basis-1/4'>
-      <ArtistCard  />
-    </div>
-
-    <div className='basis-1/4'>
-      <ArtistCard  />
-    </div>
-    </div>
-
-    <div className='my-64'>
-    <span>najay bamarbhabfaeef</span>
-    </div>
-    </section>
-  )
-}
+import { useState } from "react"
 
 const ArtistCard = ({className}:{className?:string}) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -72,8 +43,8 @@ const ArtistCard = ({className}:{className?:string}) => {
   return (
     <motion.div
     layout
-    className={`bg-blue-300 flexCenter overflow-hidden ${className}
-    ${isOpen ? "w-screen h-screen fixed top-0 left-0 !z-[1000]":"relative"} ${position ? "z-[1000]":"z-[50]"}
+    className={`flexCenter overflow-hidden ${className}
+    ${isOpen ? "w-screen h-screen fixed top-0 left-0 !z-[1000] rounded-none":"relative rounded-lg"} ${position ? "z-[1000]":"z-[50]"}
     `}
     transition={{ duration: .6}}
     onClick={delayChange}
@@ -142,4 +113,4 @@ const ContentCard = ({className}:{className?:string}) => {
   )
 }
 
-export default Page
+export default ArtistCard

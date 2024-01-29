@@ -4,6 +4,10 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  transition-property: color, background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  color: white;
 }
 .boxWidth {
   @apply max-w-[1920px] mx-auto px-9
@@ -45,5 +49,9 @@ th, td {
   transition-property: top;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
+}
+
+.section {
+  @apply mt-[144px] mb-[148px]
 }
 

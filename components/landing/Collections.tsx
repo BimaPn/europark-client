@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { HiMiniArrowLongRight } from "react-icons/hi2"
 import { motion } from "framer-motion"
-import { parentVariant, slideUpVariant, viewport } from "@/constants/framerOptions"
+import { imageSlideUpVariant, parentVariant, slideUpVariant, viewport } from "@/constants/framerOptions"
 
 const Collections = () => {
   const group1 = [
@@ -48,7 +48,7 @@ const Collections = () => {
   ]
 
   return (
-    <section className="boxWidth min-h-screen my-32 relative">
+    <section className="boxWidth min-h-screen section relative">
       <div className="sm:w-[35%] sm:absolute -top-3 left-8">
         <motion.div
         variants={parentVariant}
@@ -68,9 +68,10 @@ const Collections = () => {
 
       <div className="w-full flex justify-end gap-7">
         <div className="basis-[30%] grid grid-cols-1 h-fit gap-7 sm:mt-48">
-          {group1.map((item) => (
+          {group1.map((item, i) => (
             <motion.div
-            variants={slideUpVariant}
+            key={i}
+            variants={imageSlideUpVariant}
             initial="hidden"
             whileInView={"visible"}
             viewport={viewport} 
@@ -87,9 +88,10 @@ const Collections = () => {
         </div>
 
         <div className="basis-[30%] grid grid-cols-1 h-fit gap-7">
-          {group2.map((item) => (
+          {group2.map((item, i) => (
             <motion.div
-            variants={slideUpVariant}
+            key={i}
+            variants={imageSlideUpVariant}
             initial="hidden"
             whileInView={"visible"}
             viewport={viewport} 
@@ -105,9 +107,10 @@ const Collections = () => {
           ))}
         </div>
         <div className="basis-[30%] grid grid-cols-1 h-fit gap-7">
-          {group3.map((item) => (
+          {group3.map((item,i) => (
             <motion.div
-            variants={slideUpVariant}
+            key={i}
+            variants={imageSlideUpVariant}
             initial="hidden"
             whileInView={"visible"}
             viewport={viewport} 

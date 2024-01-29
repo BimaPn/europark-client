@@ -1,26 +1,82 @@
 "use client"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import ArtistCard from "../ArtistCard"
+import { motion, useAnimation, useInView } from "framer-motion"
+import { 
+  cardSlideUpVariant,
+  cardsParentVariant,
+  cardsViewport,
+  parentVariant,
+  slideUpVariant,
+  viewport
+  } from "@/constants/framerOptions"
+import { useEffect, useRef } from "react"
 
 const Artists = () => {
-  const [anjay, setAnjay] = useState(false)
+  const control = useAnimation();
+  const parent = useRef(null)
+  const inView = useInView(parent,{margin: "0% 0% -70% 0%", once:false});
+  const boxVariant = {
+      visible: { opacity: 1,y: 0,transition: { delay:0.4,duration: 0.6 }},
+      hidden: { opacity: 0,y:100 },
+  }
   useEffect(() => {
-console.log(anjay)
-  },[anjay])
+     if(inView) {
+       control.start("visible")
+       document.body.style.backgroundColor = "#000000"
+     }else{
+       control.start("hidden")
+       document.body.style.backgroundColor = "#000000"
+     }
+  },[inView, control]);
+
   return (
-    <section className="boxWidth min-h-screen my-32 flex flex-col gap-8">
-      <div className="flex flex-col gap-1">
-        <span className="font-bold text-[38px]">Lukisan dari Seniman Terbaik</span>
-        <span>Temukan lukisan-lukisan dari seniman terbaik didunia</span>
+    <motion.section
+    ref={parent}
+    variants={cardsParentVariant}
+    initial="hidden"
+    animate={control}
+    viewport={viewport} 
+    className="boxWidth min-h-screen section flex flex-col gap-10 text-white">
+
+      <div 
+      className="min-h-[100px] overflow-hidden relative">
+        <div className="flex flex-col gap-1 absolute top-0 left-0">
+          <motion.span variants={slideUpVariant} className="font-bold text-[38px]">Lukisan dari Seniman Terbaik</motion.span>
+          <motion.span variants={slideUpVariant}>Temukan lukisan-lukisan dari seniman terbaik didunia</motion.span>
+        </div>
+
       </div>
 
-      <div className="w-full flex gap-6">
-        <div onClick={() => setAnjay(prev => !prev)} 
-        className={`rounded-lg bg-black transition-all z-[2000] !duration-1000 ${anjay ? "fixed scale-100 inset-0":"relative w-1/3  h-96 scale-50"}`}>
-        <Image src={`/images/example7.jpg`} alt="example" fill className="object-cover" />
-        </div>
-      </div>
-    </section>
+      <motion.div
+      variants={parentVariant} 
+      viewport={cardsViewport}
+      initial="hidden"
+      whileInView={`visible`}
+      className="grid grid-cols-4 gap-6 bg-black">
+     
+        <motion.div variants={cardSlideUpVariant} 
+        className="cursor-pointer"
+        whileHover={{ scale:1.05,transition:{duration:.4} }}>
+          <ArtistCard />
+        </motion.div >  
+        <motion.div variants={cardSlideUpVariant} 
+        className="cursor-pointer"
+        whileHover={{ scale:1.05,transition:{duration:.4} }}>
+          <ArtistCard />
+        </motion.div>  
+        <motion.div variants={cardSlideUpVariant} 
+        className="cursor-pointer"
+        whileHover={{ scale:1.05,transition:{duration:.4} }}>
+          <ArtistCard />
+        </motion.div>  
+        <motion.div variants={cardSlideUpVariant}
+        className="cursor-pointer"
+        whileHover={{ scale:1.05,transition:{duration:.4} }}>
+          <ArtistCard />
+        </motion.div>  
+      </motion.div>  
+    </motion.section>
   )
 }
 
