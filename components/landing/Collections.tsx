@@ -1,10 +1,11 @@
+"use client"
 import Link from "next/link"
 import { HiMiniArrowLongRight } from "react-icons/hi2"
-import { motion } from "framer-motion"
-import { imageSlideUpVariant, parentVariant, slideUpVariant, viewport } from "@/constants/framerOptions"
+import { motion, useAnimation, useInView } from "framer-motion"
+import { childrenViewport, imageSlideUpVariant, parentVariant, slideUpVariant, viewport } from "@/constants/framerOptions"
+import { useEffect, useRef } from "react"
 
-const Collections = () => {
-  const group1 = [
+const collectionsGroup = [
     {
       image: "/images/example4.jpg",
       aspect: "aspect-[3/4]"
@@ -18,7 +19,7 @@ const Collections = () => {
       aspect: "aspect-[3.5/3]"
     }
   ]
-  const group2 = [
+const collectionsGroup2 = [
     {
       image: "/images/monalisa.jpg",
       aspect: "aspect-[3/4.2]"
@@ -32,7 +33,7 @@ const Collections = () => {
       aspect: "aspect-[3/4.3]"
     }
   ]
-  const group3 = [
+const collectionsGroup3 = [
     {
       image: "/images/example5.jpg",
       aspect: "aspect-[4/3]"
@@ -47,8 +48,17 @@ const Collections = () => {
     }
   ]
 
+const Collections = () => {
+  const parent = useRef(null)
+  const inView = useInView(parent,{margin: "0% 0% -60% 0%", once:false});
+  useEffect(() => {
+     if(inView) {
+       document.body.style.backgroundColor = "#FFFFFF"
+     }
+  },[inView]);
+
   return (
-    <section className="boxWidth min-h-screen section relative">
+    <section ref={parent} className="boxWidth min-h-screen section relative">
       <div className="sm:w-[35%] sm:absolute -top-3 left-8">
         <motion.div
         variants={parentVariant}
@@ -68,13 +78,13 @@ const Collections = () => {
 
       <div className="w-full flex justify-end gap-7">
         <div className="basis-[30%] grid grid-cols-1 h-fit gap-7 sm:mt-48">
-          {group1.map((item, i) => (
+          {collectionsGroup.map((item, i) => (
             <motion.div
             key={i}
             variants={imageSlideUpVariant}
             initial="hidden"
             whileInView={"visible"}
-            viewport={viewport} 
+            viewport={childrenViewport} 
             className={`${item.aspect}`}
             style={
             {
@@ -88,13 +98,13 @@ const Collections = () => {
         </div>
 
         <div className="basis-[30%] grid grid-cols-1 h-fit gap-7">
-          {group2.map((item, i) => (
+          {collectionsGroup2.map((item, i) => (
             <motion.div
             key={i}
             variants={imageSlideUpVariant}
             initial="hidden"
             whileInView={"visible"}
-            viewport={viewport} 
+            viewport={childrenViewport} 
             className={`${item.aspect}`}
             style={
             {
@@ -107,13 +117,13 @@ const Collections = () => {
           ))}
         </div>
         <div className="basis-[30%] grid grid-cols-1 h-fit gap-7">
-          {group3.map((item,i) => (
+          {collectionsGroup3.map((item,i) => (
             <motion.div
             key={i}
             variants={imageSlideUpVariant}
             initial="hidden"
             whileInView={"visible"}
-            viewport={viewport} 
+            viewport={childrenViewport} 
             className={`${item.aspect}`}
             style={
             {

@@ -6,8 +6,7 @@ body {
   font-family: 'Poppins', sans-serif;
   transition-property: color, background-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-  color: white;
+  transition-duration: 400ms;
 }
 .boxWidth {
   @apply max-w-[1920px] mx-auto px-9
@@ -52,6 +51,31 @@ th, td {
 }
 
 .section {
-  @apply mt-[144px] mb-[148px]
+  @apply mt-[152px] mb-[158px]
+}
+
+.horizontal-scroll-animation {
+  animation: scrollHorizontal 10s linear infinite;
+}
+
+.horizontal-scroll-animation2 {
+  animation: scrollHorizontal2 10s linear infinite;
+}
+
+@keyframes scrollHorizontal {
+  from {
+    transform: translateX(2%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes scrollHorizontal2 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200%);
+  }
 }
 

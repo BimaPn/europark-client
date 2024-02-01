@@ -5,7 +5,7 @@ import { motion, useAnimation, useInView } from "framer-motion"
 import { 
   cardSlideUpVariant,
   cardsParentVariant,
-  cardsViewport,
+  childrenViewport,
   parentVariant,
   slideUpVariant,
   viewport
@@ -15,18 +15,13 @@ import { useEffect, useRef } from "react"
 const Artists = () => {
   const control = useAnimation();
   const parent = useRef(null)
-  const inView = useInView(parent,{margin: "0% 0% -70% 0%", once:false});
-  const boxVariant = {
-      visible: { opacity: 1,y: 0,transition: { delay:0.4,duration: 0.6 }},
-      hidden: { opacity: 0,y:100 },
-  }
+  const inView = useInView(parent,{margin: "0% 0% -60% 0%", once:false});
   useEffect(() => {
      if(inView) {
        control.start("visible")
        document.body.style.backgroundColor = "#000000"
      }else{
        control.start("hidden")
-       document.body.style.backgroundColor = "#000000"
      }
   },[inView, control]);
 
@@ -36,9 +31,7 @@ const Artists = () => {
     variants={cardsParentVariant}
     initial="hidden"
     animate={control}
-    viewport={viewport} 
     className="boxWidth min-h-screen section flex flex-col gap-10 text-white">
-
       <div 
       className="min-h-[100px] overflow-hidden relative">
         <div className="flex flex-col gap-1 absolute top-0 left-0">
@@ -50,29 +43,28 @@ const Artists = () => {
 
       <motion.div
       variants={parentVariant} 
-      viewport={cardsViewport}
+      viewport={childrenViewport}
       initial="hidden"
       whileInView={`visible`}
-      className="grid grid-cols-4 gap-6 bg-black">
+      className="grid grid-cols-4 gap-6">
      
         <motion.div variants={cardSlideUpVariant} 
         className="cursor-pointer"
-        whileHover={{ scale:1.05,transition:{duration:.4} }}>
-          <ArtistCard />
+          ><ArtistCard />
         </motion.div >  
         <motion.div variants={cardSlideUpVariant} 
         className="cursor-pointer"
-        whileHover={{ scale:1.05,transition:{duration:.4} }}>
+          >
           <ArtistCard />
         </motion.div>  
         <motion.div variants={cardSlideUpVariant} 
         className="cursor-pointer"
-        whileHover={{ scale:1.05,transition:{duration:.4} }}>
+          >
           <ArtistCard />
         </motion.div>  
         <motion.div variants={cardSlideUpVariant}
         className="cursor-pointer"
-        whileHover={{ scale:1.05,transition:{duration:.4} }}>
+          >
           <ArtistCard />
         </motion.div>  
       </motion.div>  

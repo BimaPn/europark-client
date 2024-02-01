@@ -12,8 +12,8 @@ const Hero = () => {
 export const Content = ({className}:{className?:string}) => {
   return (
     <div className={`flexCenter text-white ${className}`}>
-      <div className="flexCenter flex-col gap-5">
-        <span className="w-[70%] text-[44px] font-bold leading-[58px] text-center">Jelajahi Dunia Melalui Seni Kanvas</span>
+      <div className="flexCenter flex-col gap-6">
+        <span className="w-[70%] text-[48px] font-bold leading-[58px] text-center">Jelajahi Dunia Melalui Seni Kanvas</span>
         <Link href="/collections" className="w-32 flexCenter py-[6px] border-2 border-white rounded-lg">
         Jelajahi
         </Link>

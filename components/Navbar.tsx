@@ -1,50 +1,50 @@
 "use client"
 import Link from "next/link"
-import { useEffect, useState } from "react";
 import { IoTicketOutline } from "react-icons/io5"
-import { motion } from "framer-motion"
 
 const windowPosition = window.pageYOffset
 
 const LandingNavbar = () => {
-  const [isNavbarVisible, setNavbarVisible] = useState(true);
-  const [prevScrollPos, setPrevScrollPos] = useState(windowPosition);
-  const [isFillBackground, setIsFillBackground] = useState(false)
-  const handleScroll = () => {
-    const currentScrollPos = window.pageYOffset
-    const isScrollingUp = prevScrollPos > currentScrollPos
-
-    setIsFillBackground(currentScrollPos > window.innerHeight)
-    setNavbarVisible(isScrollingUp)
-    setPrevScrollPos(currentScrollPos)
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    };
-  },[prevScrollPos])
-
+  // const [isNavbarVisible, setNavbarVisible] = useState(true);
+  // const [prevScrollPos, setPrevScrollPos] = useState(windowPosition);
+  // const [isFillBackground, setIsFillBackground] = useState(false)
+  // const handleScroll = () => {
+  //   const currentScrollPos = window.pageYOffset
+  //   const isScrollingUp = prevScrollPos > currentScrollPos
+  //
+  //   setIsFillBackground(currentScrollPos > window.innerHeight)
+  //   setNavbarVisible(isScrollingUp)
+  //   setPrevScrollPos(currentScrollPos)
+  // };
+  //
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll)
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll)
+  //   };
+  // },[prevScrollPos])
+  //
   return (
       <header 
-      className={`boxWidth fixed ${isNavbarVisible ? "top-0" : "-top-20 delay-150"} left-0 right-0 transition-top z-[20000] text-white !px-6 py-2`}>
-        <nav 
-        className={`${isFillBackground ? "bg-dark": "bg-transparent"} transition-background flexBetween rounded-xl  p-[8px]`}>
+      className={`boxWidth absolute top-0 left-0 right-0 z-[2000] text-white px-6 py-[14px]`}>
+        <nav className="flexBetween">
           <span className="text-2xl font-bold ml-2">
           EuroPark
           </span>
           <div className="flex items-center gap-5">
             <ul className="flexCenter gap-6 items-center font-semibold">
-              <li>Home</li>
-              <li>Koleksi</li>
-              <li>Jadwal</li>
+              <li>
+              <Link href={`/`} className="hover:text-gray-400">Beranda</Link>
+              </li>
+              <li>
+              <Link href={`/collections`}>Koleksi</Link>
+              </li>
             </ul>
             <Link
             href={`/tickets/buy`}
-            className="px-4 py-[6px] font-medium rounded-lg text-black bg-primary"
+            className="px-4 py-[6px] font-medium rounded-lg bg-primary hover:opacity-50"
             >
-            <span>Beli Tiket</span>
+            <span className="!text-black">Beli Tiket</span>
             </Link>
           </div>
 
