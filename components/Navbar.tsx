@@ -1,29 +1,7 @@
-"use client"
 import Link from "next/link"
 import { IoTicketOutline } from "react-icons/io5"
 
-const windowPosition = window.pageYOffset
-
 const LandingNavbar = () => {
-  // const [isNavbarVisible, setNavbarVisible] = useState(true);
-  // const [prevScrollPos, setPrevScrollPos] = useState(windowPosition);
-  // const [isFillBackground, setIsFillBackground] = useState(false)
-  // const handleScroll = () => {
-  //   const currentScrollPos = window.pageYOffset
-  //   const isScrollingUp = prevScrollPos > currentScrollPos
-  //
-  //   setIsFillBackground(currentScrollPos > window.innerHeight)
-  //   setNavbarVisible(isScrollingUp)
-  //   setPrevScrollPos(currentScrollPos)
-  // };
-  //
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll)
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll)
-  //   };
-  // },[prevScrollPos])
-  //
   return (
       <header 
       className={`boxWidth absolute top-0 left-0 right-0 z-[2000] text-white px-6 py-[14px]`}>

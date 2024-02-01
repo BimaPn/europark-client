@@ -5,17 +5,16 @@ import Link from "next/link"
 
 const Footer = () => {
   return (
-  <footer className="bg-black pb-6 pt-10 px-6 text-white">
+  <footer className="bg-black pb-5 pt-10 px-6 text-white">
     <Box className="boxWidth flex flex-col gap-14">
       <Box className="grid grid-cols-4 mb-12">
+        <div>
+          <Link href="/" className="font-bold text-4xl flex items-center gap-1">
+              EuroPark
+          </Link>
+        </div>
         <Box>
-            <Link href="/" className="font-bold text-2xl flex items-center gap-1">
-                EuroPark
-            </Link>
-        </Box>
-
-        <Box>
-          <span className="font-medium">Collections</span>
+          <span className="font-medium">Koleksi</span>
           <ul className="flex flex-col gap-4 mt-4 text-sm text-gray-300">
             {collections.map(item => (
             <li key={item.label}>
@@ -25,7 +24,7 @@ const Footer = () => {
           </ul>
         </Box>
         <Box>
-          <span className="font-medium">Navigation</span>
+          <span className="font-medium">Navigasi</span>
           <ul className="flex flex-col gap-4 mt-4 text-sm text-gray-300">
             {navigations.map(item => (
             <li key={item.label}>
@@ -48,7 +47,7 @@ const Footer = () => {
         </Box>
       </Box>
 
-      <Center className=" text-sm text-center">
+      <Center className="text-sm text-center">
         Created at 2023 By Mr.B Citamiang
       </Center>
     </Box>

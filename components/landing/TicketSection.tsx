@@ -10,7 +10,6 @@ const TicketSection = () => {
     visible: {y:0,opacity:1,transition:{duration:.4}},
     hidden: {y:100},
   }
-
   return (
     <motion.section className="flexCenter flex-col section text-white section gap-12">
       <motion.div
@@ -18,7 +17,7 @@ const TicketSection = () => {
       initial="hidden"
       whileInView={`visible`}
       viewport={viewport} 
-      className="w-[75%] flexCenter flex-col gap-5 overflow-hidden pb-6">
+      className="w-[75%] flexCenter flex-col gap-5 overflow-hidden pb-2">
         <div 
         className="mx-auto flex flex-wrap justify-center gap-[10px] font-bold text-[46px] text-center leading-[42px]">
           {ticketSectionTitle.map((item,i) => (
@@ -30,7 +29,7 @@ const TicketSection = () => {
         <motion.div variants={slideUpVariant} className="text-center"> 
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo corporis veritatis excepturi iste doloribus laboriosam.
         </motion.div>
-        <motion.div variants={slideUpVariant} className="mt-2">
+        <motion.div variants={slideUpVariant} className="mt-6">
             <Link
             href={`/tickets/buy`}
             className="px-5 py-2 font-medium rounded-lg bg-primary hover:opacity-50"

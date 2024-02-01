@@ -59,7 +59,7 @@ const Collections = () => {
 
   return (
     <section ref={parent} className="boxWidth min-h-screen section relative">
-      <div className="sm:w-[35%] sm:absolute -top-3 left-8">
+      <div className="sm:w-[35%] sm:absolute -top-3 left-8 overflow-hidden">
         <motion.div
         variants={parentVariant}
         initial="hidden"

@@ -78,4 +78,7 @@ th, td {
     transform: translateX(-200%);
   }
 }
+.button-up-transition {
+  transition: bottom ease-in-out 500ms;
+}
 

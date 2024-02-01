@@ -1,0 +1,35 @@
+"use client"
+import { useEffect, useState } from "react";
+import { HiMiniArrowUp } from "react-icons/hi2"
+
+const windowPosition = window.pageYOffset
+
+const ButtonUp = () => {
+  const [isButtonVisible, setButtonVisible] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(windowPosition);
+  const handleScroll = () => {
+    const currentScrollPos = window.pageYOffset
+    const isAtScreenBottom = currentScrollPos + window.innerHeight >= document.body.offsetHeight 
+    const isScrollingUp = prevScrollPos > currentScrollPos
+setButtonVisible((isScrollingUp || isAtScreenBottom) && currentScrollPos > window.innerHeight);
+
+    setPrevScrollPos(currentScrollPos)
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    };
+  },[prevScrollPos])
+
+  return (
+    <div className={`fixed ${isButtonVisible ? "bottom-0":"-bottom-32"} right-0 z-[4000] px-8 py-5 button-up-transition delay-100`}>
+      <button className="bg-primary text-black text-[26px] p-2 rounded-full shadow-xl">
+        <HiMiniArrowUp />
+      </button>
+    </div>
+  )
+}
+
+export default ButtonUp
