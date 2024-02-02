@@ -53,7 +53,7 @@ const Collections = () => {
   const inView = useInView(parent,{margin: "0% 0% -60% 0%", once:false});
   useEffect(() => {
      if(inView) {
-       document.body.style.backgroundColor = "#FFFFFF"
+       document.getElementById("main")!.style.backgroundColor = "#FFFFFF"
      }
   },[inView]);
 

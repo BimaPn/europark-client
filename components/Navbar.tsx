@@ -4,7 +4,7 @@ import { IoTicketOutline } from "react-icons/io5"
 const LandingNavbar = () => {
   return (
       <header 
-      className={`boxWidth absolute top-0 left-0 right-0 z-[2000] text-white px-6 py-[14px]`}>
+      className={`boxWidth fixed top-0 left-0 right-0 z-[20] text-white px-6 py-[14px]`}>
         <nav className="flexBetween">
           <span className="text-2xl font-bold ml-2">
           EuroPark

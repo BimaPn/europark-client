@@ -51,7 +51,7 @@ th, td {
 }
 
 .section {
-  @apply mt-[152px] mb-[158px]
+  @apply mb-[158px]
 }
 
 .horizontal-scroll-animation {

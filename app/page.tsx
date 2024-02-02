@@ -13,16 +13,21 @@ import ButtonUp from "@/components/landing/ButtonUp"
 const Home = () => {
   return (
     <>
-      <Navbar />
+
       <ButtonUp />
       <main>
-        <Hero />  
-        <Welcome />
-        <Collections />
-        <Artists />
-        <TicketSection />
+        <div className="relative h-screen overflow-hidden">
+          <Navbar />
+          <Hero />  
+        </div>
+        <div id="main" className="relative z-[50] bg-white pt-[152px]">
+          <Welcome />
+          <Collections />
+          <Artists />
+          <TicketSection />
+          <Footer />
+        </div>
       </main>
-      <Footer />
     </>
   )
 }

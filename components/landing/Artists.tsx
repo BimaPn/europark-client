@@ -42,7 +42,7 @@ const Artists = () => {
   useEffect(() => {
      if(inView) {
        control.start("visible")
-       document.body.style.backgroundColor = "#000000"
+       document.getElementById("main")!.style.backgroundColor = "#000000"
      }else{
        control.start("hidden")
      }
@@ -54,7 +54,7 @@ const Artists = () => {
     variants={cardsParentVariant}
     initial="hidden"
     animate={control}
-    className="boxWidth min-h-screen section flex flex-col gap-10 text-white">
+    className="boxWidth min-h-screen section !bg-transparent flex flex-col gap-10 text-white">
       <div 
       className="min-h-[100px] overflow-hidden relative">
         <div className="flex flex-col gap-1 absolute top-0 left-0">

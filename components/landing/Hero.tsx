@@ -2,7 +2,7 @@ import Link from "next/link"
 
 const Hero = () => {
   return (
-    <section className="w-full h-screen relative flexCenter overflow-hidden">
+    <section className="fixed top-0 left-0 right-0 h-screen flexCenter overflow-hidden">
         <video autoPlay src="/videos/hero.mp4" muted loop className="absolute top-0 left-0 object-cover min-w-full min-h-full brightness-[.4]"/>
       <Content className="absolute left-0 right-0 z-[2000]" />
     </section>
