@@ -31,14 +31,13 @@ const Welcome = () => {
       className="w-full flexCenter gap-5">
         <motion.div 
         variants={slideUpVariant}
-        className="bg-[url('/images/about/1.jpg')] background-cover basis-[31.5%] shadow aspect-square"/>
-        <motion.div 
-
-        variants={slideUpVariant}
-        className="bg-[url('/images/about/2.jpg')] bg-no-repeat bg-cover bg-center basis-1/3 shadow aspect-square"/>
+        className="bg-[url('/images/about/1.jpg')] background-cover basis-[31.5%] shadow aspect-square rounded-lg"/>
         <motion.div 
         variants={slideUpVariant}
-        className="bg-[url('/images/about/3.jpg')] backgroud-cover basis-[31.5%] aspect-square shadow"/>
+        className="bg-[url('/images/about/2.jpg')] bg-no-repeat bg-cover bg-center basis-1/3 shadow aspect-square rounded-lg"/>
+        <motion.div 
+        variants={slideUpVariant}
+        className="bg-[url('/images/about/3.jpg')] backgroud-cover basis-[31.5%] aspect-square shadow rounded-lg"/>
       </motion.div>
 
     </motion.section>

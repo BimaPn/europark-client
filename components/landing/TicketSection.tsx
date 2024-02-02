@@ -48,31 +48,29 @@ const TicketSection = () => {
         <span className="absolute top-1/2 -translate-y-1/2 left-0 w-full h-[3px] bg-primary" />
 
         <div className="min-w-full flex gap-8 horizontal-scroll-animation">
-          <div className="w-1/3 aspect-square relative">
-            <Image src={`/images/example7.jpg`} fill alt="example" className="object-cover rounded-xl" />
-          </div>
-          <div className="w-1/3 aspect-square relative">
-            <Image src={`/images/example7.jpg`} fill alt="example" className="object-cover rounded-xl" />
-          </div>
-          <div className="w-1/3 aspect-square relative">
-            <Image src={`/images/example7.jpg`} fill alt="example" className="object-cover rounded-xl" />
-          </div>
-        </div>
-         <div className="min-w-full flex gap-8 horizontal-scroll-animation">
-          <div className="w-1/3 aspect-square relative">
-            <Image src={`/images/example7.jpg`} fill alt="example" className="object-cover rounded-xl" />
-          </div>
-          <div className="w-1/3 aspect-square relative">
-            <Image src={`/images/example7.jpg`} fill alt="example" className="object-cover rounded-xl" />
-          </div>
-          <div className="w-1/3 aspect-square relative">
-            <Image src={`/images/example7.jpg`} fill alt="example" className="object-cover rounded-xl" />
-          </div>
+          {[1,2,3].map((item) => (
+            <div className="w-1/3 aspect-square relative">
+              <Image 
+              src={`/images/gallery/${item}.jpg`}
+              fill 
+              alt="museum picture"
+              className="object-cover rounded-xl" />
+            </div>
+          ))}
         </div>
 
+        <div className="min-w-full flex gap-8 horizontal-scroll-animation">
+          {[1,2,3].map((item) => (
+            <div className="w-1/3 aspect-square relative">
+              <Image 
+              src={`/images/gallery/${item}.jpg`}
+              fill 
+              alt="museum picture"
+              className="object-cover rounded-xl" />
+            </div>
+          ))}
+        </div>
       </motion.div>
-
-
     </motion.section>
   )
 }

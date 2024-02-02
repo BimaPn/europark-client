@@ -85,7 +85,7 @@ const Collections = () => {
             initial="hidden"
             whileInView={"visible"}
             viewport={childrenViewport} 
-            className={`${item.aspect}`}
+            className={`${item.aspect} rounded-lg`}
             style={
             {
               background:`url(${item.image})`,
@@ -105,7 +105,7 @@ const Collections = () => {
             initial="hidden"
             whileInView={"visible"}
             viewport={childrenViewport} 
-            className={`${item.aspect}`}
+            className={`${item.aspect} rounded-lg`}
             style={
             {
               background:`url(${item.image})`,
@@ -124,7 +124,7 @@ const Collections = () => {
             initial="hidden"
             whileInView={"visible"}
             viewport={childrenViewport} 
-            className={`${item.aspect}`}
+            className={`${item.aspect} rounded-lg`}
             style={
             {
               background:`url(${item.image})`,

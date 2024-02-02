@@ -12,6 +12,29 @@ import {
   } from "@/constants/framerOptions"
 import { useEffect, useRef } from "react"
 
+const artists = [
+{
+  name: "Johannes",
+  avatar: "/images/artists/turner.jpg",
+  lifetime: "1340 M - 3420 M"
+},
+{
+  name: "Johannes",
+  avatar: "/images/artists/rembrandt.jpg",
+  lifetime: "1340 M - 3420 M"
+},
+{
+  name: "Johannes",
+  avatar: "/images/artists/vangogh.jpg",
+  lifetime: "1340 M - 3420 M"
+},
+{
+  name: "Johannes",
+  avatar: "/images/artists/peter.jpg",
+  lifetime: "1340 M - 3420 M"
+}
+]
+
 const Artists = () => {
   const control = useAnimation();
   const parent = useRef(null)
@@ -47,26 +70,12 @@ const Artists = () => {
       initial="hidden"
       whileInView={`visible`}
       className="grid grid-cols-4 gap-6">
-     
-        <motion.div variants={cardSlideUpVariant} 
-        className="cursor-pointer"
-          ><ArtistCard />
-        </motion.div >  
-        <motion.div variants={cardSlideUpVariant} 
-        className="cursor-pointer"
-          >
-          <ArtistCard />
-        </motion.div>  
-        <motion.div variants={cardSlideUpVariant} 
-        className="cursor-pointer"
-          >
-          <ArtistCard />
-        </motion.div>  
-        <motion.div variants={cardSlideUpVariant}
-        className="cursor-pointer"
-          >
-          <ArtistCard />
-        </motion.div>  
+        {artists.map((item, i) => (
+          <motion.div key={i} variants={cardSlideUpVariant} 
+          className="cursor-pointer"
+            ><ArtistCard name={item.name} avatar={item.avatar} lifetime={item.lifetime} />
+          </motion.div >  
+        ))} 
       </motion.div>  
     </motion.section>
   )

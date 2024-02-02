@@ -3,7 +3,12 @@ import Image from "next/image"
 import { motion,AnimatePresence } from "framer-motion"
 import { useState } from "react"
 
-const ArtistCard = ({className}:{className?:string}) => {
+export type ArtistInfo = {
+  name: string
+  avatar: string
+  lifetime: string
+}
+const ArtistCard = ({name, avatar, ...rest}:ArtistInfo & {className?:string}) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isShowCotent, setIsShowContent] = useState(false)
   const [position, setPosition] = useState(false)
@@ -43,13 +48,13 @@ const ArtistCard = ({className}:{className?:string}) => {
   return (
     <motion.div
     layout
-    className={`flexCenter overflow-hidden ${className}
+    className={`flexCenter overflow-hidden ${rest.className}
     ${isOpen ? "w-screen h-screen fixed top-0 left-0 !z-[1000] rounded-none":"relative rounded-lg"} ${position ? "z-[1000]":"z-[50]"}
     `}
     transition={{ duration: .6}}
     onClick={delayChange}
     >
-      <motion.img src="/images/artist1.jpg" layout alt='example'
+      <motion.img src={avatar} layout alt='example'
       className={`aspect-[16/10]`}
       animate={{ filter:`brightness(${isOpen ? "65%":"100%"})` }}
       transition={{ duration: .6}}
@@ -58,14 +63,14 @@ const ArtistCard = ({className}:{className?:string}) => {
       />
       <AnimatePresence>
         {isShowCotent && (
-          <ArtistCardContent /> 
+          <ArtistCardContent name={name} avatar={avatar} lifetime={rest.lifetime} /> 
         )}
       </AnimatePresence>
     </motion.div>
   )
 }
 
-const ArtistCardContent = () => {
+const ArtistCardContent = ({name, avatar, lifetime}:{name:string, avatar: string, lifetime: string}) => {
   return (
     <motion.div 
     initial={{ opacity:0 }}
@@ -79,8 +84,8 @@ const ArtistCardContent = () => {
         animate={{ y:0,opacity:1 }}
         exit={{ y:-80 }}
         className='basis-1/2 flex pl-8 justify-end gap-3 flex-col'>
-          <span className='text-[44px] font-bold'>Leonardo Da Vinci</span>
-          <span className='text-xl font-medium'>(1440 - 1660)</span>
+          <span className='text-[44px] font-bold'>{name}</span>
+          <span className='text-xl font-medium'>{lifetime}</span>
         </motion.div>
 
         <motion.div

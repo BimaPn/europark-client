@@ -12,7 +12,6 @@ const ButtonUp = () => {
     const isAtScreenBottom = currentScrollPos + window.innerHeight >= document.body.offsetHeight 
     const isScrollingUp = prevScrollPos > currentScrollPos
 setButtonVisible((isScrollingUp || isAtScreenBottom) && currentScrollPos > window.innerHeight);
-
     setPrevScrollPos(currentScrollPos)
   };
 
@@ -22,10 +21,20 @@ setButtonVisible((isScrollingUp || isAtScreenBottom) && currentScrollPos > windo
       window.removeEventListener('scroll', handleScroll)
     };
   },[prevScrollPos])
+  
+  const scrollUp = (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    window.scrollTo({
+      top:0,
+      behavior: "smooth"
+    })
+  }
 
   return (
     <div className={`fixed ${isButtonVisible ? "bottom-0":"-bottom-32"} right-0 z-[4000] px-8 py-5 button-up-transition delay-100`}>
-      <button className="bg-primary text-black text-[26px] p-2 rounded-full shadow-xl">
+      <button 
+      onClick={scrollUp}
+      className="bg-primary text-black text-[26px] p-2 rounded-full shadow-xl">
         <HiMiniArrowUp />
       </button>
     </div>
