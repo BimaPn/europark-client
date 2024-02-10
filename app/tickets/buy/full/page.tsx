@@ -16,10 +16,10 @@ const Page = () => {
     <section className="flexBetween flex-col items-center h-full">
       <div className="flex flex-col items-center">
         <ErrorIcon width={230}/>
-        <span className="font-medium text-xl">Terjadi Kesalahan</span>
+        <span className="font-medium text-xl">Jadwal Sudah Penuh</span>
         <div className="mt-6">
           <span className="block w-[80%] text-center mx-auto leading-[28px]">
-          Terjadi kesalahan saat pembuatan tiket. Coba untuk isi ulang kembali form pembelian tiket. 
+          Tanggal dan jadwal pembelian tiket sudah penuh. Coba untuk memilih tanggal atau jadwal lain.
           </span> 
         </div>
       </div>

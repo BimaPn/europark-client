@@ -26,7 +26,7 @@ const Page = () => {
       <div className="w-full py-4 px-4 flex gap-6 text-center">
       <Link href={`/`} className="basis-1/2 px-4 py-2 border-2 border-gray-300 rounded-full">Beranda</Link>
       <Link href={`/tickets/buy`} className="basis-1/2 px-4 py-2 bg-blue-500 text-white font-medium rounded-full">
-      Beli ticket 
+      Beli tiket 
       </Link>
       </div>
     </section>

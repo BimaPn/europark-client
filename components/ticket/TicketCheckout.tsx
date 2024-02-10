@@ -75,6 +75,10 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
         setIsDone(true)
         router.push("/tickets/buy/expired")
       }
+      if(err.response.status === 409) {
+        setIsDone(true)
+        router.push("/tickets/buy/full")
+      }
       setDisableSubmit(false)
       setErrors(err.response.data.errors)
     })
