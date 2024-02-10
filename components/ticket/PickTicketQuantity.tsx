@@ -1,28 +1,31 @@
 "use client"
-
 import { useContext, useEffect } from "react"
 import { ticketPurchaseContext } from "../provider/TicketPurchaseProvider"
 import { numberToRupiah } from "@/helper/convert"
 import axios from "axios"
+import Skeleton from "../skeleton/Skeleton"
 
 const PickTicketQuantity = ({className}:{className?:string}) => {
-  const { ticketQuantity, setTicketQuantity, maxQuantity,
-  setMaxQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
+  const { ticketInformationData, ticketQuantity, setTicketQuantity, maxQuantity } = useContext(ticketPurchaseContext) as TicketPurchaseContext
 
   useEffect(() => {
+    setTicketQuantity([])
     axios.get(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/tickets/categories/get`)
     .then((res) => {
-    if(ticketQuantity.length <= 0) {
       setTicketQuantity(res.data.result)
-    }
-      setMaxQuantity(res.data.maxQuantity)
     })
     .catch((err) => {
       console.log(err.response.data)
     })
   },[])
+  useEffect(() => {
+    setTicketQuantity(ticketQuantity.map((item) => {
+      item.quantity = 0 
+      return item
+    }))
+  },[ticketInformationData.schedule])
 
-  return ticketQuantity && (
+  return ticketInformationData.schedule && (
     <div className={`flex flex-col gap-[6px] ${className}`}>
       <div className="flex flex-col gap-1">
         <span className='font-medium'>3. Pilih categori dan jumlah tiket</span>
@@ -39,6 +42,13 @@ const PickTicketQuantity = ({className}:{className?:string}) => {
             quantity={item.quantity ? item.quantity : 0}
             description={item.description}
             />
+          ))}
+
+          {ticketQuantity.length <= 0 && [1, 2, 3].map((item) => (
+            <div className="w-full flexBetween my-3">
+              <Skeleton className="w-[40%] size-lg !rounded-full" />
+              <Skeleton className="w-[20%] size-lg !rounded-full" />
+            </div>
           ))}
         </div>
     </div>

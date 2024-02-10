@@ -47,7 +47,7 @@ const TicketCheckout = () => {
   },[ticketCheckoutData])
 
   return (
-    <section className='flex flex-col gap-8 mb-8'>
+    <section className='flex flex-col gap-8 mb-8 pb-8'>
       <CheckoutForm disableSubmit={disableSubmit} />
     </section>
   )
@@ -86,7 +86,7 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
   }
   return (
     <form onSubmit={onSubmit}>
-      <div className='flex flex-col gap-3 mb-6'>
+      <div className='flex flex-col gap-3 mb-6 '>
         <span className='font-medium text-lg'>Kemana tiket akan dikirim ?</span>
         <FormControl isInvalid={errors?.email}>
           <FormLabel
@@ -104,7 +104,7 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
           )}
         </FormControl>        
       </div>    
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col gap-4 '>
         <span className='font-medium text-lg'>Masukan Data Diri Anda</span>       
         <FormControl className='!-mt-1' isInvalid={errors?.name}>
           <FormLabel
@@ -182,7 +182,7 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
           )}
         </FormControl> 
       </div>
-      <div className="w-[584px] bg-white mx-auto sticky bottom-0 right-0 left-0 z-[1000]">
+      <div className="w-[584px] bg-white mx-auto fixed bottom-0 right-0 left-0 z-[1000]">
         <ButtonCheckout 
         disabled={disableSubmit}
         ticketQuantity={ticketQuantity}

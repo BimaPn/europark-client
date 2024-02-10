@@ -16,7 +16,7 @@ export default async function RootLayout({
     <TicketPurchaseProvider>
       <section className="boxWidth flex flex-col h-screen min-h-screen relative">
         <TicketNavbar className="sticky top-0 right-0 left-0 z-[1000]"  />
-        <main className="w-[584px] flex flex-col px-4 mx-auto h-full">
+        <main className="w-[584px] flex flex-col px-4 mx-auto h-screen">
           {children}
         </main>
       </section>
