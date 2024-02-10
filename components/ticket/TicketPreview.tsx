@@ -11,6 +11,7 @@ const TicketPreview = () => {
   useEffect(() => {
     setDisableSubmit(false)
   },[])
+
   return (
     <section className="h-full">
       <div className='flex flex-col gap-2'>

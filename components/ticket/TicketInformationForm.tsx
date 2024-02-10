@@ -23,8 +23,12 @@ const TicketInformationForm = () => {
   return (
     <section>
       <DatePicker className='mb-4'/>
-      <PickSchedule className='mb-10' />
-      <PickTicketQuantity className='mb-7'/>
+      {ticketInformationData.visit_date && (
+        <PickSchedule className='mb-10' />
+      )}
+      {ticketInformationData.schedule && (
+        <PickTicketQuantity className='mb-7'/>
+      )} 
     </section>
   )
 }

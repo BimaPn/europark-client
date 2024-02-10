@@ -1,40 +1,206 @@
 "use client"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { useState } from "react"
+import { motion, useTransform, useScroll } from "framer-motion";
+import { useLayoutEffect, useRef, useState } from "react";
 
-const Page = () => {
-  const [expanded, setExpanded] = useState(false)
+
+const Example = () => {
+
   return (
-   <section className='flex justify-center min-h-screen'>
-    <div className="basis-1/2">
-      <div 
-      onClick={() => setExpanded(!expanded)}
-      className='w-fit h-full aspect-[3/3.5] flex flex-col overflow-hidden bg-black relative'>
-        <Image src={`/images/monalisa.jpg`} alt="haha" fill className="object-cover" /> 
-        <motion.div className={`absolute w-full h-1/2`}
-        initial={{ top: "0px" }}
-        animate={{ top: expanded ? "-600px" : "0px",transition:{duration:1} }}
-        >
-          <Image src={`/images/cut1.jpg`} alt="haha" fill className="object-cover"/>
-        </motion.div>      
-        <motion.div className={`absolute w-full h-1/2`}
-        initial={{ bottom: "0px" }}
-        animate={{ bottom: expanded ? "-600px" : "0px",transition:{duration:1}  }}
-        >
-          <Image src={`/images/cut2.jpg`} alt="haha" fill className="object-cover"/>
-        </motion.div>      
+
+    <div className="bg-neutral-800">
+
+      <div className="flex h-48 items-center justify-center">
+
+        <span className="font-semibold uppercase text-neutral-500">
+
+          Scroll down
+
+        </span>
+
       </div>
+
+      <HorizontalScrollCarousel />
+
+      <div className="flex h-48 items-center justify-center">
+
+        <span className="font-semibold uppercase text-neutral-500">
+
+          Scroll up
+
+        </span>
+
+      </div>
+
     </div>
 
-    <div className="basis-1/2">
-    <span>anjay banget</span>
-    </div>
+  );
+
+};
+
+
+const HorizontalScrollCarousel = () => {
+
+  const targetRef = useRef(null)
+  const scrollRef = useRef<HTMLDivElement | null>(null)
+
+  const [scrollRage, setScrollRange] = useState(0)
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  })
+  
+  useLayoutEffect(() => {  
+    scrollRef && setScrollRange(scrollRef!.current!.scrollWidth)
+  }, [scrollRef])
+
+  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+  
+
+
+  return (
+
+    <section ref={targetRef} style={{ height: scrollRage }} className="relative bg-neutral-900">
+
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+
+        <motion.div ref={scrollRef} style={{ x }} className="flex gap-4">
+
+          {cards.map((card) => {
+
+            return <Card card={card} key={card.id} />;
+
+          })}
+
+        </motion.div>
+
+      </div>
 
     </section>
-  )
-}
+
+  );
+
+};
 
 
+const Card = ({ card }:{card:{id:number, url: string, title: string}}) => {
 
-export default Page
+  return (
+
+    <div
+
+      key={card.id}
+
+      className="group relative h-[450px] w-[450px] overflow-hidden bg-neutral-200"
+
+    >
+
+      <div
+
+        style={{
+
+          backgroundImage: `url(${card.url})`,
+
+          backgroundSize: "cover",
+
+          backgroundPosition: "center",
+
+        }}
+
+        className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
+
+      ></div>
+
+      <div className="absolute inset-0 z-10 grid place-content-center">
+
+        <p className="bg-gradient-to-br from-white/20 to-white/0 p-8 text-6xl font-black uppercase text-white backdrop-blur-lg">
+
+          {card.title}
+
+        </p>
+
+      </div>
+
+    </div>
+
+  );
+
+};
+
+
+export default Example;
+
+
+const cards = [
+
+  {
+
+    url: "/imgs/abstract/1.jpg",
+
+    title: "Title 1",
+
+    id: 1,
+
+  },
+
+  {
+
+    url: "/imgs/abstract/2.jpg",
+
+    title: "Title 2",
+
+    id: 2,
+
+  },
+
+  {
+
+    url: "/imgs/abstract/3.jpg",
+
+    title: "Title 3",
+
+    id: 3,
+
+  },
+
+  {
+
+    url: "/imgs/abstract/4.jpg",
+
+    title: "Title 4",
+
+    id: 4,
+
+  },
+
+  {
+
+    url: "/imgs/abstract/5.jpg",
+
+    title: "Title 5",
+
+    id: 5,
+
+  },
+
+  {
+
+    url: "/imgs/abstract/6.jpg",
+
+    title: "Title 6",
+
+    id: 6,
+
+  },
+
+  {
+
+    url: "/imgs/abstract/7.jpg",
+
+    title: "Title 7",
+
+    id: 7,
+
+  },
+
+];
+
+

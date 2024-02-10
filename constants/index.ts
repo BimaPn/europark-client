@@ -3,7 +3,6 @@ export const ticketSectionTitle = [
   "Kamu",
   "Lewatkan",
   "Kesempatan",
-  "Besar",
   "Ini"
 ]
 

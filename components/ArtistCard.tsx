@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image"
-import { motion,AnimatePresence } from "framer-motion"
-import { useState } from "react"
+import { motion,AnimatePresence, useTransform, useScroll } from "framer-motion"
+import { useEffect, useState } from "react"
 
 export type ArtistInfo = {
   name: string
@@ -49,7 +49,7 @@ const ArtistCard = ({name, avatar, ...rest}:ArtistInfo & {className?:string}) =>
     <motion.div
     layout
     className={`flexCenter overflow-hidden ${rest.className}
-    ${isOpen ? "w-screen h-screen fixed top-0 left-0 !z-[1000] rounded-none":"relative rounded-lg"} ${position ? "z-[1000]":"z-[50]"}
+    ${isOpen ? "w-screen h-screen fixed top-0 left-0 !z-[3000] rounded-none":"relative rounded-lg"} ${position ? "z-[3000]":"z-[50]"}
     `}
     transition={{ duration: .6}}
     onClick={delayChange}
@@ -71,21 +71,28 @@ const ArtistCard = ({name, avatar, ...rest}:ArtistInfo & {className?:string}) =>
 }
 
 const ArtistCardContent = ({name, avatar, lifetime}:{name:string, avatar: string, lifetime: string}) => {
+   useEffect(() => {
+     document.body.style.overflow = "hidden"
+     return () => {
+       document.body.style.overflow = "auto"
+     }
+   },[])
+
   return (
     <motion.div 
     initial={{ opacity:0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     className="absolute inset-0 flex items-end text-white">
-      <div className='w-full h-[52%] flexCenter gap-8'>
+      <div className='w-full h-[65%] sm:h-[52%] flex sm:items-center justify-between px-4 py-12 sm:p-0 sm:justify-center flex-col sm:flex-row gap-8'>
         <motion.div
         transition={{ duration: .4, staggerChildren: .3}}
         initial={{ y: -80,opacity:0 }}
         animate={{ y:0,opacity:1 }}
         exit={{ y:-80 }}
-        className='basis-1/2 flex pl-8 justify-end gap-3 flex-col'>
-          <span className='text-[44px] font-bold'>{name}</span>
-          <span className='text-xl font-medium'>{lifetime}</span>
+        className='sm:basis-1/2 flex sm:pl-8 justify-end sm:gap-3 flex-col'>
+          <span className='section-title'>{name}</span>
+          <span className='font-medium text-sm sm:text-base'>{lifetime}</span>
         </motion.div>
 
         <motion.div
@@ -93,9 +100,9 @@ const ArtistCardContent = ({name, avatar, lifetime}:{name:string, avatar: string
         initial={{ x:500 }}
         animate={{ x:0 }}
         exit={{ x:500 }}
-        className='basis-1/2 flex items-center gap-5 overflow-x-auto'>
+        className='sm:basis-1/2 flex items-center gap-3 sm:gap-5 overflow-x-auto'>
           {[1,2,3,4,5,6].map((item) => (
-            <ContentCard key={item} className='min-w-[25%]' />
+            <ContentCard key={item} className='min-w-[33.333%] xs:min-w-[20%] sm:min-w-[25%]' />
           ))}
         </motion.div>
 

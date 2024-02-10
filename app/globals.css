@@ -9,7 +9,7 @@ body {
   transition-duration: 400ms;
 }
 .boxWidth {
-  @apply max-w-[1920px] mx-auto px-9
+  @apply max-w-[1920px] mx-auto px-4 sm:px-7 md:px-9
 }
 .flexCenter{
   @apply flex justify-center items-center
@@ -22,6 +22,9 @@ body {
 }
 .text-leading {
   @apply text-justify block leading-[28px]
+}
+.section-title {
+  @apply font-bold text-[34px] sm:text-[42px] leading-[44px] sm:leading-[52px]
 }
 .background-cover {
   @apply bg-center bg-no-repeat bg-cover

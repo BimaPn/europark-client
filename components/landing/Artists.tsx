@@ -54,11 +54,11 @@ const Artists = () => {
     variants={cardsParentVariant}
     initial="hidden"
     animate={control}
-    className="boxWidth min-h-screen section !bg-transparent flex flex-col gap-10 text-white">
+    className="boxWidth min-h-screen section !bg-transparent flex flex-col gap-4 xs:gap-1 sm:gap-6 text-white">
       <div 
-      className="min-h-[100px] overflow-hidden relative">
+      className="min-h-[150px] xs:min-h-[130px] ss:min-h-[100px] sm:min-h-[100px] overflow-hidden relative">
         <div className="flex flex-col gap-1 absolute top-0 left-0">
-          <motion.span variants={slideUpVariant} className="font-bold text-[38px]">Lukisan dari Seniman Terbaik</motion.span>
+          <motion.span variants={slideUpVariant} className="section-title">Lukisan dari Seniman Terbaik</motion.span>
           <motion.span variants={slideUpVariant}>Temukan lukisan-lukisan dari seniman terbaik didunia</motion.span>
         </div>
 
@@ -69,7 +69,7 @@ const Artists = () => {
       viewport={childrenViewport}
       initial="hidden"
       whileInView={`visible`}
-      className="grid grid-cols-4 gap-6">
+      className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
         {artists.map((item, i) => (
           <motion.div key={i} variants={cardSlideUpVariant} 
           className="cursor-pointer"

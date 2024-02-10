@@ -66,7 +66,7 @@ const Collections = () => {
         whileInView={"visible"}
         viewport={viewport} 
         className="flex flex-col gap-2 pr-4">
-          <motion.span variants={slideUpVariant} className="text-[38px] font-bold">Koleksi Seni Museum</motion.span>
+          <motion.span variants={slideUpVariant} className="section-title">Koleksi Seni Museum</motion.span>
         
           <motion.span variants={slideUpVariant} className="text-leading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque eligendi soluta, quis molestias deqfaefes fefsefes</motion.span>
           <motion.div variants={slideUpVariant} className="flex justify-end">

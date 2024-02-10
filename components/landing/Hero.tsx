@@ -13,8 +13,8 @@ export const Content = ({className}:{className?:string}) => {
   return (
     <div className={`flexCenter text-white ${className}`}>
       <div className="flexCenter flex-col gap-6">
-        <span className="w-[70%] text-[48px] font-bold leading-[58px] text-center">Jelajahi Dunia Melalui Seni Kanvas</span>
-        <Link href="/collections" className="w-32 flexCenter py-[6px] border-2 border-white rounded-lg">
+        <span className="w-[90%] sm:w-[70%] text-[36px] sm:text-[42px] md:text-[48px] font-bold leading-[58px] text-center">Jelajahi Dunia Melalui Seni Kanvas</span>
+        <Link href="/collections" className="w-28 md:w-32 flexCenter py-[6px] border-2 border-white rounded-lg">
         Jelajahi
         </Link>
       </div>

@@ -27,6 +27,7 @@ const DatePicker = ({className}:{className?:string}) => {
     ...styles,
        head_cell  : "w-[100px]",
        table : "w-full",
+       day_selected: "!bg-blue-600 !text-white"
   };
   return (
     <div className={`${className}`}>
