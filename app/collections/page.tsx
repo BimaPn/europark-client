@@ -35,13 +35,13 @@ const Page = () => {
     <section className="boxWidth min-h-[90vh]">
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <span className="font-semibold text-[28px]">Koleksi Museum</span>
-          <span>Temukan koleksi-koleksi terbaik dari museum kami.</span>
+          <span className="font-semibold text-2xl sm:text-[28px]">Koleksi Museum</span>
+          <span className="text-sm ss:text-base">Temukan koleksi-koleksi terbaik dari museum kami.</span>
         </div>
-        <CollectionsSearch onSearch={onSearch} className="w-[40%]" /> 
+        <CollectionsSearch onSearch={onSearch} className="w-full ss:w-[60%] sm:w-[40%]" /> 
       </div>
 
-    <div className="grid grid-cols-5 gap-6 mt-9">
+    <div className="grid grid-cols-2 ss:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 ss:gap-4 sm:gap-5 mt-9">
       {collections && collections.map((item, i) => (
       <Link key={item.id} href={`/collections/${item.id}`}>
         <CollectionItem 
@@ -49,7 +49,7 @@ const Page = () => {
         thumbnail={item.thumbnail} name={item.name} year={item.discovery_year} />
       </Link>
       ))}
-      {!collections && <CollectionSkeleton count={7}/>}
+      {!collections && <CollectionSkeleton count={5}/>}
     </div>
     {(collections && collections.length <= 0) && (
       <div className="w-full flexCenter py-16">
@@ -62,7 +62,7 @@ const Page = () => {
 
 const CollectionItem = ({thumbnail, name, year}:{thumbnail:string, name:string, year:string}) => {
   return (
-    <div className="flex flex-col gap-2 hover:scale-[1.03] transition-transform duration-500 cursor-pointer group">
+    <div className="flex flex-col gap-1 ss:gap-2 hover:scale-[1.03] transition-transform duration-500 cursor-pointer group">
       <div className="w-full aspect-[3/4.5] relative overflow-hidden rounded-md">
         <Image 
         src={thumbnail}
@@ -72,7 +72,7 @@ const CollectionItem = ({thumbnail, name, year}:{thumbnail:string, name:string, 
         />
       </div>
       <div className="flex flex-col">
-        <span className="font-medium">{name}</span>
+        <span className="font-medium text-sm ss:text-base">{name}</span>
         <span className="text-xs text-gray-700">{year}</span>
       </div>
     </div>

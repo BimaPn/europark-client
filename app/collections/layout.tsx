@@ -15,11 +15,11 @@ export default async function RootLayout({
 }) {
   return (
     <section className='min-h-screen'>
-      <nav className='boxWidth flexBetween p-4'>
-        <span className="text-2xl font-bold">
+      <nav className='boxWidth flexBetween px-4 py-4 sm:py-6'>
+        <span className="text-xl sm:text-2xl font-bold">
           EuroPark
         </span>
-          <div className="flex items-center gap-5">
+          <div className="items-center gap-5 hidden sm:flex">
             <ul className="flexCenter gap-6 items-center font-semibold">
               <li className='hover:text-gray-600'>
                 <Link href={`/`}>Beranda</Link>

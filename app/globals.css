@@ -9,7 +9,7 @@ body {
   transition-duration: 400ms;
 }
 .boxWidth {
-  @apply max-w-[1920px] mx-auto px-4 sm:px-7 md:px-9
+  @apply max-w-[1920px] mx-auto px-3 ss:px-4 sm:px-7 md:px-9
 }
 .flexCenter{
   @apply flex justify-center items-center

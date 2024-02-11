@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={poppins.className}>
-      <body >
+      <body>
         <ChakraProvider>
           <AuthProvider>
             {children}
