@@ -8,7 +8,7 @@ const Page = () => {
   return (
     <>
       <StartPage />
-      <div className="sticky bottom-0 right-0 left-0 z-[1000]">
+      <div className="fixed bottom-0 right-0 left-0 z-[1000]">
         <ButtonNavigation />
       </div>
     </>

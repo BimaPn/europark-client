@@ -26,7 +26,7 @@ const TicketInformationForm = () => {
       {ticketInformationData.visit_date && (
         <PickSchedule className='mb-10' />
       )}
-      <PickTicketQuantity className='mb-7'/>
+      <PickTicketQuantity className='mb-20'/>
     </section>
   )
 }

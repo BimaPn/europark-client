@@ -58,7 +58,7 @@ const QuantityItem = ({id, type, price, description, quantity}:TicketQuantity) =
   return (
     <div className="flex border-b py-3">
       <div className="basis-1/3 flex flex-col gap-[2px] text-[13px] text-slate-800">
-        <span className="font-medium text-base text-black">{type}</span>
+        <span className="font-medium text-sm ss:text-base text-black">{type}</span>
         {description && (
           <span>{description}</span>
         )}

@@ -16,7 +16,7 @@ const ButtonNavigation = () => {
     }
   }
   return (currentPage < 3) && (
-    <div className="w-[584px] bg-white mx-auto">
+    <div className="w-full ss:w-[546px] bg-white mx-auto">
       <ButtonNextPrev
       page={currentPage}
       callback={(condition) => pageChange(condition)} 
@@ -68,17 +68,16 @@ const ButtonNextPrev = ({callback, page}: {callback:(condition:boolean)=>void, p
     })
   }
   return (
-    <div className="flex justify-end items-center gap-3 text-end py-4 px-4">
+    <div className="flex justify-center ss:justify-end items-center gap-3 text-end py-4 px-3 ss:px-4">
       <button
       onClick={(e) => buttonClick(e, false)}
-      className={`border-2 border-gray-300 px-4 py-[6.5px] rounded-full ${page <= 1 && "opacity-50 cursor-not-allowed"}`}
+      className={`w-1/2 ss:w-fit border-2 border-gray-300 px-4 py-[6.5px] rounded-full ${page <= 1 && "opacity-50 cursor-not-allowed"}`}
       >Kembali</button>
       <button 
       disabled={disableSubmit}
       onClick={(e) => buttonClick(e, true)}
-      className="px-4 py-2 bg-blue-500 text-white rounded-full font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+      className="w-1/2 ss:w-fit px-4 py-2 bg-blue-500 text-white rounded-full font-medium disabled:opacity-50 disabled:cursor-not-allowed"
       >Lanjutkan</button>
-
     </div>
   )
 }

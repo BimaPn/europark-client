@@ -47,7 +47,7 @@ const TicketCheckout = () => {
   },[ticketCheckoutData])
 
   return (
-    <section className='flex flex-col gap-8 mb-8 pb-8'>
+    <section className='flex flex-col gap-8 mb-20'>
       <CheckoutForm disableSubmit={disableSubmit} />
     </section>
   )
@@ -91,15 +91,15 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
   return (
     <form onSubmit={onSubmit}>
       <div className='flex flex-col gap-3 mb-6 '>
-        <span className='font-medium text-lg'>Kemana tiket akan dikirim ?</span>
+        <span className='font-medium !text-base ss:text-lg'>Kemana tiket akan dikirim ?</span>
         <FormControl isInvalid={errors?.email}>
           <FormLabel
-          fontWeight={400} fontSize={15} className='font-normal text-xs'>Alamat Email</FormLabel>
+          fontWeight={400} className='font-normal !text-xs ss:!text-sm'>Alamat Email</FormLabel>
           <Input
           type='email'
           value={ticketCheckoutData.email}
           onChange={(e) => onChange("email",e.target.value)}
-          className="xs:!w-[70%]"
+          className="xs:!w-[70%] !text-sm ss:!text-base"
           isRequired
           placeholder='Email Address'
           />
@@ -109,15 +109,15 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
         </FormControl>        
       </div>    
       <div className='flex flex-col gap-4 '>
-        <span className='font-medium text-lg'>Masukan Data Diri Anda</span>       
+        <span className='font-medium !text-base ss:text-lg'>Masukan Data Diri Anda</span>       
         <FormControl className='!-mt-1' isInvalid={errors?.name}>
           <FormLabel
-          fontWeight={400} fontSize={15} className='font-normal text-xs'>Nama Lengkap</FormLabel>
+          fontWeight={400} fontSize={15} className='font-normal !text-xs ss:!text-sm'>Nama Lengkap</FormLabel>
           <Input 
           type='text'
           value={ticketCheckoutData.name}
           onChange={(e) => onChange("name",e.target.value)}
-          className="xs:!w-[70%]"
+          className="xs:!w-[70%] !text-sm ss:!text-base"
           isRequired
           placeholder='Full Name'
           />
@@ -127,14 +127,14 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
         </FormControl>        
         <FormControl isInvalid={errors?.whatsapp_number}>
           <FormLabel
-          fontWeight={400} fontSize={15} className='font-normal text-xs'>Nomor Whatsapp</FormLabel>
+          fontWeight={400} fontSize={15} className='font-normal !text-xs ss:!text-sm'>Nomor Whatsapp</FormLabel>
           <NumberInput
           value={ticketCheckoutData.whatsapp_number}
           onChange={(value) => onChange("whatsapp_number",value)}
           className="xs:!w-[70%]"
           isRequired
           >
-          <NumberInputField placeholder="Whatsapp Number" />
+          <NumberInputField className='!text-sm ss:!text-base' placeholder="Whatsapp Number" />
           </NumberInput>
           {errors?.whatsapp_number && (
             <FormErrorMessage>{errors?.whatsapp_number[0]}</FormErrorMessage>
@@ -142,7 +142,7 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
         </FormControl> 
         <FormControl isInvalid={errors?.identity_card_picture}>
           <FormLabel
-          fontWeight={400} fontSize={15} className='font-normal text-xs'>Foto Kartu Identitas</FormLabel>
+          fontWeight={400} fontSize={15} className='font-normal !text-xs ss:!text-sm'>Foto Kartu Identitas</FormLabel>
           <ImageInput
           onChange={(image) => onChange("identity_card_picture",image)}
           />
@@ -153,14 +153,14 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
 
         <FormControl isInvalid={errors?.institute_name}>
           <FormLabel
-          fontWeight={400} fontSize={15} className='font-normal text-xs'>
+          fontWeight={400} fontSize={15} className='font-normal !text-xs ss:!text-sm'>
           Nama Institusi (optional)
           </FormLabel>
           <Input 
           type='text'
           value={ticketCheckoutData.institute_name ? ticketCheckoutData.institute_name : ""}
           onChange={(e) => onChange("institute_name",e.target.value)}
-          className="xs:!w-[70%]" 
+          className="xs:!w-[70%] !text-sm ss:!text-base"
           placeholder="Institute's Name"
           />
           {errors?.institute_name && (
@@ -175,18 +175,19 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
           <FormLabel
           fontWeight={400}
           fontSize={15}
-          className='font-normal text-xs'>Alamat Institusi (optional)</FormLabel>
+          className='font-normal !text-xs ss:!text-sm'>Alamat Institusi (optional)</FormLabel>
           <Textarea
           value={ticketCheckoutData.institute_address ? ticketCheckoutData.institute_address : ""}
           onChange={(e) => onChange("institute_address", e.target.value)}
           placeholder="Institute's Address" 
+          className='!text-sm ss:!text-base'
           />
           {errors?.institute_address && (
             <FormErrorMessage>{errors?.institute_address[0]}</FormErrorMessage>
           )}
         </FormControl> 
       </div>
-      <div className="w-[584px] bg-white mx-auto fixed bottom-0 right-0 left-0 z-[1000]">
+      <div className="w-full ss:w-[546px] bg-white mx-auto fixed bottom-0 right-0 left-0 z-[1000]">
         <ButtonCheckout 
         disabled={disableSubmit}
         ticketQuantity={ticketQuantity}
