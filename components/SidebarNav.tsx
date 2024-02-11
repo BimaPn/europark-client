@@ -1,5 +1,7 @@
 "use client"
+import { navigations } from "@/constants/list"
 import { motion, AnimatePresence } from "framer-motion"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 const SidebarNav = ({isDark=false}:{isDark?:boolean}) => {
@@ -15,7 +17,7 @@ const SidebarNav = ({isDark=false}:{isDark?:boolean}) => {
   }
 
   const lineLeftTransition = {
-    rotate: isOpen ? "44deg" : "0deg",
+    rotate: isOpen ? "45deg" : "0deg",
     backgroundColor: checkColor(),
     transition : {
       duration: .3,
@@ -23,7 +25,7 @@ const SidebarNav = ({isDark=false}:{isDark?:boolean}) => {
     }
   }
   const lineRightTransition = {
-    rotate: isOpen ? "-44deg" : "0deg",
+    rotate: isOpen ? "-45deg" : "0deg",
     backgroundColor: checkColor(),
     transition : {
       duration: .3,
@@ -33,7 +35,7 @@ const SidebarNav = ({isDark=false}:{isDark?:boolean}) => {
 
   return (
     <div className="w-[25px] aspect-square relative z-[2000]">
-      <button onClick={() => setIsOpen(prev => !prev)} className='absolute top-0 left-0 z-[2000] w-[23px] aspect-[4/3.3] flex flex-col justify-between'>
+      <button onClick={() => setIsOpen(prev => !prev)} className='absolute top-0 left-0 z-[2000] w-[21px] aspect-[4/3.3] flex flex-col justify-between'>
         <motion.div
         animate={lineLeftTransition} 
         className='bg-black min-w-full h-[3px] rounded-full origin-top-left'/>
@@ -48,7 +50,9 @@ const SidebarNav = ({isDark=false}:{isDark?:boolean}) => {
           initial={{ translateX: "100%" }} 
           animate={{ translateX: "0%", transition:{duration:.4, damping:1} }} 
           exit={{ translateX: "100%", transition:{duration:.4, damping:1}  }} 
-          className="w-[75vw] h-screen fixed top-0 right-0 z-[1600] bg-black">
+          className="w-[75vw] h-screen fixed top-0 right-0 z-[1600] bg-black"
+          >
+            <NavList />
           </motion.div>
           <motion.div 
           initial={{ opacity: "0" }} 
@@ -64,10 +68,20 @@ const SidebarNav = ({isDark=false}:{isDark?:boolean}) => {
 
 const NavList = () => {
   return (
-    <div>
-      <ul>
-      
+    <div className="px-5 py-12 flex flex-col gap-10">
+      <ul className="flex flex-col gap-1 font-semibold text-white">
+      {navigations.map((item,i) => (
+        <li key={i} className="border-b border-gray-600 py-3 hover:text-primary">
+          <Link href={item.link}>{item.label}</Link>
+        </li>
+      ))}
       </ul>
+      <Link
+      href={`/tickets/buy`}
+      className="block text-center py-[6px] font-medium rounded-lg bg-primary hover:opacity-75"
+      >
+      <span className="!text-black">Beli Tiket</span>
+      </Link>
     </div>
   )
 }
