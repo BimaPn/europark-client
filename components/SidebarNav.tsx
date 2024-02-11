@@ -35,13 +35,13 @@ const SidebarNav = ({isDark=false}:{isDark?:boolean}) => {
 
   return (
     <div className="w-[25px] aspect-square relative z-[2000]">
-      <button onClick={() => setIsOpen(prev => !prev)} className='absolute top-0 left-0 z-[2000] w-[21px] aspect-[4/3.3] flex flex-col justify-between'>
+      <button onClick={() => setIsOpen(prev => !prev)} className='absolute top-0 left-0 z-[2000] w-[21px] aspect-[4/3.3] grid grid-cols-1 grid-rows-3 '>
         <motion.div
         animate={lineLeftTransition} 
-        className='bg-black min-w-full h-[3px] rounded-full origin-top-left'/>
-        <motion.div animate={{ opacity: isOpen ? "0" : "1"  }} className={`${isDark ? "bg-white" : "bg-black"} w-full h-[3px] rounded-full`}/>
+        className='bg-black min-w-full h-1/2 rounded-full origin-top-left'/>
+        <motion.div animate={{ opacity: isOpen ? "0" : "1"  }} className={`${isDark ? "bg-white" : "bg-black"} min-w-full h-1/2 rounded-full self-center`}/>
         <motion.div animate={lineRightTransition}
-        className='bg-black min-w-full h-[3px] rounded-full origin-bottom-left'/>
+        className='bg-black min-w-full h-1/2 rounded-full origin-bottom-left self-end'/>
       </button>
       <AnimatePresence>
       {isOpen && (

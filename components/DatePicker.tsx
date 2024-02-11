@@ -31,7 +31,7 @@ const DatePicker = ({className}:{className?:string}) => {
   };
   return (
     <div className={`${className}`}>
-      <span className='font-medium items-start'>1. Pilih Tanggal Kunjungan</span>
+      <span className='font-medium items-start !text-base'>1. Pilih Tanggal Kunjungan</span>
       <div className='flexCenter -mt-2'>
         <DayPicker
         mode='single'

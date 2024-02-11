@@ -28,7 +28,7 @@ const PickTicketQuantity = ({className}:{className?:string}) => {
   return ticketInformationData.schedule && (
     <div className={`flex flex-col gap-[6px] ${className}`}>
       <div className="flex flex-col gap-1">
-        <span className='font-medium'>3. Pilih categori dan jumlah tiket</span>
+        <span className='font-medium !text-base'>3. Pilih categori dan jumlah tiket</span>
         <span className="text-sm">Jumlah pembelian tersisa adalah {maxQuantity} tiket.</span>
       </div>
 

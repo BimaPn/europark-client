@@ -11,7 +11,7 @@ const Welcome = () => {
     initial="hidden"
     whileInView={`visible`}
     viewport={viewport} 
-    className="boxWidth min-h-screen flexCenter gap-8 sm:gap-12 md:gap-16 section flex-col">
+    className="boxWidth flexCenter gap-8 sm:gap-12 md:gap-16 section flex-col">
       <motion.div
       variants={parentVariant} 
       className="flex md:flex-row flex-col md:text-start text-center justify-between gap-3 sm:gap-6 md:gap-10">
@@ -44,10 +44,5 @@ const Welcome = () => {
   )
 }
 
-const ImagesPreview = () => {
-  return (
-    <div>hha</div>
-  )
-}
 
 export default Welcome

@@ -54,7 +54,7 @@ const Artists = () => {
     variants={cardsParentVariant}
     initial="hidden"
     animate={control}
-    className="boxWidth min-h-screen section !bg-transparent flex flex-col gap-4 xs:gap-1 sm:gap-6 text-white">
+    className="boxWidth section !bg-transparent flex flex-col gap-4 xs:gap-1 sm:gap-6 text-white">
       <div 
       className="min-h-[150px] xs:min-h-[130px] ss:min-h-[100px] sm:min-h-[100px] overflow-hidden relative">
         <div className="flex flex-col gap-1 absolute top-0 left-0">

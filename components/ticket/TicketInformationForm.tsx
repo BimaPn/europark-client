@@ -21,7 +21,7 @@ const TicketInformationForm = () => {
     return ticketQuantity.some((item) => item.quantity > 0)
   }
   return (
-    <section className='min-h-[86vh]'>
+    <section>
       <DatePicker className='mb-4'/>
       {ticketInformationData.visit_date && (
         <PickSchedule className='mb-10' />

@@ -19,7 +19,7 @@ const Home = () => {
           <Navbar isDark className="fixed top-0 left-0 right-0 z-[20] text-white" />
           <Hero />  
         </div>
-        <div id="main" className="relative z-[50] bg-white pt-[152px]">
+        <div id="main" className="relative z-[50] bg-white landing-padding-top">
           <Welcome />
           <Collections />
           <Artists />

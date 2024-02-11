@@ -37,7 +37,7 @@ const PickSchedule = ({className}:{className?: string}) => {
   }
   return (
     <div className={`flex flex-col gap-[20px] ${className}`}>
-      <span className='font-medium'>2. Pilih Jadwal Kunjungan</span>
+      <span className='font-medium !text-base'>2. Pilih Jadwal Kunjungan</span>
       <div className="flex flex-col ss:flex-row items-center gap-3 text-sm">
        {schedules && schedules.map((item, index) => (
             <button 

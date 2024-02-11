@@ -54,7 +54,10 @@ th, td {
 }
 
 .section {
-  @apply mb-[158px]
+  @apply mb-[118px] ss:mb-[132px] sm:mb-[148px] md:mb-[152px] lg:mb-[164px] xl:mb-[178px]
+}
+.landing-padding-top {
+  @apply pt-[116px] ss:pt-[127px] sm:pt-[142px] md:pt-[146px] lg:pt-[158px] xl:pt-[172px]
 }
 
 .horizontal-scroll-animation {
