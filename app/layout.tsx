@@ -4,6 +4,7 @@ import './globals.css'
 import './css/skeleton.css'
 import { ChakraProvider } from '@/components/provider/ChakraProvider'
 import AuthProvider from '@/components/provider/AuthProvider'
+import ProgressBarProvider from '@/components/provider/ProgressBarProvider'
 
 const poppins = Poppins({ subsets:["latin-ext"],weight:["400","500", "600", "700"]})
 
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.className}>
       <body>
-        <ChakraProvider>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
-        </ChakraProvider>
+        <ProgressBarProvider>
+          <ChakraProvider>
+            <AuthProvider>
+              {children}
+            </AuthProvider>
+          </ChakraProvider>
+        </ProgressBarProvider>
       </body>
     </html>
   )

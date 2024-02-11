@@ -2,16 +2,12 @@ import { FaSquareGithub, FaSquareFacebook, FaSquareXTwitter, FaSquareInstagram }
 
 export const navigations = [
     {
-        label : "Home",
+        label : "Beranda",
         link : "/"
     },
     {
-        label : "Collections",
+        label : "Koleksi",
         link : "/collections"
-    },
-    {
-        label : "Schedules",
-        link : "/schedules"
     },
 ]
 

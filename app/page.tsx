@@ -13,11 +13,10 @@ import ButtonUp from "@/components/landing/ButtonUp"
 const Home = () => {
   return (
     <>
-
       <ButtonUp />
       <main>
         <div className="relative h-screen overflow-hidden">
-          <Navbar />
+          <Navbar isDark className="fixed top-0 left-0 right-0 z-[20] text-white" />
           <Hero />  
         </div>
         <div id="main" className="relative z-[50] bg-white pt-[152px]">

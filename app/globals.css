@@ -84,4 +84,7 @@ th, td {
 .button-up-transition {
   transition: bottom ease-in-out 500ms;
 }
+.backdrop-blur-transition {
+  transition: filter ease-in-out 300ms;
+}
 
