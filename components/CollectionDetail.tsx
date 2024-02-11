@@ -2,9 +2,10 @@ import CollectionImagesPreview from './CollectionImagesPreview'
 
 const CollectionDetail = ({name, ...rest}:{name:string,createdBy:string, description:string, origin:string, discover_year:string, images:string[]}) => {
   return (
-    <section className='boxWidth min-h-[70vh] flex justify-between gap-16 relative !mt-5'>
-      <div className="basis-[55%]">
-        <div className='flex flex-col gap-3'>
+    <section className='boxWidth min-h-[70vh] flex flex-col-reverse ss:flex-row ss:justify-between gap-2 ss:gap-6 sm:gap-12 md:gap-16 relative ss:!mt-5'>
+      <div className="basis-full ss:basis-1/2 sm:basis-[55%]">
+        <div className='flex flex-col gap-2'>
+          <span className='text-slate-700 font-medium -mb-[6px]'>Koleksi</span>
           <h1 className='font-semibold text-4xl tracking-wide'>{name}</h1>
           <span className='font-medium text-lg'>{rest.createdBy}, {rest.origin}, {rest.discover_year}</span>
         </div>
@@ -14,7 +15,7 @@ const CollectionDetail = ({name, ...rest}:{name:string,createdBy:string, descrip
           </p>
         </div>
       </div>
-      <div className="basis-[45%]">
+      <div className="basis-full ss:basis-1/2 sm:basis-[45%]">
         <CollectionImagesPreview images={rest.images} />
       </div>
     </section>
