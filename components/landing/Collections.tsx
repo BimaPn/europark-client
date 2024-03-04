@@ -68,7 +68,7 @@ const Collections = () => {
         className="flex flex-col gap-2 pr-4">
           <motion.span variants={slideUpVariant} className="section-title">Koleksi Seni Museum</motion.span>
         
-          <motion.span variants={slideUpVariant} className="text-leading">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque eligendi soluta, quis molestias deqfaefes fefsefes</motion.span>
+          <motion.span variants={slideUpVariant} className="text-leading">Temukan beragam koleksi lukisan yang manarik dengan kisah misterius didalamnya.</motion.span>
           <motion.div variants={slideUpVariant} className="flex justify-end">
             <Link href={`/collections`} className="flexCenter gap-1 font-medium">
             Lebih banyak <HiMiniArrowLongRight className="text-xl -mb-[2px]" /></Link>

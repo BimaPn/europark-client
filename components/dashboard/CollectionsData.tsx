@@ -17,6 +17,7 @@ import { AlertMessageProvider, alertMessageContext } from "../AlertMessage"
 import CollectionsAdminSearch from "../CollectionsAdminSearch"
 import Skeleton from "../skeleton/Skeleton"
 import NotFound from "../NotFound"
+import Link from "next/link"
 
 const CollectionsData = () => {
   const { collections,
@@ -25,7 +26,7 @@ const CollectionsData = () => {
   const { setAlert } = useContext(alertMessageContext) as AlertMessageProvider
 
   useEffect(() => {
-    ApiClient().get(`/api/admin/get`)
+    ApiClient().get(`/api/collections/get/admin`)
     .then((res) => {
       setCollections(res.data.result)
       setPaginate(res.data.paginate)
@@ -36,7 +37,7 @@ const CollectionsData = () => {
   },[])
 
   const fetchPaginateData = (page:number) => {
-    ApiClient().get(`/api/admin/collections/get?page=${page}`)
+    ApiClient().get(`api/collections/get/admin?page=${page}`)
     .then((res) => {
       setCollections(res.data.result)
       setPaginate(res.data.paginate)
@@ -47,7 +48,7 @@ const CollectionsData = () => {
   }
   
   const deleteData = (id:string) => {
-    ApiClient().delete(`/api/collections/${id}/delete`)
+    ApiClient().delete(`api/collections/${id}/delete`)
     .then((res) => {
       setAlert({
         success: true,
@@ -67,13 +68,13 @@ const CollectionsData = () => {
           src={item.thumbnail}
           alt={item.name}
           className='!min-w-[38px] !w-[38px] !rounded-md !z-[0]' />
-          <span className='line-clamp-1'>{item.name}</span>
+          <Link href={`/collections/${item.id}`} className='line-clamp-1 hover:underline'>{item.name}</Link>
         </Td>
         <Td>{item.createdBy}</Td>
         <Td>{item.discovery_year}</Td>
         <Td>{item.origin}</Td>
         <TdActions>
-          <ButtonEdit callback={() => setId(item.id)} className="relative z-[1000]" />
+          <ButtonEdit callback={() => setId(item.id)} />
           <DeleteCollectionButton onDelete={() => deleteData(item.id)} />
         </TdActions>
       </Tr>
@@ -81,32 +82,37 @@ const CollectionsData = () => {
   }
   return (
   <>
-    <div className="flexBetween !items-start">
-      <div className="w-fit px-1 flex flex-col mb-[10px] gap-3">
+    <div className="flex flex-col mb-3">
+      <div className="w-full px-1 flexBetween mb-4">
         <div>
-          <span className="font-medium text-xl">Daftar Tiket</span>
+          <span className="font-medium text-lg sm:text-xl">Daftar Tiket</span>
         </div>
+        <CollectionCreate />
+      </div>
+
+      <div>
         <CollectionsAdminSearch /> 
       </div>
-      <div className="px-1">
-      <CollectionCreate />
-      </div>
     </div>
-    <Table>
-      <Thead>
-        <Tr>
-          <Th className="w-1/4 text-start">Nama Koleksi</Th>
-          <Th className="text-start">Pembuat</Th>
-          <Th className="text-start">Tahun Pembuatan</Th>
-          <Th className="text-start">Tempat Asal</Th>
-          <Th> </Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-      {!collections && <CollectionDataSkeleton count={5} />}
-      {collections && renderCollections()}
-      </Tbody>
-    </Table>
+
+    <div className="w-full overflow-x-auto">
+      <Table className="min-w-[732px]">
+        <Thead>
+          <Tr>
+            <Th className="w-1/4 text-start">Nama Koleksi</Th>
+            <Th className="text-start">Pembuat</Th>
+            <Th className="text-start">Tahun Pembuatan</Th>
+            <Th className="text-start">Tempat Asal</Th>
+            <Th> </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+        {!collections && <CollectionDataSkeleton count={5} />}
+        {collections && renderCollections()}
+        </Tbody>
+      </Table>
+    </div>
+
     {(collections && collections.length <= 0) && (
       <div className="py-12">
         <NotFound />

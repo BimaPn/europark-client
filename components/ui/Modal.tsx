@@ -18,9 +18,7 @@ const Modal = ({children, defaultValue=false}:{children:React.ReactNode, default
   }
   return (
     <modalContext.Provider value={{ showModal, toggleModal, disabledToggle }}>
-      <div className="z-[6000]">
         {children}
-      </div>
     </modalContext.Provider>
   )
 }
@@ -58,7 +56,7 @@ export const Content = ({children,width, ...rest}:ModalContent) => {
 
   }
   return showModal && (
-    <div onClick={modalClose} className="fixed inset-0 bg-black/30 flexCenter backdrop-blur">
+    <div onClick={modalClose} className="fixed inset-0 bg-black/30 flexCenter backdrop-blur z-[6000]">
       <div
       onClick={(e) => e.stopPropagation()}
       style={{

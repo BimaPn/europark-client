@@ -2,11 +2,12 @@
 import ApiClient from '@/app/api/axios/ApiClient';
 import {  
   Chart as ChartJS,
-  CategoryScale, 
+  CategoryScale,  
   LinearScale,
   BarElement, 
   Tooltip,
 } from 'chart.js';
+import type { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import Skeleton from '../skeleton/Skeleton';
@@ -18,14 +19,14 @@ export const options ={
   };
 
 const TicketAnalytic = ({className}:{className?:string}) => {
-  const [data, setData] = useState()
+  const [data, setData] = useState<ChartData<"bar">>()
   useEffect(() => {
 
     ApiClient().get(`/api/statistics/last-half-year-tickets/get`)
     .then((res) => {
       const result = res.data.result
       setData({
-        labels: result.map((data:any) => data.month),
+        "labels": result.map((data:any) => data.month),
         datasets: [{
           label: 'Ticket selling',
           data: result.map((data:any) => data.value),
@@ -37,12 +38,14 @@ const TicketAnalytic = ({className}:{className?:string}) => {
 
   return (
     <div className={`bg-white rounded-lg px-4 pt-[50px] pb-4 relative ${className}`}>
-      <div className='absolute top-4 left-4 '>
-        <span className='font-semibold'>Tickets Selling</span>
+        <div className='absolute top-4 left-4 '>
+        <span className='font-semibold text-sm ss:text-base'>Tickets Selling</span>
       </div>
       {!data && <Skeleton className='w-full aspect-video !rounded-xl' />}
       {data && (
-        <Bar options={options} data={data} className='w-full aspect-video'  /> 
+        <Bar
+        options={options}
+        data={data} className='w-full aspect-video'  /> 
       )}
 
     </div>

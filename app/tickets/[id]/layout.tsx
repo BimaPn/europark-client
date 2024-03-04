@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import AdminNavbar from '@/components/AdminNavbar'
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/app/api/auth/[...nextauth]/nextOptions';
 
 export const metadata: Metadata = {
   title: 'Ticket Detail',

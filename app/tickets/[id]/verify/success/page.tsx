@@ -8,7 +8,6 @@ const Page = () => {
   useEffect(() => {
     axios.get(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/session/status/get`,{withCredentials:true})
     .then((res) => {
-      console.log(res.data)
       if(res.data.message) {
         setMessage(res.data.message)
       }

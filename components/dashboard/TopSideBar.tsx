@@ -50,14 +50,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         icon={<FiMenu />}
       />
 
-      <Text
-        display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold">
-        Logo
-      </Text>
-
       <HStack spacing={{ base: '0', md: '6' }} className='px-2 rounded-full bg-white'>
         <Flex alignItems={'center'}>
           <Menu>
@@ -83,11 +75,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             </MenuButton>
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
-              borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
-              <MenuDivider />
+              borderColor={useColorModeValue('gray.200', 'gray.700')}
+              >
               <ButtonLogout>Logout</ButtonLogout>
             </MenuList>
           </Menu>

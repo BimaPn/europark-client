@@ -32,8 +32,8 @@ const TicketCategoryStatistic = ({className}:{className?:string}) => {
   return (
     <div className={`bg-white rounded-xl px-4 py-4 relative ${className}`}>
      <div className='mb-[6px] flex flex-col gap-[2px] absolute top-4 left-4'>
-        <span className='font-semibold'>Kategori Tiket</span>
-        <span className='text-sm text-slate-800'>Statistik penjualan berdasarkan kategori tiket</span>
+        <span className='font-semibold text-sm ss:text-base'>Kategori Tiket</span>
+        <span className='text-xs ss:text-sm text-slate-800'>Statistik penjualan berdasarkan kategori tiket</span>
       </div>
       <div className="w-full aspect-square mx-auto mt-16">
         <Pie

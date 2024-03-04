@@ -18,7 +18,6 @@ export const Content = ({className}:{className?:string}) => {
         Jelajahi
         </Link>
       </div>
-
     </div>
   )
 }

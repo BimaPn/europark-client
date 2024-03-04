@@ -49,9 +49,9 @@ const Stats = () => {
   },[])
   
   return (
-    <div className="flexCenter gap-4">
+    <div className="w-full grid grid-cols-1 ss:grid-cols-2 md:grid-cols-4 gap-3 ss:gap-4">
       {!data && (
-        <StatSkeleton className="w-1/4" count={4}/>
+        <StatSkeleton  count={4}/>
       )}
       {data && data.map((item,i) => (
         <StatItem
@@ -59,9 +59,8 @@ const Stats = () => {
         total={item.total}
         label={item.label}
         icon={icons[i]}
-        className="w-1/4"/>
+        />
       ))}
-
     </div>
   )
 }

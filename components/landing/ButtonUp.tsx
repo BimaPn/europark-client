@@ -2,11 +2,10 @@
 import { useEffect, useState } from "react";
 import { HiMiniArrowUp } from "react-icons/hi2"
 
-const windowPosition = window.pageYOffset
-
 const ButtonUp = () => {
   const [isButtonVisible, setButtonVisible] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(windowPosition);
+  const [prevScrollPos, setPrevScrollPos] = useState<number>(0);
+
   const handleScroll = () => {
     const currentScrollPos = window.pageYOffset
     const isAtScreenBottom = currentScrollPos + window.innerHeight >= document.body.offsetHeight 
@@ -14,6 +13,10 @@ const ButtonUp = () => {
 setButtonVisible((isScrollingUp || isAtScreenBottom) && currentScrollPos > window.innerHeight);
     setPrevScrollPos(currentScrollPos)
   };
+
+  useEffect(() => {
+    setPrevScrollPos(window.pageXOffset)
+  },[])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)

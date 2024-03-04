@@ -18,9 +18,12 @@ const CollectionUpdate = ({children}:{children:React.ReactNode}) => {
   return (
     <collectionUpdateContext.Provider value={{ id, setId }}>
       {children}
+      <div className="relative z-[1000]">
       <Modal defaultValue>
         {id && <ModalContent id={id} onClose={() => setId(null)} />}
       </Modal>
+      </div>
+
     </collectionUpdateContext.Provider>
   )
 }
@@ -46,7 +49,7 @@ const ModalContent = ({id, onClose}:{id:string, onClose:() => void}) => {
     })
   },[])
   return (
-  <Content width={512} onClose={() => onClose()} className="flex flex-col relative pb-20 z-[10000]">
+  <Content width={512} onClose={() => onClose()} className="flex flex-col relative pb-20">
       <div>
         <Header title="Ubah Koleksi" onClose={() => onClose()}/>
       </div>

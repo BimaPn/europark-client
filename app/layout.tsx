@@ -6,7 +6,7 @@ import { ChakraProvider } from '@/components/provider/ChakraProvider'
 import AuthProvider from '@/components/provider/AuthProvider'
 import ProgressBarProvider from '@/components/provider/ProgressBarProvider'
 
-const poppins = Poppins({ subsets:["latin-ext"],weight:["400","500", "600", "700"]})
+const poppins = Poppins({ subsets:["latin"],weight:["400","500", "600", "700"]})
 
 export const metadata: Metadata = {
   title: 'welcome',

@@ -27,10 +27,10 @@ const Page = () => {
            <span className="font-semibold ml-[6px]">{email}</span></span>
         </div>
       </div>
-      <div className="w-full py-4 px-4 flex gap-6 text-center">
+      <div className="w-full ss:w-[546px] py-4 px-4 flex gap-6 flexCenter text-center fixed bottom-0 left-0 right-0 mx-auto">
       <Link href={`/`} className="basis-1/2 px-4 py-2 border-2 border-gray-300 rounded-full">Beranda</Link>
       <Link href={`/tickets/buy`} className="basis-1/2 px-4 py-2 bg-blue-500 text-white font-medium rounded-full">
-      Beli ticket lagi 
+      Beli tiket lagi 
       </Link>
       </div>
     </section>

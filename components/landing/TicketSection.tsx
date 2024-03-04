@@ -27,7 +27,7 @@ const TicketSection = () => {
           ))}
         </div>
         <motion.div variants={slideUpVariant} className="text-center"> 
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo corporis veritatis excepturi iste doloribus laboriosam.
+        Jelajahi lukisan-lukisan dengan beragam cerita unik yang misterius didalamnya. Buruan sebelum tiket kehabisan!
         </motion.div>
         <motion.div variants={slideUpVariant} className="mt-3 sm:mt-6">
             <Link
@@ -49,7 +49,7 @@ const TicketSection = () => {
 
         <div className="min-w-full flex gap-8 horizontal-scroll-animation">
           {[1,2,3].map((item) => (
-            <div className="w-1/2 aspect-square relative">
+            <div key={item} className="w-1/2 aspect-square relative">
               <Image 
               src={`/images/gallery/${item}.jpg`}
               fill 
@@ -61,7 +61,7 @@ const TicketSection = () => {
 
         <div className="min-w-full flex gap-8 horizontal-scroll-animation">
           {[1,2,3].map((item) => (
-            <div className="w-1/2 aspect-square relative">
+            <div key={item} className="w-1/2 aspect-square relative">
               <Image 
               src={`/images/gallery/${item}.jpg`}
               fill 

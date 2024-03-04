@@ -8,7 +8,7 @@ const ButtonLogout = ({className,children,...props}:ButtonHTMLAttributes<HTMLBut
   const router = useRouter()
   const logout = (e:React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      ApiClient.post(`${process.env.NEXT_PUBLIC_DATABASE_URL}/api/auth/logout`)  
+      ApiClient().post(`/api/auth/logout`)  
       .then(() => {
           signOut({redirect:false}).then(() => {router.push('/admin/login')})
       })
@@ -19,7 +19,7 @@ const ButtonLogout = ({className,children,...props}:ButtonHTMLAttributes<HTMLBut
   }
   return (
      <button 
-     className={`w-fit text-[15px] ${className}`}
+     className={`w-fit px-4 text-[15px] ${className}`}
      onClick={logout}
       {...props}
       >{children}</button>

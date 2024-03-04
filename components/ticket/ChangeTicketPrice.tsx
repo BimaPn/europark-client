@@ -14,8 +14,8 @@ const ChangeTicketPrice = () => {
     <Modal defaultValue={true}> 
       <button 
       onClick={() => setIsOpen(prev => !prev)}
-      className="flexCenter gap-1 bg-blue-500 text-white pl-2 pr-3 py-2 rounded-lg text-[15px]">
-        <TbEdit className="text-lg" />
+      className="flexCenter gap-1 bg-blue-500 text-white pl-1 pr-2 ss:pl-2 ss:pr-3 py-[7px] ss:py-2 rounded-lg text-sm ss:text-[15px]">
+        <TbEdit className="text-[17px] ss:text-lg" />
         <span className="text-center -mt-[2px]">Ubah Harga</span>
       </button>
       {isOpen && <FormContent onClose={() => setIsOpen(false)}/>}

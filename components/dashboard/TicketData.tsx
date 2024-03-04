@@ -89,34 +89,39 @@ const TicketData = () => {
   }
   return (
   <>
-    <div className="flexBetween !items-start">
-      <div className="w-fit px-1 flex flex-col mb-[10px] gap-3">
-        <span className="font-medium text-xl">Daftar Tiket</span>
-        <Search onSearch={searchTicket} placeholder="Cari tiket"/>
+    <div className="flexBetween flex- !items-start">
+      <div className="w-fit px-1 mb-[10px]">
+        <span className="font-medium text-lg sm:text-xl">Daftar Tiket</span>
       </div>
-
-      <div className="flexCenter gap-3">
+      <div className="flexCenter gap-2 sm:gap-3">
         <TicketScan />
         <ChangeTicketPrice />
       </div>
     </div>
 
-    <Table>
-      <Thead>
-        <Tr>
-          <Th className="w-1/4 text-start">Nama</Th>
-          <Th className="text-start">Email</Th>
-          <Th className="text-start">Jadwal</Th>
-          <Th className="text-start">Status</Th>
-          <Th className="text-start">Tanggal Pembelian</Th>
-          <Th> </Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-      {!tickets && <TicketDataSkeleton count={5} />}
-      {tickets && renderTickets()}
-      </Tbody>
-    </Table>
+    <div className="my-2">
+      <Search onSearch={searchTicket} placeholder="Cari tiket"/>
+    </div>
+
+    <div className="w-full overflow-x-auto">
+      <Table className="min-w-[812px] sm:min-w-[964px]">
+        <Thead>
+          <Tr>
+            <Th className="w-1/4 text-start">Nama</Th>
+            <Th className="text-start">Email</Th>
+            <Th className="text-start">Jadwal</Th>
+            <Th className="text-start">Status</Th>
+            <Th className="text-start">Tanggal Pembelian</Th>
+            <Th> </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+        {!tickets && <TicketDataSkeleton count={5} />}
+        {tickets && renderTickets()}
+        </Tbody>
+      </Table>
+    </div>
+
     {(tickets && tickets.length <= 0) && (
       <div className="py-12">
         <NotFound />

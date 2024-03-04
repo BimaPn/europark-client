@@ -55,3 +55,20 @@ const dayName = (date:Date) => {
 
   return dayNames[date.getDay()];
 }
+export const numberToMonth = (number:number) => {
+  const months = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli", 
+    "Agustus",
+    "September",
+    "Oktober",
+    "November", 
+    "Desember"
+  ]
+  return months[number-1]
+}

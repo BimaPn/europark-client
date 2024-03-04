@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/app/api/auth/[...nextauth]/nextOptions'
 import { getServerSession } from 'next-auth'
 
 const baseURL = process.env.NEXT_PUBLIC_DATABASE_URL || "http://localhost:3500";

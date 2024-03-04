@@ -10,7 +10,7 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
     return NextResponse.redirect(new URL('/admin/login', req.url));
   }
   if (req.nextUrl.pathname.startsWith('/admin/login') && isAuthenticated) {
-    return NextResponse.redirect(new URL('/admin/dashboard', req.url));
+    return NextResponse.redirect(new URL('/admin/dashboard/home', req.url));
   }
   if (req.nextUrl.pathname.startsWith('/') && !isAuthenticated) {
     return NextResponse.next();

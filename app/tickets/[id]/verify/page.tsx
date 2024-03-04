@@ -4,6 +4,8 @@ import TicketIcon from "@/components/icons/TicketIcon"
 import ButtonVerify from "@/components/ticket/ButtonVerify"
 import ResponseMessageAdmin from "@/components/ticket/ResponseMessageAdmin"
 import TicketNotFound from "@/components/ticket/TicketNotFound"
+import { dateToTanggal } from "@/helper/convert"
+import { Spinner } from "@chakra-ui/react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -28,7 +30,6 @@ const Page = ({params}:{params : {id:string}}) => {
   useEffect(() => {
     ApiClient().get(`/api/tickets/${params.id}/get`)
     .then((res) => {
-      console.log(res.data)
       setData(res.data.ticket)
       setIsLoading(false)
     })
@@ -39,7 +40,11 @@ const Page = ({params}:{params : {id:string}}) => {
   },[])
   return (
     <>
-      {isLoading && <p>loading</p>}
+      {isLoading && (
+        <div className="w-full h-[80vh] flexCenter">
+          <Spinner className="text-blue-500 text-[126px]"/>
+        </div>
+      )}
       {(!isLoading && errorCode === 404) && <TicketNotFound />}
       {(!isLoading && errorCode === 409) && (
         <ResponseMessageAdmin
@@ -70,7 +75,7 @@ const Page = ({params}:{params : {id:string}}) => {
               <span>{data?.email}</span>
             </FieldItem>
             <FieldItem title="Tanggal Kunjungan">
-              <span>{data?.visit_date}</span>
+              <span>{dateToTanggal(new Date(data.visit_date))}</span>
             </FieldItem>
             <div className="flex justify-between items-start py-4 border-b">
             <span className="text-sm text-slate-700">Jumlah Tiket</span>

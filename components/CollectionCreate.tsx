@@ -12,8 +12,7 @@ import { AlertMessageProvider, alertMessageContext } from "./AlertMessage"
 const CollectionCreate = () => {
   return (
     <Modal> 
-      <Trigger className="flexCenter gap-1 bg-blue-500 text-white pl-2 pr-3 py-2 rounded-lg text-[15px]">
-        <IoMdAdd className="text-lg" />
+      <Trigger className="flexCenter bg-blue-500 text-white px-2 ss:px-3 py-[7px] ss:py-2 rounded-lg text-sm ss:text-[15px]">
         <span className="text-center -mt-[2px]">Buat koleksi</span>
       </Trigger>
       <FormContent />

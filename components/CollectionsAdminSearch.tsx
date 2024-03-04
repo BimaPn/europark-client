@@ -9,7 +9,7 @@ const CollectionsAdminSearch = () => {
 
   const searchTicket = (query:string) => {
     setCollections(null)
-    ApiClient().get(`/api/admin/collections/search?name=${query}`)
+    ApiClient().get(`/api/collections/search/admin?name=${query}`)
     .then((res) => {
       setCollections(res.data.collections)
       setPaginate(res.data.paginate)

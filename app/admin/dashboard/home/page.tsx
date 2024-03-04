@@ -10,12 +10,11 @@ const Page = () => {
       <PageTitle title="Dashboard" />
       <section>
         <div className='mb-3'>
-          <span className='font-medium'>{dateToTanggal(new Date(),true)}</span>
+          <span className='font-medium ss:text-base text-sm'>{dateToTanggal(new Date(),true)}</span>
         </div>
         <Stats /> 
-        <div className='flex gap-4 mt-4'>
-          <TicketAnalytic className="basis-[67%]" />
-          <TicketCategoryStatistic className='basis-[33%]' />
+        <div className='mt-3 ss:mt-4'>
+          <TicketAnalytic className="w-full" />
         </div>
       </section>  
     </>

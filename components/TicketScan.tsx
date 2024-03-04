@@ -13,9 +13,8 @@ const TicketScan = () => {
     <Modal defaultValue={true}> 
       <button
       onClick={() => setIsOpen(prev => !prev)}
-      className="flexCenter gap-1 bg-blue-500 text-white pl-2 pr-3 py-2 rounded-lg text-[15px]">
-        <MdQrCodeScanner className="text-lg" />
-        <span className="text-center -mt-[2px]">Scan Tiket</span>
+      className="flexCenter gap-1 bg-blue-500 text-white p-[6px] ss:p-[7px] rounded-lg">
+        <MdQrCodeScanner className="text-[20px]" />
       </button>
       {isOpen && <ModalContent onClose={() => setIsOpen(false)} />}
     </Modal>
@@ -53,7 +52,7 @@ const ModalContent = ({onClose}:{onClose:()=>void}) => {
   scanner.render(success, error)
   },[])
   return (
-    <Content width={400} className="!h-1/2" onClose={() => onClose()}>
+    <Content width={512} className="" onClose={() => onClose()}>
       <Header title="Scan Tiket" onClose={() => onClose()}/>
       <Body className="px-4">
         <div className="flex flex-col items-center mb-4">

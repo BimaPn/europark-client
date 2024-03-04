@@ -21,7 +21,6 @@ const PickSchedule = ({className}:{className?: string}) => {
     }})
     .then((res) => {
       setSchedules(res.data.schedules)
-      console.log(res.data.schedules)
       })
     .catch((err) => {
       console.log(err.response.data)
