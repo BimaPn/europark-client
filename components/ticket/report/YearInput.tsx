@@ -1,5 +1,7 @@
 "use client"
 import ApiClient from '@/app/api/axios/ApiClient'
+import Skeleton from '@/components/skeleton/Skeleton'
+import TicketReportInputSkeleton from '@/components/skeleton/TicketReportInputSkeleton'
 import { Select } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 
@@ -26,7 +28,7 @@ const YearInput = ({optionChange}:{optionChange:(val:string|number) => void}) =>
       </Select>
     </div>
   ) : (
-  <div>Tunggu bentar...</div>
+    <TicketReportInputSkeleton />
   )
 }
 

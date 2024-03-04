@@ -3,6 +3,7 @@ import { Select } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
 import { ReportDateProvider, reportContext } from "@/components/provider/TicketReportDateProvider"
 import ApiClient from "@/app/api/axios/ApiClient"
+import TicketReportInputSkeleton from "@/components/skeleton/TicketReportInputSkeleton"
 
 const DayInput = ({optionChange}:{optionChange:(val:string|number) => void}) => {
   const [days, setDays] = useState<string[]|number[]|null>(null)
@@ -29,7 +30,7 @@ const DayInput = ({optionChange}:{optionChange:(val:string|number) => void}) => 
       </Select>
     </div>
   ) : (
-  <div>tunggu bang...</div>
+    <TicketReportInputSkeleton />
   )
 }
 

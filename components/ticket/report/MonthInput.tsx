@@ -1,6 +1,7 @@
 "use client"
 import ApiClient from "@/app/api/axios/ApiClient"
 import { ReportDateProvider, reportContext } from "@/components/provider/TicketReportDateProvider"
+import TicketReportInputSkeleton from "@/components/skeleton/TicketReportInputSkeleton"
 import { numberToMonth } from "@/helper/convert"
 import { Select } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
@@ -30,7 +31,7 @@ const MonthInput = ({optionChange}:{optionChange:(val:string|number) => void}) =
       </Select>
     </div>
   ) : (
-  <div>Tunggu Bentar...</div>
+    <TicketReportInputSkeleton />
   )
 }
 
