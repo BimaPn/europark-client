@@ -1,7 +1,7 @@
 import ApiClient from "@/app/api/axios/ApiClient"
 import axios from "axios"
 import { signOut } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next-nprogress-bar"
 import { ButtonHTMLAttributes } from "react"
 
 const ButtonLogout = ({className,children,...props}:ButtonHTMLAttributes<HTMLButtonElement> & {children:React.ReactNode,className?:string}) => {
@@ -19,7 +19,7 @@ const ButtonLogout = ({className,children,...props}:ButtonHTMLAttributes<HTMLBut
   }
   return (
      <button 
-     className={`w-fit px-4 text-[15px] ${className}`}
+     className={`w-full px-4 text-[15px] ${className}`}
      onClick={logout}
       {...props}
       >{children}</button>

@@ -91,7 +91,7 @@ const TicketData = () => {
   <>
     <div className="flexBetween flex- !items-start">
       <div className="w-fit px-1 mb-[10px]">
-        <span className="font-medium text-lg sm:text-xl">Daftar Tiket</span>
+        <span className="font-medium text-lg sm:text-xl text-slate-600">Daftar Tiket</span>
       </div>
       <div className="flexCenter gap-2 sm:gap-3">
         <TicketScan />

@@ -51,7 +51,7 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
   return (
     <Box
       transition="3s ease"
-      className={`bg-white`}
+      className={`bg-white !px-2`}
       w={{ base: 'full', md: 60 }}
       pos="fixed"
       h="full"
@@ -69,7 +69,7 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
           key={link.name}
           icon={link.icon}
           path={link.path}
-          className={`${pathname.includes(link.path) && "bg-blue-400 text-white"}`} 
+          className={`${pathname.includes(link.path) && "bg-blue-500 font-medium text-white"}`} 
           >
             {link.name}
           </NavItem>

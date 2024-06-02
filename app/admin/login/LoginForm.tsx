@@ -3,7 +3,7 @@ import ButtonPrimary from "@/components/ui/ButtonPrimary";
 import InputLabel from "@/components/ui/InputLabel";
 import TextInput from "@/components/ui/TextInput";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-nprogress-bar"
 import { useState } from "react"
 
 const LoginForm = ({className}:{className?:string}) => {

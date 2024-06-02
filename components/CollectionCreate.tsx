@@ -12,7 +12,7 @@ import { AlertMessageProvider, alertMessageContext } from "./AlertMessage"
 const CollectionCreate = () => {
   return (
     <Modal> 
-      <Trigger className="flexCenter bg-blue-500 text-white px-2 ss:px-3 py-[7px] ss:py-2 rounded-lg text-sm ss:text-[15px]">
+      <Trigger className="flexCenter bg-transparent border border-blue-400 text-blue-500 px-2 ss:px-3 py-[7px] ss:py-2 rounded-lg text-sm ss:text-[15px]">
         <span className="text-center -mt-[2px]">Buat koleksi</span>
       </Trigger>
       <FormContent />

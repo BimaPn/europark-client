@@ -13,7 +13,7 @@ const TicketScan = () => {
     <Modal defaultValue={true}> 
       <button
       onClick={() => setIsOpen(prev => !prev)}
-      className="flexCenter gap-1 bg-blue-500 text-white p-[6px] ss:p-[7px] rounded-lg">
+      className="flexCenter gap-1 bg-transparent border border-blue-400 text-blue-500 p-[6px] ss:p-[7px] rounded-lg">
         <MdQrCodeScanner className="text-[20px]" />
       </button>
       {isOpen && <ModalContent onClose={() => setIsOpen(false)} />}

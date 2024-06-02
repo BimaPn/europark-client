@@ -79,6 +79,7 @@ const CheckoutForm = ({disableSubmit}:{disableSubmit:boolean}) => {
         setIsDone(true)
         router.push("/tickets/buy/full")
       }
+        console.log(err.response.data)
       setDisableSubmit(false)
       setErrors(err.response.data.errors)
     })

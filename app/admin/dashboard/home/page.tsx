@@ -8,11 +8,14 @@ const Page = () => {
   return (
     <>
       <PageTitle title="Dashboard" />
-      <section>
-        <div className='mb-3'>
-          <span className='font-medium ss:text-base text-sm'>{dateToTanggal(new Date(),true)}</span>
+      <section className=''>
+        <div className='bg-white p-4 rounded-lg'>
+          <div className='mb-3'>
+            <span className='font-medium ss:text-base text-sm text-slate-600'>{dateToTanggal(new Date(),true)}</span>
+          </div>
+          <Stats /> 
         </div>
-        <Stats /> 
+
         <div className='mt-3 ss:mt-4'>
           <TicketAnalytic className="w-full" />
         </div>

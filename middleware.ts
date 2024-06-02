@@ -6,8 +6,11 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
   const token = await getToken({ req });
   const isAuthenticated = !!token;
 
+  if (req.nextUrl.pathname.startsWith('/admin/tickets') && !isAuthenticated) {
+    return NextResponse.redirect(new URL('/', req.url));
+  }
   if (req.nextUrl.pathname.startsWith('/admin/dashboard') && !isAuthenticated) {
-    return NextResponse.redirect(new URL('/admin/login', req.url));
+    return NextResponse.redirect(new URL('/', req.url));
   }
   if (req.nextUrl.pathname.startsWith('/admin/login') && isAuthenticated) {
     return NextResponse.redirect(new URL('/admin/dashboard/home', req.url));
@@ -15,6 +18,7 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
   if (req.nextUrl.pathname.startsWith('/') && !isAuthenticated) {
     return NextResponse.next();
   }
+
 
 
   const authMiddleware = await withAuth({

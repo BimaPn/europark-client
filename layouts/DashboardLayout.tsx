@@ -17,7 +17,7 @@ const DashboardLayout = async ({children}:{children:React.ReactNode}) => {
 
 export const PageTitle = ({title, className}:{title:string, className?:string}) => {
   return (
-    <div className={`mb-4 sm:block hidden ${className}`}>
+    <div className={`mb-4 sm:block hidden text-slate-600 ${className}`}>
       <h1 className='text-[28px] font-semibold'>{title}</h1>
     </div>
   )

@@ -85,7 +85,7 @@ const CollectionsData = () => {
     <div className="flex flex-col mb-3">
       <div className="w-full px-1 flexBetween mb-4">
         <div>
-          <span className="font-medium text-lg sm:text-xl">Daftar Tiket</span>
+          <span className="font-medium text-lg sm:text-xl text-slate-600">Daftar Koleksi</span>
         </div>
         <CollectionCreate />
       </div>

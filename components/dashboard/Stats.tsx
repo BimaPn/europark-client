@@ -14,7 +14,23 @@ type Stat = {
   label: string,
   icon: React.ReactNode,
 }
-
+const styles = [{
+  parent: "bg-[#ffe2e6]",
+  icon: "bg-[#f95b7e]"
+},
+{
+  parent: "bg-[#fff4de]",
+  icon: "bg-[#fe9378]"
+},
+{
+  parent: "bg-[#dcfce7]",
+  icon: "bg-[#3cd856]"
+},
+{
+  parent: "bg-[#f4e8ff]",
+  icon: "bg-[#bf84fd]"
+}
+]
 const Stats = () => {
   const icons = [
   <HiUsers key={1} className="text-[19px]" />,
@@ -59,22 +75,26 @@ const Stats = () => {
         total={item.total}
         label={item.label}
         icon={icons[i]}
+        style={styles[i]}
         />
       ))}
     </div>
   )
 }
-
-const StatItem = ({total, label, icon, className}:Stat & {className?:string}) => {
+type Style = {
+  parent:string,
+  icon:string
+}
+const StatItem = ({total, label, icon, style}:Stat & {style:Style}) => {
   return (
-    <div className={`bg-white flex flex-col px-3 py-3 rounded-lg ${className} relative`}>
+    <div className={`flex flex-col px-3 py-3 rounded-lg ${style.parent} relative`}>
       <div className="flex flex-col gap-[2px]">
         <span className="font-semibold text-2xl">{total}</span>
         <span className="text-[13px] text-slate-500">{label}</span>
       </div>
       <div
-      className="absolute top-3 right-3 min-w-[32px] flexCenter 
-      aspect-square rounded-full bg-blue-100 text-blue-600">
+      className={`absolute top-3 right-3 min-w-[32px] flexCenter ${style.icon}
+      aspect-square rounded-full ${style.icon} text-white`}>
         {icon}
       </div>
     </div>

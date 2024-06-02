@@ -1,8 +1,7 @@
-import TicketReportDateProvider from '@/components/provider/TicketReportDateProvider'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'welcome',
+  title: 'Dashboard',
 }
 
 export default function RootLayout({
@@ -12,9 +11,7 @@ export default function RootLayout({
 }) {
   return (
   <>
-  <TicketReportDateProvider>
   {children}
-  </TicketReportDateProvider>
   </>
   )
 }

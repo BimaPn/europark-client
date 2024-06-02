@@ -20,7 +20,7 @@ const TicketReportModal = () => {
     <Modal defaultValue={true}>
       <button 
       onClick={() => setIsOpen((prev) => !prev)}
-      className="flexCenter gap-[2px] bg-blue-500 font-medium text-white pl-1 pr-2 ss:pl-2 ss:pr-3 py-[7px] rounded-lg text-sm ss:text-[14px]">
+      className="flexCenter gap-[2px] font-medium text-blue-500 border border-blue-400 pl-1 pr-2 ss:pl-2 ss:pr-3 py-[7px] rounded-lg text-sm ss:text-[14px]">
       <TbReportAnalytics className="text-lg" />
         <span className="text-center">Laporan</span>
       </button>
@@ -48,10 +48,10 @@ const ModalContent = ({onClose}:{onClose:()=>void}) => {
 
   const onPrint = () => {
     setDisabledButton(true)
-    router.push("/testing/pick/report")
+    router.push("/admin/tickets/report")
   }
   return (
-   <Content width={384} className="relative sm:!h-1/2" onClose={() => onClose()}>
+   <Content width={384} className="relative sm:!h-[70%]" onClose={() => onClose()}>
     <Header title="Cetak Laporan" onClose={() => onClose()}/>
     <Body className="px-4">
       <span className="text-sm font-medium">Pilih Kategori Laporan</span>
